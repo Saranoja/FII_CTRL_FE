@@ -71,7 +71,7 @@ class Resources extends React.Component {
                                 <h2> Search by uploading a course file </h2>
                                 <FilePicker onFileUploadSuccess={actions.loadResourcesForFile} />
                                 <FormControlLabel
-                                    control={<Checkbox onChange={this.handleArticlesCheckboxPdf} />}
+                                    control={<Checkbox defaultChecked={true} onChange={this.handleArticlesCheckboxPdf} />}
                                     label="Include scientific articles and publications if possible"
                                 />
                                 <Button className="resource-submit-button" color="secondary" variant="contained" onClick={this.handleFileSubmit}> Submit </Button>

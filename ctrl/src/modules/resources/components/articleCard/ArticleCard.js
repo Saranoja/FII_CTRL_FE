@@ -17,11 +17,11 @@ const ArticleCard = ({ title, author, summary, link }) => {
                         {R.map((item) => `${item} `, author)}
                     </span>
                 </Typography>
-                <Typography variant="body3">
+                <Typography variant="caption">
                     {summary}
                 </Typography>
             </CardContent>
-            <CardActions extra>
+            <CardActions>
                 <a href={link} target='_blank' rel='noreferrer'>
                     <LibraryBooksIcon />
                     Read the article

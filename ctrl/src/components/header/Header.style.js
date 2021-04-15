@@ -8,7 +8,7 @@ ${({ theme }) => {
             .logo-fii {
                 display: block;
                 cursor: pointer;
-                position: fixed;
+                position: absolute;
                 top: 0.5em;
                 left: 1em;
 

@@ -22,7 +22,7 @@ const ResourceCard = ({ title, author, pages, link }) => {
                 <Typography gutterBottom variant="body2" component="h6">
                     <span className='author'>{author}</span>
                 </Typography>
-                <Typography variant="body3">
+                <Typography variant="caption">
                     <List>
                         {R.map((pagesGroup) => (
                             <ListItem key={pagesGroup[0]}>
@@ -38,7 +38,7 @@ const ResourceCard = ({ title, author, pages, link }) => {
                     </List>
                 </Typography>
             </CardContent>
-            <CardActions extra>
+            <CardActions>
                 <a href={link} target='_blank' rel='noreferrer'>
                     <LibraryBooksIcon />
                     Find the book
