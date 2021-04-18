@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 // const ENV = window._env_ || process.env;
-const BASE = 'http://localhost:5000';
+const BASE = 'https://fii-ctrl.appspot.com/';
 
 export default {
     userManager: {
