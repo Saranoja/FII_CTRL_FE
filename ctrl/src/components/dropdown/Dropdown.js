@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as R from 'ramda';
-import { Select, FormControl, FormHelperText } from '@material-ui/core';
+import { Select, FormControl } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 
 
 const CustomDropdown = ({ options, placeholder, actionOnChange, className }) => {
-    const handleOnChange = (e, { value }) => {
-        actionOnChange(value);
+    const [currentValue, setCurrentValue] = useState('');
+
+    const handleOnChange = (e) => {
+        setCurrentValue(e.target.value);
+        actionOnChange(e.target.value);
     };
 
     return (
         <FormControl>
-            <Select onChange={handleOnChange} className={className} >
+            <InputLabel id="demo-simple-select-label">{placeholder}</InputLabel>
+            <Select onChange={handleOnChange} className={className} value={currentValue}>
                 {R.map((element) => <MenuItem key={element.key} value={element.value}>{element.text}</MenuItem>, options)}
             </Select>
-            <FormHelperText>{placeholder}</FormHelperText>
         </FormControl>
     )
 };

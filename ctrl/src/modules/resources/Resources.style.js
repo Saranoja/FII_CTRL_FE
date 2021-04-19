@@ -6,23 +6,20 @@ ${() => {
             display: flex;
             flex-direction: column;
             justify-content: space-around;
-            gap: 24px;
 
-            .ui.fluid.dropdown {
-                width: 384px;
-                box-shadow: 6px 10px 14px -6px rgba(119,125,128,0.5);
+            .resources-subject-picker {
+                margin-bottom: 24px;
             }
 
             .search-wrapper {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                align-items: flex-start;
-                gap: 24px;
-
-                .ui.secondary.button.resource-submit-button {
-                    margin: 0;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: flex-start;
                 }
+
+            .filepicker-wrapper, .articles-checkbox {
+                margin-bottom: 24px;
             }
 
             .resource-cards-wrapper {

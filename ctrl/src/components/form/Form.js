@@ -24,7 +24,7 @@ class CustomForm extends Component {
     }
 
     checkForErrorsAndSubmit = (errors) => {
-        if (!errors.username && !errors.password)
+        if (!errors.email && !errors.password)
             this.props.submit(this.state.data);
     }
 

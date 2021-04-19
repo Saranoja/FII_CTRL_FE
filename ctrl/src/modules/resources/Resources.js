@@ -71,20 +71,20 @@ class Resources extends React.Component {
                                 <h2> Search by uploading a course file </h2>
                                 <FilePicker onFileUploadSuccess={actions.loadResourcesForFile} />
                                 <FormControlLabel
+                                    className="articles-checkbox"
                                     control={<Checkbox defaultChecked={true} onChange={this.handleArticlesCheckboxPdf} />}
                                     label="Include scientific articles and publications if possible"
                                 />
                                 <Button className="resource-submit-button" color="secondary" variant="contained" onClick={this.handleFileSubmit}> Submit </Button>
-                                {/* <img src={images.resourcesEntry} size='medium' alt="resourcesEntry" /> */}
                             </div>
                         </>}
                         secondChoice={
-                            <h2> Search by keywords </h2>
+                            null
                         }
                         isLoading={isLoading || (this.state.shouldIncludeArticlesPdf && !articles && this.state.shouldExecuteScroll)}
                     />
                     <div className="resource-cards-wrapper" ref={this.resourceCardRef}>
-                        <Grid container justify="center">
+                        <Grid container>
                             {recommendations ?
                                 (
                                     R.map((item) =>

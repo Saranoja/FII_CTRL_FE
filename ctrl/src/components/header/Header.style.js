@@ -17,6 +17,10 @@ ${({ theme }) => {
                 ${breakpoints.up('sm')} {
                     width: ${`${spacing(4)}px`};
                 }
+
+                ${breakpoints.up('lg')} {
+                    position: fixed;
+                }
             }
         `;
     }}

@@ -10,8 +10,8 @@ const DividedGrid = ({ firstChoice, secondChoice, isLoading }) => {
     const theme = useTheme();
     return (
         <StyledDividedGrid theme={theme}>
-            <Paper className="divided-grid-segment">
-                <Grid container justify="center">
+            <Paper className="divided-grid-segment" elevation={3}>
+                <Grid container>
                     <Grid item>
                         {firstChoice}
                     </Grid>
