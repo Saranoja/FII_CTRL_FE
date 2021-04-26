@@ -2,7 +2,6 @@ import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import images from 'assets/images/resources';
 import Layout from 'components/layout';
 import Dropdown from 'components/dropdown';
 import FilePicker from 'components/filePicker';

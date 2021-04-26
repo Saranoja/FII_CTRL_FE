@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 import CONFIG from '../../config';
-import { isBlank, localStorageManager, STORE_KEYS } from '../../utils';
+import { isBlank, localStorageManager, STORE_KEYS } from 'utils';
 
 class UserManager {
     constructor() {
