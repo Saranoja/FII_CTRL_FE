@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTheme } from '@material-ui/core/styles';
 import * as R from 'ramda';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
@@ -15,53 +14,79 @@ import CardContent from '@material-ui/core/CardContent';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import StyledResourceCard from './ResourceCard.style';
 
+// TODO: add withInView hoc
+
 const ResourceCard = ({ title, author, pages, link }) => {
-    const theme = useTheme();
-    return (
-        <StyledResourceCard theme={theme}>
-            <CardContent>
-                <Typography className="resource-title" gutterBottom variant="h6" component="h3">{title}</Typography>
-                <Typography color="textSecondary" className="resource-author" gutterBottom variant="subtitle2" component="h6">
-                    <span className='author'>{author}</span>
-                </Typography>
-                <Typography variant="caption">
-                    <List>
-                        {R.map((pagesGroup) => (
-                            <ListItem key={pagesGroup[0]} dense disableGutters>
-                                <ListItemIcon
-                                    classes={{
-                                        root: "bookmark-icon-root",
-                                    }}>
-                                    <BookmarkBorderIcon
-                                        fontSize="small"
-                                    />
-                                </ListItemIcon>
-                                <ListItemText
-                                    classes={{
-                                        root: "pages-list-line-wrapper",
-                                    }}
-                                >
-                                    <span className="page-numbers-item"> Pg. {pagesGroup[0]} </span>
-                                </ListItemText>
-                                <Rating
-                                    icon={<StarRateIcon fontSize="small"/>}
-                                    precision={0.5}
-                                    className="pages-rating"
-                                    value={pagesGroup[1]}
-                                    readOnly
-                                />
-                            </ListItem>),
-                            pages)}
-                    </List>
-                </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-                <Link href={link} target='_blank' rel='noreferrer' underline="none" color="secondary" component={Button}>
-                    Find the book
-                </Link>
-            </CardActions>
-        </StyledResourceCard>
-    )
+	return (
+		<StyledResourceCard>
+			<CardContent>
+				<Typography
+					className="resource-title"
+					gutterBottom
+					variant="h6"
+					component="h3"
+				>
+					{title}
+				</Typography>
+				<Typography
+					color="textSecondary"
+					className="resource-author"
+					gutterBottom
+					variant="subtitle2"
+					component="h6"
+				>
+					<span className="author">{author}</span>
+				</Typography>
+				<Typography variant="caption">
+					<List>
+						{R.map(
+							(pagesGroup) => (
+								<ListItem key={pagesGroup[0]} dense disableGutters>
+									<ListItemIcon
+										classes={{
+											root: 'bookmark-icon-root',
+										}}
+									>
+										<BookmarkBorderIcon fontSize="small" />
+									</ListItemIcon>
+									<ListItemText
+										classes={{
+											root: 'pages-list-line-wrapper',
+										}}
+									>
+										<span className="page-numbers-item">
+											{' '}
+											Pg. {pagesGroup[0]}{' '}
+										</span>
+									</ListItemText>
+									<Rating
+										icon={<StarRateIcon fontSize="small" />}
+										precision={0.5}
+										className="pages-rating"
+										value={pagesGroup[1]}
+										readOnly
+									/>
+								</ListItem>
+							),
+							pages
+						)}
+					</List>
+				</Typography>
+			</CardContent>
+			<CardActions disableSpacing>
+				<Link
+					href={link}
+					target="_blank"
+					rel="noreferrer"
+					underline="none"
+					color="secondary"
+					component={Button}
+				>
+					Find the book
+				</Link>
+			</CardActions>
+		</StyledResourceCard>
+	);
 };
 
 export default ResourceCard;

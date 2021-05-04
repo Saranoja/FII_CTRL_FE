@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const StyledErrorPage = styled.div`
-${() => {
-        return css`
+	${() => {
+		return css`
         position: absolute;
         top: 50%;
         left: 50%;
@@ -22,8 +22,8 @@ ${() => {
         }
         
     `;
-    }}
-`
+	}}
+`;
 
 StyledErrorPage.displayName = 'StyledNotFoundPage';
 

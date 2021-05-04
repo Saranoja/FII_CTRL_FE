@@ -7,4 +7,4 @@ export { default as ErrorPage } from './errorPage';
 export { default as RouterLink } from './routerLink';
 // export { default as ProgressBar } from './progressBar';
 // export { default as Dropdown } from './dropdown';
-export {default as DarkThemeToggle} from './darkThemeToggle';
+export { default as DarkThemeToggle } from './darkThemeToggle';

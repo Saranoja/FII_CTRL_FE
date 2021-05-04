@@ -12,21 +12,19 @@ import postAnnouncement from './post_announcement.svg';
 import postAssignment from './post_assignment.svg';
 import postResources from './post_resources.svg';
 
-
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    resources,
-    announcements,
-    assignments,
-    group,
-    meetings,
-    personalInfo,
-    team,
-    courses,
-    notes,
-    onlineClass,
-    postAnnouncement,
-    postAssignment,
-    postResources,
+	resources,
+	announcements,
+	assignments,
+	group,
+	meetings,
+	personalInfo,
+	team,
+	courses,
+	notes,
+	onlineClass,
+	postAnnouncement,
+	postAssignment,
+	postResources,
 };

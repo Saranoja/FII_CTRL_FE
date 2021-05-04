@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
 
-
 const StyledActionCard = styled.div`
-${({ theme }) => {
-        const { spacing, palette } = theme;
+	${({ theme }) => {
+		const { spacing, palette } = theme;
 
-        return css`
+		return css`
             .action-card-wrapper {
                 margin: ${`${spacing(2)}px`};
                 box-shadow: 5px 7px 15px -5px rgba(0,0,0,0.5);
@@ -24,8 +23,7 @@ ${({ theme }) => {
                 transform: scale(1.05);
             }
     }`;
-    }}
-`
-
+	}}
+`;
 
 export default StyledActionCard;

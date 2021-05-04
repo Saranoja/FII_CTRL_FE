@@ -8,45 +8,45 @@ import Login from 'modules/login';
 import { localStorageManager } from 'utils';
 import { Route, Redirect } from 'react-router-dom';
 
+const LoginRoute = ({ redirectToPath, hasIdm, ...otherProps }) => (
+	<Route
+		{...otherProps}
+		render={() => {
+			if (hasIdm) {
+				console.log('LGON');
+				localStorageManager.set(
+					'persisted_path',
+					window.location.pathname + window.location.search
+				);
+				console.log('Redirectiong to ', redirectToPath);
+				return <Redirect to={{ pathname: redirectToPath }} />;
+			}
 
-const LoginRoute = ({
-    redirectToPath,
-    hasIdm,
-    ...otherProps
-}) => (
-    <Route {...otherProps}
-        render={() => {
-            if (hasIdm) {
-                console.log("LGON");
-                localStorageManager.set('persisted_path', window.location.pathname + window.location.search);
-                console.log('Redirectiong to ', redirectToPath);
-                return <Redirect to={{ pathname: redirectToPath }} />
-            }
-
-            return <Route exact path={routePaths.LOGIN} component={Login} />
-        }}
-    />
+			return <Route exact path={routePaths.LOGIN} component={Login} />;
+		}}
+	/>
 );
 
 LoginRoute.defaultProps = {
-    location: {},
+	location: {},
 };
 
 LoginRoute.propTypes = {
-    redirectToPath: PropTypes.string.isRequired,
-    location: PropTypes.shape({}),
+	redirectToPath: PropTypes.string.isRequired,
+	location: PropTypes.shape({}),
 };
 
 const mapStateToProps = (state) => ({
-    hasIdm: state.userManager.hasIdm,
+	hasIdm: state.userManager.hasIdm,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({
-        loadAccountDetails,
-    },
-        dispatch
-    ),
+	actions: bindActionCreators(
+		{
+			loadAccountDetails,
+		},
+		dispatch
+	),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginRoute);

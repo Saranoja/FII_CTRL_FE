@@ -3,37 +3,38 @@ import CONFIG from '../../config';
 import { isBlank, localStorageManager, STORE_KEYS } from 'utils';
 
 class UserManager {
-    constructor() {
-        this.config = CONFIG.userManager;
-        this.loginUrl = this.config.authorization;
-    }
+	constructor() {
+		this.config = CONFIG.userManager;
+		this.loginUrl = this.config.authorization;
+	}
 
-    getIdmData = () => localStorageManager.get(STORE_KEYS.ID);
+	getIdmData = () => localStorageManager.get(STORE_KEYS.ID);
 
-    getIdToken = () => R.prop('token', this.getIdmData());
+	getIdToken = () => R.prop('token', this.getIdmData());
 
-    getRefreshToken = () => R.prop('refresh_token', this.getIdmData());
+	getRefreshToken = () => R.prop('refresh_token', this.getIdmData());
 
-    isLoggedIn = () => !isBlank(R.prop('token', localStorageManager.get(STORE_KEYS.ID)));
+	isLoggedIn = () =>
+		!isBlank(R.prop('token', localStorageManager.get(STORE_KEYS.ID)));
 
-    setIdmData = (data) => {
-        const existingIdmData = this.getIdmData();
+	setIdmData = (data) => {
+		const existingIdmData = this.getIdmData();
 
-        localStorageManager.set(STORE_KEYS.ID, { ...existingIdmData, ...data });
-    };
+		localStorageManager.set(STORE_KEYS.ID, { ...existingIdmData, ...data });
+	};
 
-    setTokens = (data) => {
-        localStorageManager.set(STORE_KEYS.ID.token, data.token);
-        localStorageManager.set(STORE_KEYS.ID.refresh_token, data.refresh_token);
-    };
+	setTokens = (data) => {
+		localStorageManager.set(STORE_KEYS.ID.token, data.token);
+		localStorageManager.set(STORE_KEYS.ID.refresh_token, data.refresh_token);
+	};
 
-    clearData = () => {
-        localStorageManager.removeItem(STORE_KEYS.ID);
-    };
+	clearData = () => {
+		localStorageManager.removeItem(STORE_KEYS.ID);
+	};
 
-    isTeaching = async () => {
-        return R.prop('teaching', this.getIdmData());
-    }
+	isTeaching = async () => {
+		return R.prop('teaching', this.getIdmData());
+	};
 }
 
 const userManager = new UserManager();

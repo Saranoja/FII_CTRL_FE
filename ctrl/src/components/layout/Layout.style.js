@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
 const StyledLayout = styled.div`
-${({ theme }) => {
-        const { spacing, breakpoints } = theme;
+	${({ theme }) => {
+		const { spacing, breakpoints } = theme;
 
-        return css`
+		return css`
             display: block;
             margin-top: ${`${spacing(6)}px`};
 
@@ -46,8 +46,7 @@ ${({ theme }) => {
                 }
             }
         `;
-    }}
-`
-
+	}}
+`;
 
 export default StyledLayout;

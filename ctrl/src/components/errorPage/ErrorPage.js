@@ -6,27 +6,26 @@ import { GENERIC_ERROR_TEXT } from './constants';
 import StyledErrorPage from './ErrorPage.style';
 import { Link } from 'react-router-dom';
 
-
 const ErrorPage = ({ image, errorText }) => (
-    <StyledErrorPage>
-        <div className="container">
-            <img src={image} alt="error-pic" className="large-image" />
-            <h2 className="error-text"> {errorText} </h2>
-            <h2 className="error-text" onClick={reloadPage}>
-                <Link onClick={reloadPage}> Reload page 🏠 </Link>
-            </h2>
-        </div>
-    </StyledErrorPage>
-)
+	<StyledErrorPage>
+		<div className="container">
+			<img src={image} alt="error-pic" className="large-image" />
+			<h2 className="error-text"> {errorText} </h2>
+			<h2 className="error-text" onClick={reloadPage}>
+				<Link onClick={reloadPage}> Reload page 🏠 </Link>
+			</h2>
+		</div>
+	</StyledErrorPage>
+);
 
 ErrorPage.defaultProps = {
-    errorText: GENERIC_ERROR_TEXT,
-    image: images.InternalServerError,
-}
+	errorText: GENERIC_ERROR_TEXT,
+	image: images.InternalServerError,
+};
 
 ErrorPage.propTypes = {
-    image: PropTypes.string,
-    errorText: PropTypes.string,
-}
+	image: PropTypes.string,
+	errorText: PropTypes.string,
+};
 
 export default ErrorPage;
