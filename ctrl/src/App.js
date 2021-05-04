@@ -11,30 +11,30 @@ import { Header, DarkThemeToggle } from 'components';
 const IS_DARK_THEME = 'dark_theme';
 
 const App = () => {
-	const [darkTheme, setDarkTheme] = useState(
-		localStorageManager.get(IS_DARK_THEME) ? true : false
-	);
-	const themeType = darkTheme ? 'dark' : 'light';
+  const [darkTheme, setDarkTheme] = useState(
+    !!localStorageManager.get(IS_DARK_THEME),
+  );
+  const themeType = darkTheme ? 'dark' : 'light';
 
-	useEffect(() => {
-		localStorageManager.set(IS_DARK_THEME, darkTheme);
-	});
+  useEffect(() => {
+    localStorageManager.set(IS_DARK_THEME, darkTheme);
+  });
 
-	return (
-		<MuiThemePRovider theme={theme(themeType)}>
-			<ScThemeProvider theme={theme(themeType)}>
-				<Router>
-					<Header />
-					<AppRoutes />
-					<CssBaseline />
-					<DarkThemeToggle
-						checked={darkTheme}
-						onChange={() => setDarkTheme(!darkTheme)}
-					/>
-				</Router>
-			</ScThemeProvider>
-		</MuiThemePRovider>
-	);
+  return (
+    <MuiThemePRovider theme={theme(themeType)}>
+      <ScThemeProvider theme={theme(themeType)}>
+        <Router>
+          <Header />
+          <AppRoutes />
+          <CssBaseline />
+          <DarkThemeToggle
+            checked={darkTheme}
+            onChange={() => setDarkTheme(!darkTheme)}
+          />
+        </Router>
+      </ScThemeProvider>
+    </MuiThemePRovider>
+  );
 };
 
 export default App;

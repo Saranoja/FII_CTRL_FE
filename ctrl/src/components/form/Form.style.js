@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledForm = styled.form`
-	${({ theme }) => `
+  ${({ theme }) => `
 		margin-top: ${theme.spacing(2)}px;
 		display: flex;
 		flex-direction: column;

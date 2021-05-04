@@ -10,43 +10,43 @@ import StyledArticleCard from './ArticleCard.style';
 // TODO: add withInView hoc
 // TODO: process latex text
 
-const ArticleCard = ({ title, author, summary, link }) => {
-	return (
-		<StyledArticleCard>
-			<CardContent>
-				<Typography
-					className="header article-title"
-					gutterBottom
-					variant="h6"
-					component="h3"
-				>
-					{title}
-				</Typography>
-				<Typography
-					color="textSecondary"
-					className="article-author"
-					gutterBottom
-					variant="subtitle2"
-					component="h6"
-				>
-					<span className="author">{R.map((item) => `${item} `, author)}</span>
-				</Typography>
-				<Typography variant="caption">{summary}</Typography>
-			</CardContent>
-			<CardActions>
-				<Link
-					href={link}
-					target="_blank"
-					rel="noreferrer"
-					underline="none"
-					color="secondary"
-					component={Button}
-				>
-					Read the article
-				</Link>
-			</CardActions>
-		</StyledArticleCard>
-	);
-};
+const ArticleCard = ({
+  title, author, summary, link,
+}) => (
+  <StyledArticleCard>
+    <CardContent>
+      <Typography
+        className="header article-title"
+        gutterBottom
+        variant="h6"
+        component="h3"
+      >
+        {title}
+      </Typography>
+      <Typography
+        color="textSecondary"
+        className="article-author"
+        gutterBottom
+        variant="subtitle2"
+        component="h6"
+      >
+        <span className="author">{R.map((item) => `${item} `, author)}</span>
+      </Typography>
+      <Typography variant="caption">{summary}</Typography>
+    </CardContent>
+    <CardActions>
+      <Link
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+        underline="none"
+        color="secondary"
+        component={Button}
+      >
+        Read the article
+      </Link>
+    </CardActions>
+  </StyledArticleCard>
+);
 
 export default ArticleCard;

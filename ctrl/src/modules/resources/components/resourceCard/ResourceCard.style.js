@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Card } from '@material-ui/core';
 
 const StyledResourceCard = styled(Card)`
-	${({ theme }) => `
+  ${({ theme }) => `
         margin-right: ${theme.spacing(2)}px;
 
         .resource-title, .resource-author {

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledHeader = styled.div`
-	${({ theme }) => `
+  ${({ theme }) => `
 		.logo-fii {
 			display: block;
 			cursor: pointer;

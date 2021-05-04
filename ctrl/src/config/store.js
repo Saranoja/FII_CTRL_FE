@@ -5,37 +5,36 @@ import createReducer from '../reducers';
 import asyncMiddleware from './asyncMiddleware';
 
 export function configureStore(initialState) {
-	if (module.hot) {
-		module.hot.accept('../reducers/', () => {
-			const nextRootReducer = require('../reducers/index').default();
-			store.replaceReducer(nextRootReducer);
-		});
-	}
+  if (module.hot) {
+    module.hot.accept('../reducers/', () => {
+      const nextRootReducer = require('../reducers/index').default();
+      store.replaceReducer(nextRootReducer);
+    });
+  }
 
-	const composeEnhancers =
-		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-	const store = createStore(
-		createReducer(),
-		initialState,
-		composeEnhancers(applyMiddleware(thunk), applyMiddleware(asyncMiddleware))
-	);
+  const store = createStore(
+    createReducer(),
+    initialState,
+    composeEnhancers(applyMiddleware(thunk), applyMiddleware(asyncMiddleware)),
+  );
 
-	store.asyncReducers = {};
+  store.asyncReducers = {};
 
-	store.injectReducer = (path, reducer) => {
-		store.asyncReducers = R.assocPath(path, reducer, store.asyncReducers);
-		store.replaceReducer(createReducer(store.asyncReducers));
-		return store;
-	};
+  store.injectReducer = (path, reducer) => {
+    store.asyncReducers = R.assocPath(path, reducer, store.asyncReducers);
+    store.replaceReducer(createReducer(store.asyncReducers));
+    return store;
+  };
 
-	store.ejectReducer = (path) => {
-		store.asyncReducers = R.dissocPath(path, store.asyncReducers);
-		store.replaceReducer(createReducer(store.asyncReducers));
-		return store;
-	};
+  store.ejectReducer = (path) => {
+    store.asyncReducers = R.dissocPath(path, store.asyncReducers);
+    store.replaceReducer(createReducer(store.asyncReducers));
+    return store;
+  };
 
-	return store;
+  return store;
 }
 
 const store = configureStore();

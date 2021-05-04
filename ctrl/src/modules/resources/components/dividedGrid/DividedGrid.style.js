@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const StyledDividedGrid = styled.div`
-	${({ theme }) => `
+  ${({ theme }) => `
 		.divided-grid-segment {
 			border-radius: ${theme.spacing(1)}px;
 			border: none;
-			padding: ${theme.spacing(3)}px ${theme.spacing(8)}px;
+			padding: ${theme.spacing(3)}px ${theme.spacing(8)}px ${theme.spacing(6)}px;
 
 			${theme.breakpoints.down('sm')} {
 				padding: ${theme.spacing(3)}px;
@@ -24,6 +24,10 @@ const StyledDividedGrid = styled.div`
 
 				.divided-grid-item {
 					width: 45%;
+
+					${theme.breakpoints.down('md')} {
+						width: auto;
+					}
 
 					.chip-root {
 						margin-bottom: ${theme.spacing(3)}px;

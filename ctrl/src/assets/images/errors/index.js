@@ -5,8 +5,8 @@ import InternalServerError from './500_internal_server_error.svg';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-	Forbidden,
-	NotFound,
-	RequestTimeout,
-	InternalServerError,
+  Forbidden,
+  NotFound,
+  RequestTimeout,
+  InternalServerError,
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledCustomFilePicker = styled.div`
-	${({ theme }) => `
+  ${({ theme }) => `
 		.filepicker-wrapper {
 			display: flex;
 			flex-direction: row;

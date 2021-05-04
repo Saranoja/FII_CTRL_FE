@@ -1,5 +1,5 @@
-/* eslint-disable import/no-anonymous-default-export */
+// eslint-disable-next-line
 export default {
-	isLoading: false,
-	current_file: '',
+  isLoading: false,
+  current_file: '',
 };

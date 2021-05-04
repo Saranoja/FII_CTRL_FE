@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledLayout = styled.div`
-	${({ theme }) => `
+  ${({ theme }) => `
         display: block;
         margin-top: ${theme.spacing(6)}px;
 

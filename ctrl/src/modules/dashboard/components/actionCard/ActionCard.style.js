@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledActionCard = styled.div`
-	${({ theme }) => `
+  ${({ theme }) => `
         .action-card-wrapper {
             margin: ${theme.spacing(2)}px;
             box-shadow: 5px 7px 15px -5px rgba(0,0,0,0.5);

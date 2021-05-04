@@ -4,25 +4,29 @@ import { connect } from 'react-redux';
 import { loadAccountDetails } from '../../../userManager/actions';
 import StyledSidebar from './Sidebar.style';
 
-const Sidebar = ({ username, className }) => {
-	return (
-		<StyledSidebar className={className} elevation={3} square>
-			<h1 className="username-greet"> Hello {username}! </h1>
-		</StyledSidebar>
-	);
-};
+const Sidebar = ({ username, className }) => (
+  <StyledSidebar className={className} elevation={3} square>
+    <h1 className="username-greet">
+      {' '}
+      Hello
+      {username}
+      !
+      {' '}
+    </h1>
+  </StyledSidebar>
+);
 
 const mapStateToProps = (state) => ({
-	username: state.userManager.first_name,
+  username: state.userManager.first_name,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	actions: bindActionCreators(
-		{
-			loadAccountDetails,
-		},
-		dispatch
-	),
+  actions: bindActionCreators(
+    {
+      loadAccountDetails,
+    },
+    dispatch,
+  ),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

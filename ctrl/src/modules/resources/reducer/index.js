@@ -1,115 +1,108 @@
 import * as R from 'ramda';
-import initialState from './initialState';
 import { handleActions } from 'redux-actions';
+import initialState from './initialState';
 import {
-	uploadFile,
-	postFile,
-	resetState,
-	postFileArticles,
-	resetSearch,
+  uploadFile,
+  postFile,
+  resetState,
+  postFileArticles,
+  resetSearch,
 } from '../actions';
 
 const fileUploadHandler = [
-	uploadFile,
-	(state, action) => {
-		const { payload } = action;
+  uploadFile,
+  (state, action) => {
+    const { payload } = action;
 
-		const file = R.prop('file', payload);
+    const file = R.prop('file', payload);
 
-		return {
-			...state,
-			isLoading: false,
-			current_file: file,
-		};
-	},
+    return {
+      ...state,
+      isLoading: false,
+      current_file: file,
+    };
+  },
 ];
 
-const resetStateHandler = [
-	resetState,
-	(state, action) => {
-		return { initialState };
-	},
-];
+const resetStateHandler = [resetState, (state, action) => ({ initialState })];
 
 const resetSearchHandler = [
-	resetSearch,
-	(state, action) => {
-		return {
-			...state,
-			current_file: '',
-		};
-	},
+  resetSearch,
+  (state, action) => ({
+    ...state,
+    current_file: '',
+  }),
 ];
 
 const filePostHandler = [
-	postFile,
-	(state, action) => {
-		const { ready, error, payload } = action;
+  postFile,
+  (state, action) => {
+    const { ready, error, payload } = action;
 
-		if (!ready) {
-			return {
-				...state,
-				isLoading: true,
-			};
-		}
+    if (!ready) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
 
-		if (error) {
-			return {
-				...state,
-				hasError: true,
-				isLoading: false,
-			};
-		}
+    if (error) {
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+      };
+    }
 
-		const response = R.path(['data', 'message'], payload);
+    const response = R.path(['data', 'message'], payload);
 
-		return {
-			...state,
-			isLoading: false,
-			recommendations: response,
-		};
-	},
+    return {
+      ...state,
+      isLoading: false,
+      recommendations: response,
+    };
+  },
 ];
 
 const filePostArticleHandler = [
-	postFileArticles,
-	(state, action) => {
-		const { ready, error, payload } = action;
+  postFileArticles,
+  (state, action) => {
+    const { ready, error, payload } = action;
 
-		if (!ready) {
-			return {
-				...state,
-				isLoading: true,
-			};
-		}
+    if (!ready) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
 
-		if (error) {
-			return {
-				...state,
-				hasError: true,
-				isLoading: false,
-			};
-		}
+    if (error) {
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+      };
+    }
 
-		const response = R.path(['data', 'message'], payload);
+    const response = R.path(['data', 'message'], payload);
 
-		return {
-			...state,
-			isLoading: false,
-			articles: response,
-		};
-	},
+    return {
+      ...state,
+      isLoading: false,
+      articles: response,
+    };
+  },
 ];
 
 const reducer = handleActions(
-	new Map([
-		fileUploadHandler,
-		filePostHandler,
-		resetStateHandler,
-		filePostArticleHandler,
-		resetSearchHandler,
-	]),
-	R.clone(initialState)
+  new Map([
+    fileUploadHandler,
+    filePostHandler,
+    resetStateHandler,
+    filePostArticleHandler,
+    resetSearchHandler,
+  ]),
+  R.clone(initialState),
 );
 
 export default reducer;

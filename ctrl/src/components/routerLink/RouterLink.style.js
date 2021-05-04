@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledRouterLink = styled(Link)`
-	${({ theme }) => `
+  ${({ theme }) => `
 		text-decoration: none;
 		color: ${theme.palette.primary.main};
 		::visited {

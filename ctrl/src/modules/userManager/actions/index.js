@@ -8,16 +8,15 @@ export const signIn = createPrefixedAction(actionTypes.SIGN_IN);
 export const signOut = createPrefixedAction(actionTypes.SIGN_OUT);
 export const updateTokens = createPrefixedAction(actionTypes.UPDATE_TOKENS);
 export const getAccountDetails = createPrefixedAction(
-	actionTypes.GET_ACCOUNT_DETAILS
+  actionTypes.GET_ACCOUNT_DETAILS,
 );
 
-export const loadAuthToken = (header) => (dispatch) =>
-	dispatch(getIdmTokens(POST(userManager.config.authorization, null, header)));
+export const loadAuthToken = (header) => (dispatch) => dispatch(getIdmTokens(POST(userManager.config.authorization, null, header)));
 
 export const loadAccountDetails = (header) => async (dispatch) => {
-	try {
-		dispatch(getAccountDetails(GET(userManager.config.details, header)));
-	} catch (exception) {
-		console.log(exception);
-	}
+  try {
+    dispatch(getAccountDetails(GET(userManager.config.details, header)));
+  } catch (exception) {
+    console.log(exception);
+  }
 };

@@ -4,11 +4,11 @@ const BASE = 'http://localhost:8080';
 // const BASE = 'https://fii-ctrl.appspot.com';
 
 export default {
-	userManager: {
-		authorization: `${BASE}/login`,
-		details: `${BASE}/current-user`,
-		teaching: `${BASE}/current-user/teaching`,
-		resources: `${BASE}/resources`,
-		articles: `${BASE}/articles`,
-	},
+  userManager: {
+    authorization: `${BASE}/login`,
+    details: `${BASE}/current-user`,
+    teaching: `${BASE}/current-user/teaching`,
+    resources: `${BASE}/resources`,
+    articles: `${BASE}/articles`,
+  },
 };

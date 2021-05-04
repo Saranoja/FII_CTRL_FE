@@ -1,41 +1,41 @@
-import { POST } from '../../../config/http';
+import { POST, createHeaderWithRefreshToken } from '../../../config/http';
 import { createPrefixedAction } from '../config';
 import userManager from '../../userManager';
-import { createHeaderWithRefreshToken } from '../../../config/http';
+
 import actionTypes from './actionTypes';
 
 export const uploadFile = createPrefixedAction(actionTypes.UPLOAD_FILE);
 export const postFile = createPrefixedAction(actionTypes.POST_FILE);
 export const postFileArticles = createPrefixedAction(
-	actionTypes.POST_FILE_ARTICLES
+  actionTypes.POST_FILE_ARTICLES,
 );
 export const resetState = createPrefixedAction(actionTypes.RESET_STATE);
 export const resetSearch = createPrefixedAction(actionTypes.RESET_SEARCH);
 
 export const loadResourcesForFile = (file) => (dispatch) => {
-	dispatch(uploadFile({ file }));
+  dispatch(uploadFile({ file }));
 };
 
 export const getResetState = () => (dispatch) => {
-	dispatch(resetState({}));
+  dispatch(resetState({}));
 };
 
 export const getResetSearch = () => (dispatch) => {
-	dispatch(resetSearch({}));
+  dispatch(resetSearch({}));
 };
 
 export const getResourcesForFile = (file, subjectId) => (dispatch) => {
-	const header = createHeaderWithRefreshToken();
-	dispatch(
-		postFile(
-			POST(`${userManager.config.resources}/${subjectId}/pdf`, file, header)
-		)
-	);
+  const header = createHeaderWithRefreshToken();
+  dispatch(
+    postFile(
+      POST(`${userManager.config.resources}/${subjectId}/pdf`, file, header),
+    ),
+  );
 };
 
 export const getArticlesForFile = (file) => (dispatch) => {
-	const header = createHeaderWithRefreshToken();
-	dispatch(
-		postFileArticles(POST(`${userManager.config.articles}/pdf`, file, header))
-	);
+  const header = createHeaderWithRefreshToken();
+  dispatch(
+    postFileArticles(POST(`${userManager.config.articles}/pdf`, file, header)),
+  );
 };
