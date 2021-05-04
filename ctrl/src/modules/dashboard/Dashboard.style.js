@@ -1,11 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledDashboard = styled.div`
-	${() => {
-		return css`
+	${() =>
+		`
             
-        }`;
-	}}
+        `}
 `;
 
 export default StyledDashboard;

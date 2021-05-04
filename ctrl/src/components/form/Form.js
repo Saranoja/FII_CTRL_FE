@@ -84,7 +84,6 @@ class CustomForm extends Component {
 						error={errors.email ? true : false}
 						helperText={errors.email}
 						name="email"
-						autoComplete="off"
 					/>
 				</FormControl>
 				<FormControl variant="filled" color="primary" className="form-input">
@@ -109,7 +108,6 @@ class CustomForm extends Component {
 								</IconButton>
 							</InputAdornment>
 						}
-						autoComplete="off"
 					/>
 				</FormControl>
 				<Button

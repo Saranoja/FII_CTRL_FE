@@ -1,53 +1,48 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledDividedGrid = styled.div`
-	${({ theme }) => {
-		const { spacing, breakpoints } = theme;
+	${({ theme }) => `
+		.divided-grid-segment {
+			border-radius: ${theme.spacing(1)}px;
+			border: none;
+			padding: ${theme.spacing(3)}px ${theme.spacing(8)}px;
 
-		return css`
-			.divided-grid-segment {
-				border-radius: ${`${spacing(1)}px`};
-				border: none;
-				padding: ${`${spacing(3)}px`} ${`${spacing(8)}px`};
+			${theme.breakpoints.down('sm')} {
+				padding: ${theme.spacing(3)}px;
+			}
 
-				${breakpoints.down('sm')} {
-					padding: ${`${spacing(3)}px`};
+			margin-bottom: ${theme.spacing(3)}px;
+
+			.divided-grid-container {
+				flex-wrap: nowrap;
+				flex-direction: column;
+				justify-content: space-evenly;
+
+				${theme.breakpoints.up('md')} {
+					flex-direction: row;
 				}
 
-				margin-bottom: ${`${spacing(3)}px`};
+				.divided-grid-item {
+					width: 45%;
 
-				.divided-grid-container {
-					flex-wrap: nowrap;
-					flex-direction: column;
-					justify-content: space-evenly;
-
-					${breakpoints.up('md')} {
-						flex-direction: row;
+					.chip-root {
+						margin-bottom: ${theme.spacing(3)}px;
 					}
 
-					.divided-grid-item {
-						width: 45%;
-
-						.root {
-							margin-bottom: 24px;
-						}
-
-						.chip-container {
-							margin-top: 24px;
-							margin-bottom: 4px;
-							max-height: 32px;
-							overflow: auto;
-							min-height: 32px;
-						}
+					.chip-container {
+						margin-top: ${theme.spacing(3)}px;
+						margin-bottom: ${theme.spacing(0.5)}px;
+						max-height: ${theme.spacing(4)}px;
+						overflow: auto;
 					}
 				}
 			}
+		}
 
-			.grid-divider-loader {
-				margin: ${`${spacing(2)}px`};
-			}
-		`;
-	}}
+		.grid-divider-loader {
+			margin: ${theme.spacing(2)}px;
+		}
+	`}
 `;
 
 export default StyledDividedGrid;

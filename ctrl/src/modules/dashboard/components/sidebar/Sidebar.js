@@ -6,7 +6,7 @@ import StyledSidebar from './Sidebar.style';
 
 const Sidebar = ({ username, className }) => {
 	return (
-		<StyledSidebar className={className}>
+		<StyledSidebar className={className} elevation={3} square>
 			<h1 className="username-greet"> Hello {username}! </h1>
 		</StyledSidebar>
 	);

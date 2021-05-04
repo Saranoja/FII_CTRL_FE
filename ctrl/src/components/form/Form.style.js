@@ -1,24 +1,20 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledForm = styled.form`
-	${() => {
-		return css`
-			margin-top: 16px;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-evenly;
+	${({ theme }) => `
+		margin-top: ${theme.spacing(2)}px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
 
-			.form-input {
-				margin-bottom: 16px;
-			}
+		.form-input {
+			margin-bottom: ${theme.spacing(2)}px;
+		}
 
-			.form-submit-button {
-				align-self: flex-start;
-			}
-		`;
-	}}
+		.form-submit-button {
+			align-self: flex-start;
+		}
+	`}
 `;
-
-StyledForm.displayName = 'StyledForm';
 
 export default StyledForm;

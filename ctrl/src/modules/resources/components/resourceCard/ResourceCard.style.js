@@ -1,35 +1,30 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Card } from '@material-ui/core';
 
 const StyledResourceCard = styled(Card)`
-	${({ theme }) => {
-		const { spacing } = theme;
+	${({ theme }) => `
+        margin-right: ${theme.spacing(2)}px;
 
-		return css`
+        .resource-title, .resource-author {
+            font-weight: normal;
+        }
 
-            margin-right: ${`${spacing(2)}px`};
+        .bookmark-icon-root {
+            min-width: auto;
+            margin-right: ${theme.spacing(1)}px;
+        }
 
-            .resource-title, .resource-author {
-                font-weight: normal;
+        .pages-list-line-wrapper {
+            display: flex;
+            justify-content: space-between;
+            flex: 0 0 auto;
+
+            .page-numbers-item {
+                margin-right: ${theme.spacing(1)}px;
             }
+        }
 
-            .bookmark-icon-root {
-                min-width: auto;
-                margin-right: ${`${spacing(1)}px`};
-            }
-
-            .pages-list-line-wrapper {
-                display: flex;
-                justify-content: space-between;
-                flex: 0 0 auto;
-
-                .page-numbers-item {
-                    margin-right: ${`${spacing(1)}px`};
-                }
-            }
-
-    }`;
-	}}
+    `}
 `;
 
 export default StyledResourceCard;
