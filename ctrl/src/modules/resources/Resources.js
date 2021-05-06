@@ -9,20 +9,29 @@ import ResourceCard from './components/resourceCard';
 import ArticleCard from './components/articleCard';
 import DividedGrid from './components/dividedGrid';
 import { Button } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import ChipInput from 'material-ui-chip-input';
 import Grid from '@material-ui/core/Grid';
+import Tabs from '@material-ui/core/Tabs';
+import TabPanel from '@material-ui/lab/TabPanel';
+import TabContext from '@material-ui/lab/TabContext';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Tab from '@material-ui/core/Tab';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import DescriptionIcon from '@material-ui/icons/Description';
 import StyledResources from './Resources.style';
 import { coursesList, formatRecommendations } from './helpers';
 import {
   loadResourcesForFile,
   getResourcesForFile,
-  getResetState,
   getArticlesForFile,
+  getResourcesForKeywords,
+  getArticlesForKeywords,
+  getResetState,
   getResetSearch,
 } from './actions';
 
-// TODO: connect keywords search button to request
-// TODO: change loading state spinner position
+// TODO: split in separate components
 
 class Resources extends React.Component {
   constructor() {
@@ -31,24 +40,31 @@ class Resources extends React.Component {
       subjectId: null,
       shouldExecuteScroll: false,
       manualKeywords: [],
+      currentResourcesTab: 'articles',
     };
     this.resourceCardRef = React.createRef();
+    this.articleCardRef = React.createRef();
   }
 
   componentDidUpdate() {
-    const { recommendations } = this.props;
-    if (recommendations && this.state.shouldExecuteScroll) {
+    const { recommendations, articles } = this.props;
+    if (recommendations && articles && this.state.shouldExecuteScroll) {
       this.executeScroll();
       this.setState({ shouldExecuteScroll: false });
     }
   }
 
-  executeScroll = () =>
-    this.resourceCardRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest',
-    });
+  executeScroll = () => {
+    setTimeout(
+      () =>
+        this.articleCardRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        }),
+      500
+    );
+  };
 
   handleFileSubmit = async () => {
     const { actions, current_file } = this.props;
@@ -60,15 +76,13 @@ class Resources extends React.Component {
 
   handleKeywordsSubmit = async () => {
     const { actions } = this.props;
-    // TODO: complete here
-  };
-
-  handleArticlesCheckboxPdf = async () => {
-    this.setState((previousState) => {
-      return {
-        shouldIncludeArticlesPdf: !previousState.shouldIncludeArticlesPdf,
-      };
-    });
+    await actions.getResetState();
+    await actions.getResourcesForKeywords(
+      this.state.manualKeywords,
+      this.state.subjectId
+    );
+    await actions.getArticlesForKeywords(this.state.manualKeywords);
+    this.setState({ shouldExecuteScroll: true });
   };
 
   handleAddChip = (chip) => {
@@ -85,13 +99,26 @@ class Resources extends React.Component {
     });
   };
 
+  handleResourcesTabChange = (event, newValue) => {
+    console.log('ARTICLE CARD', this.articleCardRef);
+
+    this.setState({ currentResourcesTab: newValue });
+    this.executeScroll();
+  };
+
   componentWillUnmount = () => {
     const { actions } = this.props;
     actions.getResetState();
   };
 
   render() {
-    const { actions, recommendations, articles, isLoading } = this.props;
+    const {
+      actions,
+      recommendations,
+      articles,
+      isLoading,
+      current_file,
+    } = this.props;
 
     return (
       <Layout isCentered={false}>
@@ -114,9 +141,9 @@ class Resources extends React.Component {
                   color="secondary"
                   variant="contained"
                   onClick={this.handleFileSubmit}
+                  disabled={this.state.subjectId && current_file ? false : true}
                 >
-                  {' '}
-                  Search{' '}
+                  Search by course
                 </Button>
               </div>
             }
@@ -124,7 +151,7 @@ class Resources extends React.Component {
               <div className="keywords-wrapper">
                 <h2> Search by adding keywords </h2>
                 <ChipInput
-                  label="Add keywords"
+                  label="Add keywords in relevance order"
                   value={this.state.manualKeywords}
                   onAdd={(chip) => this.handleAddChip(chip)}
                   onDelete={(chip, index) => this.handleDeleteChip(chip, index)}
@@ -139,55 +166,84 @@ class Resources extends React.Component {
                   className="resource-submit-button"
                   color="secondary"
                   variant="contained"
-                  onClick={() => {
-                    console.log('Submitted keywords search');
-                  }}
+                  onClick={this.handleKeywordsSubmit}
+                  disabled={
+                    this.state.subjectId && this.state.manualKeywords.length
+                      ? false
+                      : true
+                  }
                 >
-                  {' '}
-                  Search{' '}
+                  Search by keywords
                 </Button>
               </div>
             }
-            isLoading={
-              isLoading ||
-              (this.state.shouldIncludeArticlesPdf &&
-                !articles &&
-                this.state.shouldExecuteScroll)
-            }
             variant="middle"
           />
-          <div className="resource-cards-wrapper" ref={this.resourceCardRef}>
-            <Grid container>
-              {recommendations
-                ? R.map(
-                    (item) => (
-                      <ResourceCard
-                        key={item.title}
-                        title={item.title}
-                        author={item.author}
-                        pages={item.pages}
-                        link={item.link}
-                      />
-                    ),
-                    formatRecommendations(recommendations)
-                  )
-                : null}
-              {articles
-                ? R.map(
-                    (item) => (
-                      <ArticleCard
-                        key={item.title}
-                        title={item.title}
-                        author={item.authors}
-                        summary={item.summary}
-                        link={item.link}
-                      />
-                    ),
-                    articles
-                  )
-                : null}
-            </Grid>
-          </div>
+          <TabContext value={this.state.currentResourcesTab}>
+            <Tabs
+              value={this.state.currentResourcesTab}
+              onChange={this.handleResourcesTabChange}
+              indicatorColor="primary"
+              textColor="primary"
+              aria-label="icon label tabs"
+            >
+              <Tab
+                icon={<DescriptionIcon />}
+                label="ARTICLES"
+                value="articles"
+              />
+              <Tab icon={<MenuBookIcon />} label="BOOKS" value="books" />
+            </Tabs>
+            <div className="resource-cards-wrapper" ref={this.articleCardRef}>
+              <TabPanel value="articles">
+                <Grid container>
+                  {articles ? (
+                    R.map(
+                      (item) => (
+                        <ArticleCard
+                          key={item.title}
+                          title={item.title}
+                          author={item.authors}
+                          summary={item.summary}
+                          link={item.link}
+                        />
+                      ),
+                      articles
+                    )
+                  ) : (
+                    <Typography variant="body1">
+                      ... Search and you will find 💡
+                    </Typography>
+                  )}
+                </Grid>
+              </TabPanel>
+              <TabPanel value="books">
+                <Grid container>
+                  {recommendations ? (
+                    R.map(
+                      (item) => (
+                        <ResourceCard
+                          key={item.title}
+                          title={item.title}
+                          author={item.author}
+                          pages={item.pages}
+                          link={item.link}
+                        />
+                      ),
+                      formatRecommendations(recommendations)
+                    )
+                  ) : (
+                    <Typography variant="body1">
+                      ... Search and you will find 💡
+                    </Typography>
+                  )}
+                </Grid>
+              </TabPanel>
+            </div>
+          </TabContext>
+          {isLoading ? (
+            <CircularProgress className="grid-divider-loader" />
+          ) : null}
         </StyledResources>
       </Layout>
     );
@@ -207,6 +263,8 @@ const mapDispatchToProps = (dispatch) => ({
       loadResourcesForFile,
       getResourcesForFile,
       getArticlesForFile,
+      getResourcesForKeywords,
+      getArticlesForKeywords,
       getResetState,
       getResetSearch,
     },

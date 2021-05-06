@@ -4,8 +4,10 @@ import initialState from './initialState';
 import {
   uploadFile,
   postFile,
-  resetState,
   postFileArticles,
+  postKeywords,
+  postKeywordsArticles,
+  resetState,
   resetSearch,
 } from '../actions';
 
@@ -94,15 +96,77 @@ const filePostArticleHandler = [
   },
 ];
 
+const keywordsPostHandler = [
+  postKeywords,
+  (state, action) => {
+    const { ready, error, payload } = action;
+
+    if (!ready) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    if (error) {
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+      };
+    }
+
+    const response = R.path(['data', 'message'], payload);
+
+    return {
+      ...state,
+      isLoading: false,
+      recommendations: response,
+    };
+  },
+];
+
+const keywordsPostArticleHandler = [
+  postKeywordsArticles,
+  (state, action) => {
+    const { ready, error, payload } = action;
+
+    if (!ready) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    if (error) {
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+      };
+    }
+
+    const response = R.path(['data', 'message'], payload);
+
+    return {
+      ...state,
+      isLoading: false,
+      articles: response,
+    };
+  },
+];
+
 const reducer = handleActions(
   new Map([
     fileUploadHandler,
     filePostHandler,
+    keywordsPostHandler,
+    keywordsPostArticleHandler,
     resetStateHandler,
     filePostArticleHandler,
     resetSearchHandler,
   ]),
-  R.clone(initialState),
+  R.clone(initialState)
 );
 
 export default reducer;

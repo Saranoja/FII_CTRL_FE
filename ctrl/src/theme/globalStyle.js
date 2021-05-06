@@ -1,5 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components';
-import { lightPalette } from './palette';
+import { darkPalette } from './palette';
 
 export const SCROLLBAR_WEIGHT = '6px';
 
@@ -53,10 +53,10 @@ export const coreGlobalStyle = css`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${lightPalette.primary.dark};
+    background-color: ${darkPalette.background.paper};
     border-radius: 4px;
     &:hover {
-      background-color: ${lightPalette.primary.main};
+      background-color: ${darkPalette.background.paper};
     }
   }
 

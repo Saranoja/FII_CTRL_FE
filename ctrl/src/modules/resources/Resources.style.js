@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledResources = styled.div`
-  ${() => css`
+  ${({ theme }) => `
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -29,6 +29,10 @@ const StyledResources = styled.div`
       justify-content: start;
       align-items: baseline;
       gap: 16px;
+    }
+
+    .grid-divider-loader {
+      margin: ${theme.spacing(2)}px;
     }
   `}
 `;

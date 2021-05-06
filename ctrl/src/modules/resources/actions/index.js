@@ -1,13 +1,18 @@
-import { POST, createHeaderWithRefreshToken } from '../../../config/http';
+import { POST, createHeaderWithRefreshToken } from 'config/http';
 import { createPrefixedAction } from '../config';
 import userManager from '../../userManager';
+import { transformKeywordsList } from '../helpers';
 
 import actionTypes from './actionTypes';
 
 export const uploadFile = createPrefixedAction(actionTypes.UPLOAD_FILE);
 export const postFile = createPrefixedAction(actionTypes.POST_FILE);
 export const postFileArticles = createPrefixedAction(
-  actionTypes.POST_FILE_ARTICLES,
+  actionTypes.POST_FILE_ARTICLES
+);
+export const postKeywords = createPrefixedAction(actionTypes.POST_KEYWORDS);
+export const postKeywordsArticles = createPrefixedAction(
+  actionTypes.POST_KEYWORDS_ARTICLES
 );
 export const resetState = createPrefixedAction(actionTypes.RESET_STATE);
 export const resetSearch = createPrefixedAction(actionTypes.RESET_SEARCH);
@@ -28,14 +33,44 @@ export const getResourcesForFile = (file, subjectId) => (dispatch) => {
   const header = createHeaderWithRefreshToken();
   dispatch(
     postFile(
-      POST(`${userManager.config.resources}/${subjectId}/pdf`, file, header),
-    ),
+      POST(`${userManager.config.resources}/${subjectId}/pdf`, file, header)
+    )
   );
 };
 
 export const getArticlesForFile = (file) => (dispatch) => {
   const header = createHeaderWithRefreshToken();
   dispatch(
-    postFileArticles(POST(`${userManager.config.articles}/pdf`, file, header)),
+    postFileArticles(POST(`${userManager.config.articles}/pdf`, file, header))
+  );
+};
+
+export const getResourcesForKeywords = (keywordsList, subjectId) => (
+  dispatch
+) => {
+  const header = createHeaderWithRefreshToken();
+  const transformedKeywordsPayload = transformKeywordsList(keywordsList);
+  dispatch(
+    postFile(
+      POST(
+        `${userManager.config.resources}/${subjectId}/keywords`,
+        transformedKeywordsPayload,
+        header
+      )
+    )
+  );
+};
+
+export const getArticlesForKeywords = (keywordsList) => (dispatch) => {
+  const header = createHeaderWithRefreshToken();
+  const transformedKeywordsPayload = transformKeywordsList(keywordsList);
+  dispatch(
+    postFileArticles(
+      POST(
+        `${userManager.config.articles}/keywords`,
+        transformedKeywordsPayload,
+        header
+      )
+    )
   );
 };

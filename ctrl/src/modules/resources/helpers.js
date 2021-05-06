@@ -60,6 +60,8 @@ export const formatRecommendations = (recommendationsJson) => {
 
     formattedPages.forEach((tuple) => (tuple[1] = (tuple[1] / maxScore) * 5));
 
+    // TODO: extract this into a constant
+
     const reference = {
       title: key.split('by')[0],
       author: key.split('by')[1],
@@ -69,4 +71,16 @@ export const formatRecommendations = (recommendationsJson) => {
     formattedRecommendations.push(reference);
   });
   return formattedRecommendations;
+};
+
+export const transformKeywordsList = (keywordsList) => {
+  let keywordsJson = {};
+  let keywordsCount = keywordsList.length;
+  const ratio = 10 / keywordsCount;
+  keywordsList.forEach((keyword) => {
+    keywordsJson[keyword] = ratio * keywordsCount;
+    keywordsCount += 1;
+  });
+  console.log(keywordsJson);
+  return keywordsJson;
 };

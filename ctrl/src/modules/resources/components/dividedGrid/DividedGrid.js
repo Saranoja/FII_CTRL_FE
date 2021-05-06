@@ -1,10 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import StyledDividedGrid from './DividedGrid.style';
 
-const DividedGrid = ({ firstChoice, secondChoice, isLoading }) => (
+const DividedGrid = ({ firstChoice, secondChoice }) => (
   <StyledDividedGrid>
     <Paper className="divided-grid-segment" elevation={3}>
       <Grid
@@ -31,7 +30,6 @@ const DividedGrid = ({ firstChoice, secondChoice, isLoading }) => (
         </Grid>
       </Grid>
     </Paper>
-    {isLoading ? <CircularProgress className="grid-divider-loader" /> : null}
   </StyledDividedGrid>
 );
 
