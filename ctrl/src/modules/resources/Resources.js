@@ -21,6 +21,9 @@ import {
   getResetSearch,
 } from './actions';
 
+// TODO: connect keywords search button to request
+// TODO: change loading state spinner position
+
 class Resources extends React.Component {
   constructor() {
     super();
@@ -53,6 +56,11 @@ class Resources extends React.Component {
     await actions.getResourcesForFile(current_file, this.state.subjectId);
     await actions.getArticlesForFile(current_file);
     this.setState({ shouldExecuteScroll: true });
+  };
+
+  handleKeywordsSubmit = async () => {
+    const { actions } = this.props;
+    // TODO: complete here
   };
 
   handleArticlesCheckboxPdf = async () => {

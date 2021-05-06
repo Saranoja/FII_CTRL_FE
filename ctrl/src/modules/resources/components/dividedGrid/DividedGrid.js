@@ -30,8 +30,8 @@ const DividedGrid = ({ firstChoice, secondChoice, isLoading }) => (
           {secondChoice}
         </Grid>
       </Grid>
-      {isLoading ? <CircularProgress className="grid-divider-loader" /> : null}
     </Paper>
+    {isLoading ? <CircularProgress className="grid-divider-loader" /> : null}
   </StyledDividedGrid>
 );
 

@@ -4,6 +4,12 @@ import { Card } from '@material-ui/core';
 const StyledResourceCard = styled(Card)`
   ${({ theme }) => `
         margin-right: ${theme.spacing(2)}px;
+        margin-top: ${theme.spacing(2)}px;
+        
+        opacity: 0;
+		transition: opacity 0.2s linear;
+		animation: fadeIn 0.2s ease-in;
+		animation-fill-mode: forwards;
 
         .resource-title, .resource-author {
             font-weight: normal;

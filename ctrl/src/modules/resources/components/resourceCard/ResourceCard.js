@@ -1,5 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
+import { withInView } from 'hocs';
 import Rating from '@material-ui/lab/Rating';
 import Typography from '@material-ui/core/Typography';
 import CardActions from '@material-ui/core/CardActions';
@@ -14,11 +15,7 @@ import CardContent from '@material-ui/core/CardContent';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import StyledResourceCard from './ResourceCard.style';
 
-// TODO: add withInView hoc
-
-const ResourceCard = ({
-  title, author, pages, link,
-}) => (
+const ResourceCard = ({ title, author, pages, link }) => (
   <StyledResourceCard>
     <CardContent>
       <Typography
@@ -55,13 +52,7 @@ const ResourceCard = ({
                     root: 'pages-list-line-wrapper',
                   }}
                 >
-                  <span className="page-numbers-item">
-                    {' '}
-                    Pg.
-                    {' '}
-                    {pagesGroup[0]}
-                    {' '}
-                  </span>
+                  <span className="page-numbers-item">Pg. {pagesGroup[0]}</span>
                 </ListItemText>
                 <Rating
                   icon={<StarRateIcon fontSize="small" />}
@@ -72,7 +63,7 @@ const ResourceCard = ({
                 />
               </ListItem>
             ),
-            pages,
+            pages
           )}
         </List>
       </Typography>
@@ -92,4 +83,4 @@ const ResourceCard = ({
   </StyledResourceCard>
 );
 
-export default ResourceCard;
+export default withInView(ResourceCard);

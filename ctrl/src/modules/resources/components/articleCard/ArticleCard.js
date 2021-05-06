@@ -1,5 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
+import { withInView } from 'hocs';
 import CardActions from '@material-ui/core/CardActions';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,12 +8,9 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import StyledArticleCard from './ArticleCard.style';
 
-// TODO: add withInView hoc
 // TODO: process latex text
 
-const ArticleCard = ({
-  title, author, summary, link,
-}) => (
+const ArticleCard = ({ title, author, summary, link }) => (
   <StyledArticleCard>
     <CardContent>
       <Typography
@@ -49,4 +47,4 @@ const ArticleCard = ({
   </StyledArticleCard>
 );
 
-export default ArticleCard;
+export default withInView(ArticleCard);
