@@ -29,6 +29,10 @@ const StyledResources = styled.div`
       justify-content: start;
       align-items: baseline;
       gap: 16px;
+
+      .tab-panel-root {
+        padding: ${theme.spacing(3)}px 0;
+      }
     }
 
     .grid-divider-loader {

@@ -23,10 +23,10 @@ const StyledDividedGrid = styled.div`
 			}
 
 			.divided-grid-item {
-				width: 45%;
+				width: auto;
 
-				${theme.breakpoints.down('mdT')} {
-					width: auto;
+				${theme.breakpoints.up('md')} {
+					width: 45%;
 				}
 
 				.chip-root {

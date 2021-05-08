@@ -2,6 +2,7 @@ import * as R from 'ramda';
 import CONFIG from 'config';
 import routePaths from 'routes/routePaths';
 import { isBlank, localStorageManager, STORE_KEYS } from 'utils';
+import { createHeaderWithToken, POST } from 'config/http';
 
 class UserManager {
   constructor() {
@@ -39,8 +40,11 @@ class UserManager {
   };
 
   logout = () => {
-    this.clearData();
-    window.location.replace(routePaths.LOGIN);
+    const header = createHeaderWithToken();
+    POST(this.config.logout, {}, header).then(() => {
+      window.location.replace(routePaths.LOGIN);
+      this.clearData();
+    });
   };
 
   redirectToErrorPage = () => {

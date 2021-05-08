@@ -99,8 +99,6 @@ class Resources extends React.Component {
   };
 
   handleResourcesTabChange = (event, newValue) => {
-    console.log('ARTICLE CARD', this.articleCardRef);
-
     this.setState({ currentResourcesTab: newValue });
     this.executeScroll();
   };
@@ -194,7 +192,12 @@ class Resources extends React.Component {
               <Tab icon={<MenuBookIcon />} label="BOOKS" value="books" />
             </Tabs>
             <div className="resource-cards-wrapper" ref={this.articleCardRef}>
-              <TabPanel value="articles">
+              <TabPanel
+                value="articles"
+                classes={{
+                  root: 'tab-panel-root',
+                }}
+              >
                 <Grid container>
                   {articles ? (
                     R.map(

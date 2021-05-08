@@ -11,8 +11,6 @@ import {
 import userManager from 'modules/userManager';
 import { transformAuthData } from 'modules/userManager/helpers';
 
-const NETWORK_ERROR_CODE = 'network_error';
-
 /* 
 the point with this is that we don't want to do multiple 
 token calls - in case there are concurrent api calls on the same page
@@ -25,10 +23,7 @@ export const AUTH_ERROR_CODES = {
   TOKEN_HAS_NOT_EXPIRED_YET: 'TOKEN_HAS_NOT_EXPIRED_YET',
 };
 
-export const NETWORK_ERROR_MESSAGE = 'Network Error';
-
 const isTokenInvalid = (error) => {
-  console.log(error);
   const isRefreshPath = includes(R.path(['config', 'url'], error), 'refresh');
 
   return (
@@ -109,10 +104,6 @@ const refreshInterceptor = (error) => {
 };
 
 export const errorHandler = (error) => {
-  if (error.message === NETWORK_ERROR_MESSAGE) {
-    userManager.redirectToErrorPage(NETWORK_ERROR_CODE);
-    return error;
-  }
   return refreshInterceptor(error);
 };
 
