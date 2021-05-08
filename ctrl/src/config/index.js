@@ -10,5 +10,7 @@ export default {
     teaching: `${BASE}/current-user/teaching`,
     resources: `${BASE}/resources`,
     articles: `${BASE}/articles`,
+    refresh: `${BASE}/refresh`,
+    logout: `${BASE}/logout`, //TODO: check this
   },
 };

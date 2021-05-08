@@ -2,24 +2,22 @@ import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Layout from 'components/layout';
-import Dropdown from 'components/dropdown';
-import FilePicker from 'components/filePicker';
+import { Layout, Dropdown, FilePicker } from 'components';
 import ResourceCard from './components/resourceCard';
 import ArticleCard from './components/articleCard';
 import DividedGrid from './components/dividedGrid';
-import { Button } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import {
+  Button,
+  Typography,
+  Grid,
+  Tabs,
+  Tab,
+  CircularProgress,
+} from '@material-ui/core';
 import ChipInput from 'material-ui-chip-input';
-import Grid from '@material-ui/core/Grid';
-import Tabs from '@material-ui/core/Tabs';
-import TabPanel from '@material-ui/lab/TabPanel';
-import TabContext from '@material-ui/lab/TabContext';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Tab from '@material-ui/core/Tab';
+import { TabPanel, TabContext } from '@material-ui/lab';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import DescriptionIcon from '@material-ui/icons/Description';
-import StyledResources from './Resources.style';
 import { coursesList, formatRecommendations } from './helpers';
 import {
   loadResourcesForFile,
@@ -30,6 +28,7 @@ import {
   getResetState,
   getResetSearch,
 } from './actions';
+import StyledResources from './Resources.style';
 
 // TODO: split in separate components
 

@@ -9,16 +9,16 @@ const PrivateRoute = ({
   unauthorizedRedirectPath,
   component: Component,
   componentProps,
-  hasIdm,
+  hasId,
   ...otherProps
 }) => (
   <Route
     {...otherProps}
     render={(props) => {
-      if (!hasIdm) {
+      if (!hasId) {
         localStorageManager.set(
           'persisted_path',
-          window.location.pathname + window.location.search,
+          window.location.pathname + window.location.search
         );
         console.log('Redirecting to ', unauthorizedRedirectPath);
         return <Redirect to={{ pathname: unauthorizedRedirectPath }} />;
@@ -30,7 +30,7 @@ const PrivateRoute = ({
 );
 
 const mapStateToProps = (state) => ({
-  hasIdm: state.userManager.hasIdm,
+  hasId: state.userManager.hasId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -38,7 +38,7 @@ const mapDispatchToProps = (dispatch) => ({
     {
       loadAccountDetails,
     },
-    dispatch,
+    dispatch
   ),
 });
 

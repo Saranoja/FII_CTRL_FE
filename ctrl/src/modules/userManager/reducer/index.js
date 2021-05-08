@@ -2,16 +2,14 @@ import * as R from 'ramda';
 import { handleActions } from 'redux-actions';
 import userManager from 'modules/userManager';
 import initialState from './initialState';
-import {
-  signIn, signOut, getIdmTokens, getAccountDetails,
-} from '../actions';
+import { signIn, signOut, getIdmTokens, getAccountDetails } from '../actions';
 import { transformAuthData } from '../helpers';
 
 const signInHandler = [
   signIn,
   (state) => ({
     ...state,
-    hasIdm: true,
+    hasId: true,
   }),
 ];
 
@@ -19,7 +17,7 @@ const signOutHandler = [
   signOut,
   (state) => ({
     ...state,
-    hasIdm: false,
+    hasId: false,
   }),
 ];
 
@@ -43,14 +41,14 @@ const getIdmTokensHandler = [
       };
     }
 
-    const idm = transformAuthData(R.prop('data', payload));
-    userManager.setIdmData(idm);
+    const id = transformAuthData(R.prop('data', payload));
+    userManager.setIdmData(id);
     return {
       ...state,
       isLoading: false,
       hasError: false,
-      hasIdm: true,
-      idm,
+      hasId: true,
+      id,
     };
   },
 ];
@@ -94,7 +92,7 @@ const reducer = handleActions(
     signInHandler,
     signOutHandler,
   ]),
-  R.clone(initialState),
+  R.clone(initialState)
 );
 
 export default reducer;

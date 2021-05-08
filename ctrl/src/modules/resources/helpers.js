@@ -81,6 +81,5 @@ export const transformKeywordsList = (keywordsList) => {
     keywordsJson[keyword] = ratio * keywordsCount;
     keywordsCount += 1;
   });
-  console.log(keywordsJson);
   return keywordsJson;
 };

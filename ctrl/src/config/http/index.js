@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { isBlank } from '../../utils';
 import { getToken, getRefreshToken } from './helpers';
+import { errorHandler } from './refreshInterceptor';
 
 export const createHeaderWithToken = (headers = {}) => {
   const token = getToken();
@@ -44,7 +45,7 @@ export const RequestFactory = (
   headers,
   data,
   responseType,
-  options,
+  options
 ) => {
   const augmentedHeaders = createHeaderWithToken(headers || {}, url);
   return axios({
@@ -58,17 +59,30 @@ export const RequestFactory = (
   });
 };
 
-export const GET = (url, headers = {}, ...options) => RequestFactory('get', url, headers, null, null, ...options);
+export const GET = (url, headers = {}, ...options) =>
+  RequestFactory('get', url, headers, null, null, ...options);
 
-export const HEAD = (url, headers = {}, ...options) => RequestFactory('head', url, headers, null, null, ...options);
+export const HEAD = (url, headers = {}, ...options) =>
+  RequestFactory('head', url, headers, null, null, ...options);
 
-export const POST = (url, data, headers = {}, ...options) => RequestFactory('post', url, headers, data, null, ...options);
+export const POST = (url, data, headers = {}, ...options) =>
+  RequestFactory('post', url, headers, data, null, ...options);
 
-export const PUT = (url, data, headers = {}, ...options) => RequestFactory('put', url, headers, data, null, ...options);
+export const PUT = (url, data, headers = {}, ...options) =>
+  RequestFactory('put', url, headers, data, null, ...options);
 
-export const PATCH = (url, data, headers = {}, ...options) => RequestFactory('patch', url, headers, data, null, ...options);
+export const PATCH = (url, data, headers = {}, ...options) =>
+  RequestFactory('patch', url, headers, data, null, ...options);
 
-export const DELETE = (url, headers = {}, ...options) => RequestFactory('delete', url, headers, null, null, ...options);
+export const DELETE = (url, headers = {}, ...options) =>
+  RequestFactory('delete', url, headers, null, null, ...options);
+
+export const configureRefreshInterceptor = (signOut) => {
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => errorHandler(error, signOut)
+  );
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

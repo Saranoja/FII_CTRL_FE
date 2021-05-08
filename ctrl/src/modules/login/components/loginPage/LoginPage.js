@@ -31,6 +31,7 @@ class LoginPage extends React.Component {
   submit = async (data) => {
     const { actions } = this.props;
     let header = createAuthHeader(data.email, data.password);
+    // TODO: create an independent action for this!!!
     actions
       .loadAuthToken(header)
       .then(() => actions.loadAccountDetails(createHeaderWithToken()))

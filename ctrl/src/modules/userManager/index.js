@@ -1,11 +1,13 @@
 import * as R from 'ramda';
-import CONFIG from '../../config';
+import CONFIG from 'config';
+import routePaths from 'routes/routePaths';
 import { isBlank, localStorageManager, STORE_KEYS } from 'utils';
 
 class UserManager {
   constructor() {
     this.config = CONFIG.userManager;
     this.loginUrl = this.config.authorization;
+    this.logoutUrl = this.config.logout;
   }
 
   getIdmData = () => localStorageManager.get(STORE_KEYS.ID);
@@ -34,6 +36,15 @@ class UserManager {
 
   isTeaching = async () => {
     return R.prop('teaching', this.getIdmData());
+  };
+
+  logout = () => {
+    this.clearData();
+    window.location.replace(routePaths.LOGIN);
+  };
+
+  redirectToErrorPage = () => {
+    window.location.replace(routePaths.ERROR);
   };
 }
 

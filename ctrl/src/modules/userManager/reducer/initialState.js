@@ -13,6 +13,6 @@ export default {
   last_name: initialData.last,
   teaching: initialData.teaching,
   isLoading: false,
-  hasIdm: !isBlank(account),
-  idm: account,
+  hasId: !isBlank(account),
+  id: account,
 };

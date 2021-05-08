@@ -8,15 +8,15 @@ import { localStorageManager } from 'utils';
 import { Route, Redirect } from 'react-router-dom';
 import routePaths from './routePaths';
 
-const LoginRoute = ({ redirectToPath, hasIdm, ...otherProps }) => (
+const LoginRoute = ({ redirectToPath, hasId, ...otherProps }) => (
   <Route
     {...otherProps}
     render={() => {
-      if (hasIdm) {
+      if (hasId) {
         console.log('LGON');
         localStorageManager.set(
           'persisted_path',
-          window.location.pathname + window.location.search,
+          window.location.pathname + window.location.search
         );
         console.log('Redirectiong to ', redirectToPath);
         return <Redirect to={{ pathname: redirectToPath }} />;
@@ -37,7 +37,7 @@ LoginRoute.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  hasIdm: state.userManager.hasIdm,
+  hasId: state.userManager.hasId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -45,7 +45,7 @@ const mapDispatchToProps = (dispatch) => ({
     {
       loadAccountDetails,
     },
-    dispatch,
+    dispatch
   ),
 });
 

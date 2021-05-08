@@ -1,10 +1,9 @@
 export { default as LoginForm } from './form';
 export { default as Header } from './header';
-// export { default as InlineError } from './inlineError';
 export { default as NotFoundPage } from './notFoundPage';
 export { default as ErrorPage } from './errorPage';
-// export { default as Layout } from './layout';
+export { default as Layout } from './layout';
 export { default as RouterLink } from './routerLink';
-// export { default as ProgressBar } from './progressBar';
-// export { default as Dropdown } from './dropdown';
+export { default as Dropdown } from './dropdown';
 export { default as DarkThemeToggle } from './darkThemeToggle';
+export { default as FilePicker } from './filePicker';

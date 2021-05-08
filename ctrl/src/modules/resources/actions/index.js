@@ -1,4 +1,4 @@
-import { POST, createHeaderWithRefreshToken } from 'config/http';
+import { POST, createHeaderWithToken } from 'config/http';
 import { createPrefixedAction } from '../config';
 import userManager from '../../userManager';
 import { transformKeywordsList } from '../helpers';
@@ -30,7 +30,7 @@ export const getResetSearch = () => (dispatch) => {
 };
 
 export const getResourcesForFile = (file, subjectId) => (dispatch) => {
-  const header = createHeaderWithRefreshToken();
+  const header = createHeaderWithToken();
   dispatch(
     postFile(
       POST(`${userManager.config.resources}/${subjectId}/pdf`, file, header)
@@ -39,7 +39,7 @@ export const getResourcesForFile = (file, subjectId) => (dispatch) => {
 };
 
 export const getArticlesForFile = (file) => (dispatch) => {
-  const header = createHeaderWithRefreshToken();
+  const header = createHeaderWithToken();
   dispatch(
     postFileArticles(POST(`${userManager.config.articles}/pdf`, file, header))
   );
@@ -48,7 +48,7 @@ export const getArticlesForFile = (file) => (dispatch) => {
 export const getResourcesForKeywords = (keywordsList, subjectId) => (
   dispatch
 ) => {
-  const header = createHeaderWithRefreshToken();
+  const header = createHeaderWithToken();
   const transformedKeywordsPayload = transformKeywordsList(keywordsList);
   dispatch(
     postFile(
@@ -62,7 +62,7 @@ export const getResourcesForKeywords = (keywordsList, subjectId) => (
 };
 
 export const getArticlesForKeywords = (keywordsList) => (dispatch) => {
-  const header = createHeaderWithRefreshToken();
+  const header = createHeaderWithToken();
   const transformedKeywordsPayload = transformKeywordsList(keywordsList);
   dispatch(
     postFileArticles(
