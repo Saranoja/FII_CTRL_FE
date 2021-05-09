@@ -11,6 +11,8 @@ import Announcements from 'modules/announcements';
 // import Notes from 'modules/notes';
 // import PersonalPage from 'modules/personalPage';
 
+//TODO: actually separate this into routes for students and routes for teachers
+
 export const privateRoutes = [
   {
     id: 'dashboard',

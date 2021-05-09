@@ -5,13 +5,15 @@ const BASE = 'http://localhost:8080';
 
 const API = {
   login: `${BASE}/login`,
+  logout: `${BASE}/logout`,
   refresh: `${BASE}/refresh`,
   users: `${BASE}/users`,
   current_user: `${BASE}/current-user`,
   teaching: `${BASE}/current-user/teaching`,
   resources: `${BASE}/resources`,
   articles: `${BASE}/articles`,
-  logout: `${BASE}/logout`,
+  announcements: `${BASE}/announcements`,
+  groups: `${BASE}/discussion-groups`,
 };
 
 export default API;

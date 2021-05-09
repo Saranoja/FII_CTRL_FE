@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
 
-export const MODULE_NAME = 'RESOURCES';
+export const MODULE_NAME = 'ANNOUNCEMENTS';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

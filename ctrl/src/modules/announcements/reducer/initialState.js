@@ -2,5 +2,5 @@
 export default {
   isLoading: false,
   hasError: false,
-  current_file: '',
+  allGroups: [],
 };
