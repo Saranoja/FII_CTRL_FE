@@ -1,15 +1,15 @@
 import { ErrorPage } from 'components';
 import Dashboard from 'modules/dashboard';
 import Resources from 'modules/resources';
-import Login from '../modules/login';
+import Login from 'modules/login';
 import routePaths from './routePaths';
-// import Announcements from '../modules/announcements';
-// import Courses from '../modules/courses';
-// import Assignments from '../modules/assignments';
-// import Meetings from '../modules/meetings';
-// import Groups from '../modules/groups';
-// import Notes from '../modules/notes';
-// import PersonalPage from '../modules/personalPage';
+import Announcements from 'modules/announcements';
+// import Courses from 'modules/courses';
+// import Assignments from 'modules/assignments';
+// import Meetings from 'modules/meetings';
+// import Groups from 'modules/groups';
+// import Notes from 'modules/notes';
+// import PersonalPage from 'modules/personalPage';
 
 export const privateRoutes = [
   {
@@ -18,32 +18,18 @@ export const privateRoutes = [
     component: Dashboard,
     title: 'Dashboard',
   },
-];
-export const publicRoutes = [
-  {
-    id: 'login',
-    path: routePaths.LOGIN,
-    component: Login,
-    title: 'Login',
-  },
-  {
-    id: 'root',
-    path: routePaths.ROOT,
-    component: Login,
-    title: 'Login',
-  },
   {
     id: 'resources',
     path: routePaths.RESOURCES,
     component: Resources,
     title: 'Resources',
   },
-  // {
-  //     id: 'announcements',
-  //     path: routePaths.ANNOUNCEMENTS,
-  //     component: Announcements,
-  //     title: 'Announcements',
-  // },
+  {
+    id: 'announcements',
+    path: routePaths.ANNOUNCEMENTS,
+    component: Announcements,
+    title: 'Announcements',
+  },
   // {
   //     id: 'courses',
   //     path: routePaths.COURSES,
@@ -80,6 +66,20 @@ export const publicRoutes = [
   //     component: PersonalPage,
   //     title: 'Personal',
   // },
+];
+export const publicRoutes = [
+  {
+    id: 'login',
+    path: routePaths.LOGIN,
+    component: Login,
+    title: 'Login',
+  },
+  {
+    id: 'root',
+    path: routePaths.ROOT,
+    component: Dashboard,
+    title: 'Dashboard',
+  },
   {
     id: 'error',
     path: routePaths.ERROR,

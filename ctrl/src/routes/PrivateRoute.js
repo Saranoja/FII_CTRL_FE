@@ -1,9 +1,10 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Route, Redirect } from 'react-router-dom';
 import { loadAccountDetails } from 'modules/userManager/actions';
 import { localStorageManager } from 'utils';
-import { Route, Redirect } from 'react-router-dom';
+import { PERSISTED_PATH } from './constants';
 
 const PrivateRoute = ({
   unauthorizedRedirectPath,
@@ -17,7 +18,7 @@ const PrivateRoute = ({
     render={(props) => {
       if (!hasId) {
         localStorageManager.set(
-          'persisted_path',
+          PERSISTED_PATH,
           window.location.pathname + window.location.search
         );
         console.log('Redirecting to ', unauthorizedRedirectPath);

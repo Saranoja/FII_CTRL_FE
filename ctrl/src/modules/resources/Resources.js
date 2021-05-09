@@ -31,6 +31,7 @@ import {
 import StyledResources from './Resources.style';
 
 // TODO: split in separate components
+// TODO: clean inputs after sending request - add prop for this
 
 class Resources extends React.Component {
   constructor() {

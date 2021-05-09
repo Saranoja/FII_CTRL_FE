@@ -4,12 +4,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createAuthHeader, createHeaderWithToken } from 'config/http';
+import { localStorageManager } from 'utils';
+import { PERSISTED_PATH } from 'routes/constants';
 import { loadAuthToken, loadAccountDetails } from 'modules/userManager/actions';
 import StyledLoginPage from './LoginPage.style';
-import routePaths from 'routes/routePaths';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import { withAlreadyLoggedIn } from 'hocs';
 import { LoginForm } from 'components';
 
 const Alert = (props) => {
@@ -31,11 +33,13 @@ class LoginPage extends React.Component {
   submit = async (data) => {
     const { actions } = this.props;
     let header = createAuthHeader(data.email, data.password);
-    // TODO: create an independent action for this!!!
+    // TODO: extract an action for this!!!
     actions
       .loadAuthToken(header)
       .then(() => actions.loadAccountDetails(createHeaderWithToken()))
-      .then(() => this.props.history.push(routePaths.DASHBOARD))
+      .then(() =>
+        this.props.history.push(localStorageManager.get(PERSISTED_PATH))
+      )
       .catch(() => this.setState({ shouldDisplayError: true }));
   };
 
@@ -64,6 +68,7 @@ class LoginPage extends React.Component {
 const mapStateToProps = (state) => ({
   isLoading: state.userManager.isLoading,
   hasError: state.userManager.hasError,
+  hasId: state.userManager.hasId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -78,5 +83,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default R.compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withRouter
+  withRouter,
+  withAlreadyLoggedIn
 )(LoginPage);

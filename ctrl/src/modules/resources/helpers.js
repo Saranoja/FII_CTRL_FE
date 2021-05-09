@@ -1,4 +1,5 @@
 import * as R from 'ramda';
+import { AMAZON_SEARCH_URL } from './constants';
 
 export const coursesList = [
   {
@@ -60,13 +61,11 @@ export const formatRecommendations = (recommendationsJson) => {
 
     formattedPages.forEach((tuple) => (tuple[1] = (tuple[1] / maxScore) * 5));
 
-    // TODO: extract this into a constant
-
     const reference = {
       title: key.split('by')[0],
       author: key.split('by')[1],
       pages: formattedPages,
-      link: `https://www.amazon.com/s?k=${key}`,
+      link: `${AMAZON_SEARCH_URL}${key}`,
     };
     formattedRecommendations.push(reference);
   });

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loadAccountDetails } from 'modules/userManager/actions';
+import { withLogin } from 'hocs';
 import Layout from 'components/layout';
 import ErrorPage from 'components/errorPage';
 import ActionCard from './components/actionCard';
@@ -27,7 +28,6 @@ class Dashboard extends React.Component {
               spacing={2}
               className="dashboard-cards-stack"
             >
-              {/* <Card.Group stackable itemsPerRow={3} doubling centered className="dashboard-cards-stack" > */}
               {R.map(
                 (column) => (
                   <Grid item className="column" key={column.id}>
@@ -47,7 +47,7 @@ class Dashboard extends React.Component {
                     ) : null}
                   </Grid>
                 ),
-                cardsType,
+                cardsType
               )}
             </Grid>
           </div>
@@ -61,6 +61,7 @@ const mapStateToProps = (state) => ({
   firstName: state.userManager.first_name,
   teaching: state.userManager.teaching,
   hasError: state.userManager.hasError,
+  hasId: state.userManager.hasId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,8 +69,11 @@ const mapDispatchToProps = (dispatch) => ({
     {
       loadAccountDetails,
     },
-    dispatch,
+    dispatch
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default R.compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withLogin
+)(Dashboard);
