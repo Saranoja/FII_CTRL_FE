@@ -2,7 +2,7 @@ import * as R from 'ramda';
 import { handleActions } from 'redux-actions';
 import initialState from './initialState';
 
-import { retrieveGroups } from '../actions';
+import { retrieveGroups, retrieveGroupAnnouncements } from '../actions';
 
 const groupsRetrievalHandler = [
   retrieveGroups,
@@ -33,8 +33,37 @@ const groupsRetrievalHandler = [
   },
 ];
 
+const announcementsRetrievalHandler = [
+  retrieveGroupAnnouncements,
+  (state, action) => {
+    const { ready, error, payload } = action;
+    if (!ready) {
+      return {
+        ...state,
+        areAnnouncementsLoading: true,
+      };
+    }
+
+    if (error) {
+      return {
+        ...state,
+        hasError: true,
+        areAnnouncementsLoading: false,
+      };
+    }
+
+    const response = R.path(['data'], payload);
+
+    return {
+      ...state,
+      areAnnouncementsLoading: false,
+      currentGroupAnnouncements: response,
+    };
+  },
+];
+
 const reducer = handleActions(
-  new Map([groupsRetrievalHandler]),
+  new Map([groupsRetrievalHandler, announcementsRetrievalHandler]),
   R.clone(initialState)
 );
 

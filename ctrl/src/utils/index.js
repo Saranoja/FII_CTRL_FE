@@ -29,6 +29,8 @@ export const localStorageManager = {
 
 export const STORE_KEYS = {
   ID: 'account',
+  IS_DARK_THEME: 'dark_theme',
+  LAST_VISITED_GROUP: 'last_visited_group',
 };
 
 export const clearInternalCache = () => {

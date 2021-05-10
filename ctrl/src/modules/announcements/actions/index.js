@@ -8,6 +8,9 @@ export const retrieveGroups = createPrefixedAction(actionTypes.GET_USER_GROUPS);
 export const retrieveGroupAnnouncements = createPrefixedAction(
   actionTypes.GET_GROUP_ANNOUNCEMENTS
 );
+export const addAnnouncement = createPrefixedAction(
+  actionTypes.POST_ANNOUNCEMENT
+);
 export const removeAnnouncement = createPrefixedAction(
   actionTypes.DELETE_ANNOUNCEMENT
 );
@@ -21,7 +24,22 @@ export const loadGroups = () => (dispatch) => {
 export const loadGroupAnnouncements = (groupId) => (dispatch) => {
   const header = createHeaderWithToken();
   dispatch(
-    retrieveGroups(POST(`${userManager.config.groups}/${groupId}`, {}, header))
+    retrieveGroupAnnouncements(
+      GET(`${userManager.config.announcements}/${groupId}`, {}, header)
+    )
+  );
+};
+
+export const postAnnouncement = (groupId, announcement) => (dispatch) => {
+  const header = createHeaderWithToken();
+  dispatch(
+    retrieveGroups(
+      POST(
+        `${userManager.config.announcements}/${groupId}`,
+        announcement,
+        header
+      )
+    )
   );
 };
 
@@ -30,7 +48,7 @@ export const deleteAnnouncement = (groupId, announcementId) => (dispatch) => {
   dispatch(
     retrieveGroups(
       DELETE(
-        `${userManager.config.groups}/${groupId}?id=${announcementId}`,
+        `${userManager.config.announcements}/${groupId}?id=${announcementId}`,
         {},
         header
       )
@@ -47,7 +65,7 @@ export const patchAnnouncement = (
   dispatch(
     retrieveGroups(
       PATCH(
-        `${userManager.config.groups}/${groupId}?id=${announcementId}`,
+        `${userManager.config.announcements}/${groupId}?id=${announcementId}`,
         newAnnouncementData,
         header
       )

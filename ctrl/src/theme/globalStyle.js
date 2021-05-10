@@ -53,11 +53,8 @@ export const coreGlobalStyle = css`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${darkPalette.background.paper};
+    background-color: ${darkPalette.secondary.dark};
     border-radius: 4px;
-    &:hover {
-      background-color: ${darkPalette.background.paper};
-    }
   }
 
   @keyframes ${animations.fadeIn} {

@@ -3,8 +3,8 @@ import routePaths from 'routes/routePaths';
 import images from 'assets/images/header';
 import StyledHeader from './Header.style';
 import RouterLink from '../routerLink';
-import { Button } from '@material-ui/core';
-import userManager from 'modules/userManager';
+// import { Button } from '@material-ui/core';
+// import userManager from 'modules/userManager';
 
 //TODO: see for logout button
 
