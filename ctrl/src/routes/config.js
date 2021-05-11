@@ -15,6 +15,12 @@ import Announcements from 'modules/announcements';
 
 export const privateRoutes = [
   {
+    id: 'root',
+    path: routePaths.ROOT,
+    component: Dashboard,
+    title: 'Dashboard',
+  },
+  {
     id: 'dashboard',
     path: routePaths.DASHBOARD,
     component: Dashboard,
@@ -75,12 +81,6 @@ export const publicRoutes = [
     path: routePaths.LOGIN,
     component: Login,
     title: 'Login',
-  },
-  {
-    id: 'root',
-    path: routePaths.ROOT,
-    component: Dashboard,
-    title: 'Dashboard',
   },
   {
     id: 'error',

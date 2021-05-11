@@ -26,7 +26,7 @@ const App = () => {
           <AppRoutes />
           <CssBaseline />
           <DarkThemeToggle
-            checked={darkTheme}
+            checked={darkTheme.length ? darkTheme : false}
             onChange={() => setDarkTheme(!darkTheme)}
           />
         </Router>

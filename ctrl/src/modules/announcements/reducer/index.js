@@ -1,6 +1,7 @@
 import * as R from 'ramda';
 import { handleActions } from 'redux-actions';
 import initialState from './initialState';
+import { transformAnnouncementsPayloadData } from './helpers';
 
 import { retrieveGroups, retrieveGroupAnnouncements } from '../actions';
 
@@ -57,7 +58,7 @@ const announcementsRetrievalHandler = [
     return {
       ...state,
       areAnnouncementsLoading: false,
-      currentGroupAnnouncements: response,
+      currentGroupAnnouncements: transformAnnouncementsPayloadData(response),
     };
   },
 ];

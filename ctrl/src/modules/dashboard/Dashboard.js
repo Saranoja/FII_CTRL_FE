@@ -73,7 +73,6 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default R.compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withLogin
-)(Dashboard);
+export default R.compose(connect(mapStateToProps, mapDispatchToProps))(
+  Dashboard
+);
