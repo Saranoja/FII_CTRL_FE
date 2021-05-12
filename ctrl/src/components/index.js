@@ -7,3 +7,4 @@ export { default as RouterLink } from './routerLink';
 export { default as Dropdown } from './dropdown';
 export { default as DarkThemeToggle } from './darkThemeToggle';
 export { default as FilePicker } from './filePicker';
+export { default as LogoutButton } from './logoutButton';

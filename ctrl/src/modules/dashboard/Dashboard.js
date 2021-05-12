@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loadAccountDetails } from 'modules/userManager/actions';
-import { withLogin } from 'hocs';
 import Layout from 'components/layout';
 import ErrorPage from 'components/errorPage';
 import ActionCard from './components/actionCard';

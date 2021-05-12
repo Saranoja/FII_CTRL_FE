@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const StyledHeader = styled.div`
   ${({ theme }) => `
 		.logo-fii {
+			z-index: ${theme.zIndex.mobileStepper};
 			display: block;
 			cursor: pointer;
 			position: absolute;

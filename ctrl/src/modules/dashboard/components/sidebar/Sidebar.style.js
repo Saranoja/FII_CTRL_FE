@@ -5,8 +5,12 @@ const StyledSidebar = styled(({ theme, ...otherProps }) => (
   <Paper {...otherProps} />
 ))`
   ${({ theme }) => `
-        z-index: -1;
         padding: ${theme.spacing(6)}px ${theme.spacing(2)}px;
+        .signout-button {
+          position: absolute;
+          bottom: ${theme.spacing(1)}px;
+          left: 1em;
+        }
     `}
 `;
 
