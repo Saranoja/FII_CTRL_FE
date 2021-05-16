@@ -10,7 +10,7 @@ const account = initialData
 
 export default {
   first_name: initialData.first_name,
-  last_name: initialData.last,
+  last_name: initialData.last_name,
   teaching: initialData.teaching,
   isLoading: false,
   hasId: !isBlank(account),

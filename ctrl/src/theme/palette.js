@@ -31,4 +31,7 @@ export const darkPalette = {
     paper: '#242426',
     default: '#1b1b1c',
   },
+  text: {
+    primary: '#F1F1F1',
+  },
 };

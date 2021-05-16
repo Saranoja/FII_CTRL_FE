@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { socket } from 'socketContext';
 import { Layout } from 'components';
 import { loadGroups, loadGroupAnnouncements } from './actions';
 import { availableGroupsTitle } from './constants';
 import StyledAnnouncements from './Announcements.style';
 import {
-  CircularProgress,
+  LinearProgress,
   Paper,
   Typography,
   Chip,
@@ -16,56 +17,86 @@ import {
 import { localStorageManager, STORE_KEYS } from 'utils';
 import AnnouncementSegment from './components/announcementSegment';
 
-const Announcements = ({
-  groups,
-  currentGroupAnnouncements,
-  isLoading,
-  areAnnouncementsLoading,
-  actions,
-}) => {
-  const [currentGroup, setCurrentGroup] = useState();
+class Announcements extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentGroup: {},
+      announcements: [],
+    };
+  }
 
-  const setLastVisitedGroup = (lastAccessedGroup) => {
-    localStorageManager.set(STORE_KEYS.LAST_VISITED_GROUP, lastAccessedGroup);
-  };
-
-  const getLastVisitedGroup = () => {
+  getLastVisitedGroup = () => {
     return localStorageManager.get(STORE_KEYS.LAST_VISITED_GROUP);
   };
 
-  useEffect(() => {
-    const lastVisitedGroup = getLastVisitedGroup() || groups[0];
-    if (groups.length) {
-      setCurrentGroup(lastVisitedGroup);
-      setLastVisitedGroup(lastVisitedGroup);
-      actions.loadGroupAnnouncements(lastVisitedGroup.id);
-    } else {
-      actions.loadGroups();
-    }
-  }, [actions, groups]);
+  setLastVisitedGroup = (lastAccessedGroup) => {
+    localStorageManager.set(STORE_KEYS.LAST_VISITED_GROUP, lastAccessedGroup);
+  };
 
-  const handleGroupChipClick = async (newGroup) => {
-    setCurrentGroup(newGroup);
-    setLastVisitedGroup(newGroup);
+  handleAnnouncementsInit = () => {
+    const { groups, actions } = this.props;
+
+    const lastVisitedGroup = this.getLastVisitedGroup() || groups[0];
+    this.setState({ currentGroup: lastVisitedGroup });
+    this.setLastVisitedGroup(lastVisitedGroup);
+    actions.loadGroupAnnouncements(lastVisitedGroup.id);
+  };
+
+  componentDidMount() {
+    const { groups, actions } = this.props;
+
+    // TODO: move subscription after login to get notifications
+    actions
+      .loadGroups()
+      .then(() =>
+        R.forEach((group) => socket.emit('join', { room: group.id }), groups)
+      )
+      .then(this.handleAnnouncementsInit);
+
+    socket.connect();
+    socket.on('message', this.handleAnnouncementPosting);
+  }
+
+  handleAnnouncementPosting = () => {
+    const { actions } = this.props;
+    actions.loadGroupAnnouncements(this.state.currentGroup.id);
+  };
+
+  componentWillUnmount() {
+    socket.off('message', this.handleAnnouncementPosting);
+    socket.disconnect();
+  }
+
+  handleGroupChipClick = async (newGroup) => {
+    const { actions } = this.props;
+    this.setState({ currentGroup: newGroup });
+    this.setLastVisitedGroup(newGroup);
     await actions.loadGroupAnnouncements(newGroup.id);
   };
 
   //TODO: create separate components for the 2 papers
 
-  return (
-    <Layout isCentered={false}>
-      <StyledAnnouncements>
-        <Paper elevation={3} className="announcements-segment">
-          {currentGroup ? (
-            <Typography variant="h5" color="secondary">
-              {currentGroup.name} announcements
-            </Typography>
-          ) : null}
-          <div className="announcements-wrapper">
-            {areAnnouncementsLoading ? (
-              <CircularProgress color="secondary" />
-            ) : (
-              R.map(
+  render() {
+    const {
+      groups,
+      areAnnouncementsLoading,
+      currentGroupAnnouncements,
+    } = this.props;
+    return (
+      <Layout isCentered={false}>
+        <StyledAnnouncements>
+          <Paper elevation={3} className="announcements-segment">
+            {this.state.currentGroup ? (
+              <Typography variant="h5" color="secondary">
+                {this.state.currentGroup.name} Announcements
+              </Typography>
+            ) : null}
+            <div className="announcements-wrapper">
+              {areAnnouncementsLoading ? (
+                <LinearProgress color="secondary" />
+              ) : null}
+              {R.map(
                 (announcement) => (
                   <AnnouncementSegment
                     key={announcement.id}
@@ -76,52 +107,51 @@ const Announcements = ({
                   />
                 ),
                 currentGroupAnnouncements
-              )
-            )}
-          </div>
-        </Paper>
-        <Paper className="available-groups-segment">
-          <Typography variant="subtitle1" color="secondary">
-            {availableGroupsTitle}
-          </Typography>
-          <div className="available-groups-wrapper">
-            {groups &&
-              R.map(
-                (groupElement) => (
-                  <Chip
-                    className="group-chip"
-                    clickable
-                    onClick={() => handleGroupChipClick(groupElement)}
-                    key={groupElement.id}
-                    label={groupElement.name}
-                    avatar={
-                      groupElement.avatar ? (
-                        <Avatar src={groupElement.avatar} />
-                      ) : (
-                        <Avatar>{groupElement.name[0]}</Avatar>
-                      )
-                    }
-                    color="secondary"
-                    variant={
-                      groupElement?.id === currentGroup?.id
-                        ? 'default'
-                        : 'outlined'
-                    }
-                  />
-                ),
-                groups
               )}
-          </div>
-        </Paper>
-      </StyledAnnouncements>
-    </Layout>
-  );
-};
+            </div>
+          </Paper>
+          <Paper className="available-groups-segment">
+            <Typography variant="subtitle1" color="secondary">
+              {availableGroupsTitle}
+            </Typography>
+            <div className="available-groups-wrapper">
+              {groups &&
+                R.map(
+                  (groupElement) => (
+                    <Chip
+                      className="group-chip"
+                      clickable
+                      onClick={() => this.handleGroupChipClick(groupElement)}
+                      key={groupElement.id}
+                      label={groupElement.name}
+                      avatar={
+                        groupElement.avatar ? (
+                          <Avatar src={groupElement.avatar} />
+                        ) : (
+                          <Avatar>{groupElement.name[0]}</Avatar>
+                        )
+                      }
+                      color="secondary"
+                      variant={
+                        groupElement?.id === this.state.currentGroup?.id
+                          ? 'default'
+                          : 'outlined'
+                      }
+                    />
+                  ),
+                  groups
+                )}
+            </div>
+          </Paper>
+        </StyledAnnouncements>
+      </Layout>
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
   groups: state.announcements.groups,
   currentGroupAnnouncements: state.announcements.currentGroupAnnouncements,
-  isLoading: state.announcements.isLoading,
   areAnnouncementsLoading: state.announcements.areAnnouncementsLoading,
 });
 

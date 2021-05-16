@@ -18,12 +18,14 @@ export const updateAnnouncement = createPrefixedAction(actionTypes.PATCH);
 
 export const loadGroups = () => (dispatch) => {
   const header = createHeaderWithToken();
-  dispatch(retrieveGroups(GET(`${userManager.config.groups}`, {}, header)));
+  return dispatch(
+    retrieveGroups(GET(`${userManager.config.groups}`, {}, header))
+  );
 };
 
 export const loadGroupAnnouncements = (groupId) => (dispatch) => {
   const header = createHeaderWithToken();
-  dispatch(
+  return dispatch(
     retrieveGroupAnnouncements(
       GET(`${userManager.config.announcements}/${groupId}`, {}, header)
     )
