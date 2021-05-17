@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 const StyledDarkThemeToggle = styled.div`
+  ${({ theme }) => `
   .toggle-root {
     position: absolute;
-    top: 0;
-    right: 0;
-  }
+    top: ${theme.spacing(0.5)}px;;
+    right: ${theme.spacing(5)}px;
+  }`}
 `;
 
 export default StyledDarkThemeToggle;

@@ -2,10 +2,11 @@ import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { socket } from 'socketContext';
 import { Layout } from 'components';
+import { loadNotification } from 'modules/notifications/actions';
 import { loadGroups, loadGroupAnnouncements } from './actions';
 import { availableGroupsTitle } from './constants';
+import withSocketProvider from 'modules/socketProvider/withSocketProvider';
 import StyledAnnouncements from './Announcements.style';
 import {
   LinearProgress,
@@ -44,17 +45,9 @@ class Announcements extends React.Component {
   };
 
   componentDidMount() {
-    const { groups, actions } = this.props;
+    const { actions, socket } = this.props;
 
-    // TODO: move subscription after login to get notifications
-    actions
-      .loadGroups()
-      .then(() =>
-        R.forEach((group) => socket.emit('join', { room: group.id }), groups)
-      )
-      .then(this.handleAnnouncementsInit);
-
-    socket.connect();
+    actions.loadGroups().then(this.handleAnnouncementsInit);
     socket.on('message', this.handleAnnouncementPosting);
   }
 
@@ -63,10 +56,10 @@ class Announcements extends React.Component {
     actions.loadGroupAnnouncements(this.state.currentGroup.id);
   };
 
-  componentWillUnmount() {
-    socket.off('message', this.handleAnnouncementPosting);
-    socket.disconnect();
-  }
+  handleNotification = (data) => {
+    const { actions } = this.props;
+    actions.loadNotification(data);
+  };
 
   handleGroupChipClick = async (newGroup) => {
     const { actions } = this.props;
@@ -160,9 +153,13 @@ const mapDispatchToProps = (dispatch) => ({
     {
       loadGroups,
       loadGroupAnnouncements,
+      loadNotification,
     },
     dispatch
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Announcements);
+export default R.compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withSocketProvider
+)(Announcements);

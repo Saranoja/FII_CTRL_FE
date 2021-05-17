@@ -8,3 +8,6 @@ export { default as Dropdown } from './dropdown';
 export { default as DarkThemeToggle } from './darkThemeToggle';
 export { default as FilePicker } from './filePicker';
 export { default as LogoutButton } from './logoutButton';
+export { default as NotificationsDrawer } from './notificationsDrawer';
+export { default as SnackbarToast } from './snackbarToast';
+export { default as AnnouncementsConsumer } from './announcementsConsumer';

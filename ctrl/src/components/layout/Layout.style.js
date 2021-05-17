@@ -39,8 +39,15 @@ const StyledLayout = styled.div`
             padding: ${theme.spacing(1)}px;
 
             ${theme.breakpoints.up('lg')} {
-                padding: ${theme.spacing(4)}px;
+                padding: ${theme.spacing(6)}px ${theme.spacing(4)}px;
             }
+        }
+
+        .notifications-icon {
+            z-index: ${theme.zIndex.mobileStepper};
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     `}
 `;

@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
+import SocketProvider from 'modules/socketProvider/SocketProvider';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider as MuiThemePRovider } from '@material-ui/core/styles';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
 import { localStorageManager, STORE_KEYS } from 'utils';
 import theme from 'theme';
 import AppRoutes from 'routes';
-import { Header, DarkThemeToggle } from 'components';
+import {
+  Header,
+  DarkThemeToggle,
+  SnackbarToast,
+  AnnouncementsConsumer,
+} from 'components';
 
 const App = () => {
   const [darkTheme, setDarkTheme] = useState(
@@ -21,15 +27,19 @@ const App = () => {
   return (
     <MuiThemePRovider theme={theme(themeType)}>
       <ScThemeProvider theme={theme(themeType)}>
-        <Router>
-          <Header />
-          <AppRoutes />
-          <CssBaseline />
-          <DarkThemeToggle
-            checked={darkTheme.length ? darkTheme : false}
-            onChange={() => setDarkTheme(!darkTheme)}
-          />
-        </Router>
+        <SocketProvider>
+          <AnnouncementsConsumer />
+          <Router>
+            <Header />
+            <SnackbarToast />
+            <AppRoutes />
+            <CssBaseline />
+            <DarkThemeToggle
+              checked={darkTheme.length ? darkTheme : false}
+              onChange={() => setDarkTheme(!darkTheme)}
+            />
+          </Router>
+        </SocketProvider>
       </ScThemeProvider>
     </MuiThemePRovider>
   );
