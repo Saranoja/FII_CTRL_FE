@@ -35,7 +35,7 @@ export const loadGroupAnnouncements = (groupId) => (dispatch) => {
 export const postAnnouncement = (groupId, announcement) => (dispatch) => {
   const header = createHeaderWithToken();
   dispatch(
-    retrieveGroups(
+    addAnnouncement(
       POST(
         `${userManager.config.announcements}/${groupId}`,
         announcement,
@@ -48,7 +48,7 @@ export const postAnnouncement = (groupId, announcement) => (dispatch) => {
 export const deleteAnnouncement = (groupId, announcementId) => (dispatch) => {
   const header = createHeaderWithToken();
   dispatch(
-    retrieveGroups(
+    removeAnnouncement(
       DELETE(
         `${userManager.config.announcements}/${groupId}?id=${announcementId}`,
         {},
@@ -65,7 +65,7 @@ export const patchAnnouncement = (
 ) => (dispatch) => {
   const header = createHeaderWithToken();
   dispatch(
-    retrieveGroups(
+    updateAnnouncement(
       PATCH(
         `${userManager.config.announcements}/${groupId}?id=${announcementId}`,
         newAnnouncementData,

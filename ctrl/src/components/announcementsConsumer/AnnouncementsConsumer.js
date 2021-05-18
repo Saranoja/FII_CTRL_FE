@@ -14,21 +14,21 @@ class AnnouncementsConsumer extends React.Component {
     return localStorageManager.get(STORE_KEYS.LAST_VISITED_GROUP);
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { socket, actions, groups } = this.props;
     if (isBlank(socket)) return;
 
-    actions.loadGroups().then(() =>
+    await actions.loadGroups().then(() =>
       R.forEach((group) => {
         socket.emit('join', { room: group.id });
       }, groups)
     );
 
-    const lastVisitedGroup = this.getLastVisitedGroup() || groups[0];
+    const lastVisitedGroupId = this.getLastVisitedGroup().id || groups[0].id;
 
     socket.on('message', (data) => {
       actions.loadNotification(data);
-      actions.loadGroupAnnouncements(lastVisitedGroup.id);
+      actions.loadGroupAnnouncements(lastVisitedGroupId);
     });
   }
 

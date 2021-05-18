@@ -3,7 +3,11 @@ import { handleActions } from 'redux-actions';
 import initialState from './initialState';
 import { transformAnnouncementsPayloadData } from './helpers';
 
-import { retrieveGroups, retrieveGroupAnnouncements } from '../actions';
+import {
+  retrieveGroups,
+  retrieveGroupAnnouncements,
+  addAnnouncement,
+} from '../actions';
 
 const groupsRetrievalHandler = [
   retrieveGroups,
@@ -63,8 +67,38 @@ const announcementsRetrievalHandler = [
   },
 ];
 
+const announcementsPostHandler = [
+  addAnnouncement,
+  (state, action) => {
+    const { ready, error } = action;
+    if (!ready) {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    if (error) {
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+      };
+    }
+
+    return {
+      ...state,
+      isLoading: false,
+    };
+  },
+];
+
 const reducer = handleActions(
-  new Map([groupsRetrievalHandler, announcementsRetrievalHandler]),
+  new Map([
+    groupsRetrievalHandler,
+    announcementsRetrievalHandler,
+    announcementsPostHandler,
+  ]),
   R.clone(initialState)
 );
 
