@@ -29,17 +29,17 @@ const App = () => {
       <ScThemeProvider theme={theme(themeType)}>
         <SocketProvider>
           <AnnouncementsConsumer />
-          <Router>
-            <Header />
-            <SnackbarToast />
-            <AppRoutes />
-            <CssBaseline />
-            <DarkThemeToggle
-              checked={darkTheme.length ? darkTheme : false}
-              onChange={() => setDarkTheme(!darkTheme)}
-            />
-          </Router>
         </SocketProvider>
+        <Router>
+          <Header />
+          <SnackbarToast />
+          <AppRoutes />
+          <CssBaseline />
+          <DarkThemeToggle
+            checked={darkTheme.length ? darkTheme : false}
+            onChange={() => setDarkTheme(!darkTheme)}
+          />
+        </Router>
       </ScThemeProvider>
     </MuiThemePRovider>
   );

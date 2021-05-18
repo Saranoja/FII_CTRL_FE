@@ -2,12 +2,18 @@ import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { localStorageManager, STORE_KEYS } from 'utils';
 import { loadNotification } from 'modules/notifications/actions';
+import { loadGroupAnnouncements } from 'modules/announcements/actions';
 import { loadGroups } from 'modules/announcements/actions';
 import { isBlank } from 'utils';
 import withSocketProvider from 'modules/socketProvider/withSocketProvider';
 
 class AnnouncementsConsumer extends React.Component {
+  getLastVisitedGroup = () => {
+    return localStorageManager.get(STORE_KEYS.LAST_VISITED_GROUP);
+  };
+
   componentDidMount() {
     const { socket, actions, groups } = this.props;
     if (isBlank(socket)) return;
@@ -18,8 +24,11 @@ class AnnouncementsConsumer extends React.Component {
       }, groups)
     );
 
+    const lastVisitedGroup = this.getLastVisitedGroup() || groups[0];
+
     socket.on('message', (data) => {
       actions.loadNotification(data);
+      actions.loadGroupAnnouncements(lastVisitedGroup.id);
     });
   }
 
@@ -37,6 +46,7 @@ const mapDispatchToProps = (dispatch) => ({
     {
       loadNotification,
       loadGroups,
+      loadGroupAnnouncements,
     },
     dispatch
   ),

@@ -6,7 +6,6 @@ import { Layout } from 'components';
 import { loadNotification } from 'modules/notifications/actions';
 import { loadGroups, loadGroupAnnouncements } from './actions';
 import { availableGroupsTitle } from './constants';
-import withSocketProvider from 'modules/socketProvider/withSocketProvider';
 import StyledAnnouncements from './Announcements.style';
 import {
   LinearProgress,
@@ -17,6 +16,7 @@ import {
 } from '@material-ui/core';
 import { localStorageManager, STORE_KEYS } from 'utils';
 import AnnouncementSegment from './components/announcementSegment';
+import AnnouncementsCreationSegment from './components/announcementsCreationSegment';
 
 class Announcements extends React.Component {
   constructor(props) {
@@ -45,21 +45,9 @@ class Announcements extends React.Component {
   };
 
   componentDidMount() {
-    const { actions, socket } = this.props;
-
+    const { actions } = this.props;
     actions.loadGroups().then(this.handleAnnouncementsInit);
-    socket.on('message', this.handleAnnouncementPosting);
   }
-
-  handleAnnouncementPosting = () => {
-    const { actions } = this.props;
-    actions.loadGroupAnnouncements(this.state.currentGroup.id);
-  };
-
-  handleNotification = (data) => {
-    const { actions } = this.props;
-    actions.loadNotification(data);
-  };
 
   handleGroupChipClick = async (newGroup) => {
     const { actions } = this.props;
@@ -135,6 +123,7 @@ class Announcements extends React.Component {
                   groups
                 )}
             </div>
+            <AnnouncementsCreationSegment />
           </Paper>
         </StyledAnnouncements>
       </Layout>
@@ -159,7 +148,6 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default R.compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withSocketProvider
-)(Announcements);
+export default R.compose(connect(mapStateToProps, mapDispatchToProps))(
+  Announcements
+);
