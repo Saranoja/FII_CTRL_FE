@@ -14,5 +14,6 @@ export default {
   teaching: initialData.teaching,
   isLoading: false,
   hasId: !isBlank(account),
-  id: account,
+  idm: account,
+  id: initialData.id,
 };

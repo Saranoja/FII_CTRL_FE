@@ -10,9 +10,21 @@ function TransitionRight(props) {
   return <Slide {...props} direction="left" />;
 }
 
-const SnackbarToast = ({ isToastOpen, lastAnnouncement, actions }) => {
+const SnackbarToast = ({
+  isToastOpen,
+  lastAnnouncement,
+  currentUserId,
+  actions,
+}) => {
+  let isSelfAuthor = false;
+  if (lastAnnouncement) {
+    isSelfAuthor = currentUserId === lastAnnouncement.author_id;
+  }
+
   const notificationMessage = lastAnnouncement
-    ? `${lastAnnouncement.author} has posted a new announcement in ${lastAnnouncement.group}`
+    ? `${
+        isSelfAuthor ? 'Successfully' : lastAnnouncement.author
+      } posted a new announcement in ${lastAnnouncement.group}`
     : '';
   return (
     <Snackbar
@@ -29,6 +41,7 @@ const SnackbarToast = ({ isToastOpen, lastAnnouncement, actions }) => {
 const mapStateToProps = (state) => ({
   isToastOpen: state.notifications.is_toast_on,
   lastAnnouncement: R.last(state.notifications.notfications_list),
+  currentUserId: state.userManager.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

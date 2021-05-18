@@ -8,12 +8,17 @@ import Typography from '@material-ui/core/Typography';
 import StyledNotificationsDrawer from './NotificationsDrawer.style';
 
 const action = (
-  <Button color="primary" size="small" disableElevation>
+  <Button color="inherit" size="small" disableElevation>
     Dismiss
   </Button>
 );
 
-const NotificationsDrawer = ({ isOpen, onClose, notificationsList }) => {
+const NotificationsDrawer = ({
+  isOpen,
+  onClose,
+  notificationsList,
+  currentUserId,
+}) => {
   return (
     <StyledNotificationsDrawer
       anchor="right"
@@ -24,22 +29,25 @@ const NotificationsDrawer = ({ isOpen, onClose, notificationsList }) => {
       }}
     >
       {notificationsList.length ? (
-        R.map(
-          (notification) => (
+        R.map((notification) => {
+          const isSelfAuthor = currentUserId === notification.author_id;
+          const notificationPlaceholder = isSelfAuthor
+            ? 'Successfully'
+            : notification.author;
+          return (
             <div
               key={`${notification.title}${notification.text}${notification.author}}`}
             >
               <Alert
-                severity="info"
+                severity={isSelfAuthor ? 'success' : 'info'}
                 action={action}
                 className="snackbar-notification-content"
               >
-                {`${notification.author} posted a new announcement in ${notification.group}`}
+                {`${notificationPlaceholder} posted a new announcement in ${notification.group}`}
               </Alert>
             </div>
-          ),
-          notificationsList
-        )
+          );
+        }, notificationsList)
       ) : (
         <Typography variant="h6" className="empty-drawer-text">
           No new notifications
@@ -51,6 +59,7 @@ const NotificationsDrawer = ({ isOpen, onClose, notificationsList }) => {
 
 const mapStateToProps = (state) => ({
   notificationsList: state.notifications.notfications_list,
+  currentUserId: state.userManager.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -41,14 +41,14 @@ const getIdmTokensHandler = [
       };
     }
 
-    const id = transformAuthData(R.prop('data', payload));
-    userManager.setIdmData(id);
+    const idm = transformAuthData(R.prop('data', payload));
+    userManager.setIdmData(idm);
     return {
       ...state,
       isLoading: false,
       hasError: false,
       hasId: true,
-      id,
+      idm,
     };
   },
 ];
@@ -81,6 +81,7 @@ const getAccountDetailsHandler = [
       first_name: R.prop('first_name', data),
       last_name: R.prop('last_name', data),
       teaching: R.prop('teaching', data),
+      id: R.prop('id', data),
     };
   },
 ];
