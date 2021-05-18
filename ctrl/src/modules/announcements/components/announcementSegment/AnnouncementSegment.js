@@ -1,8 +1,9 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
+import ActionsSegment from 'modules/announcements/components/actionsSegment';
 import StyledAnnouncementSegment from './AnnouncementSegment.style';
 
-const AnnouncementSegment = ({ title, text, author, createdAt }) => {
+const AnnouncementSegment = ({ title, text, author, authorId, createdAt }) => {
   return (
     <StyledAnnouncementSegment>
       <div className="announcement-container">
@@ -15,9 +16,12 @@ const AnnouncementSegment = ({ title, text, author, createdAt }) => {
         <Typography variant="body2" className="announcement-subtitle">
           {text}
         </Typography>
-        <Typography variant="overline" color="textSecondary">
-          {createdAt}
-        </Typography>
+        <div className="actions-info-wrapper">
+          <Typography variant="overline" color="textSecondary">
+            {createdAt}
+          </Typography>
+          <ActionsSegment postAuthorId={authorId} />
+        </div>
       </div>
     </StyledAnnouncementSegment>
   );

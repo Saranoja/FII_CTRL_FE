@@ -19,6 +19,14 @@ const StyledAnnouncementSegment = styled.div`
     .announcement-subtitle {
       margin: ${theme.spacing(0.5)}px 0;
     }
+
+    .actions-info-wrapper {
+      margin-top: ${theme.spacing(3)}px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
   `}
 `;
 

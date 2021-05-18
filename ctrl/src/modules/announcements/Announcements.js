@@ -84,6 +84,7 @@ class Announcements extends React.Component {
                     title={announcement.title}
                     text={announcement.text}
                     author={announcement.author}
+                    authorId={announcement.author_id}
                     createdAt={announcement.created_at}
                   />
                 ),

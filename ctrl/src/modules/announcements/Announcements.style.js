@@ -12,6 +12,11 @@ const StyledAnnouncements = styled.div`
         flex-grow: 3;
         width: 100%;
         padding: ${theme.spacing(3)}px;
+        height: 90vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         ${theme.breakpoints.up('sm')} {
           max-width: 75%;
@@ -19,6 +24,7 @@ const StyledAnnouncements = styled.div`
         }
 
         .announcements-wrapper {
+          flex-grow: 1;
           max-height: 70vh;
           overflow: auto;
           margin: ${theme.spacing(2)}px 0;
