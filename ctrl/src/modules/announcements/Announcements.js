@@ -90,6 +90,7 @@ class Announcements extends React.Component {
                 currentGroupAnnouncements
               )}
             </div>
+            <AnnouncementsCreationSegment />
           </Paper>
           <Paper className="available-groups-segment">
             <Typography variant="subtitle1" color="secondary">
@@ -123,7 +124,6 @@ class Announcements extends React.Component {
                   groups
                 )}
             </div>
-            <AnnouncementsCreationSegment />
           </Paper>
         </StyledAnnouncements>
       </Layout>

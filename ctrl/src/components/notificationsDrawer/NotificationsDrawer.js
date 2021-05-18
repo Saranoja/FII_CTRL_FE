@@ -2,6 +2,11 @@ import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import {
+  NOTIFICATION_TYPES,
+  messageGeneric,
+  noNotificationsGeneric,
+} from 'modules/notifications/constants';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -31,26 +36,31 @@ const NotificationsDrawer = ({
       {notificationsList.length ? (
         R.map((notification) => {
           const isSelfAuthor = currentUserId === notification.author_id;
+          const notificationType = notification.type;
+          const notificationSelfMessage =
+            notificationType === NOTIFICATION_TYPES.error
+              ? messageGeneric.error
+              : messageGeneric.success;
           const notificationPlaceholder = isSelfAuthor
-            ? 'Successfully'
-            : notification.author;
+            ? notificationSelfMessage
+            : `${notification.author} ${messageGeneric.info}`;
           return (
             <div
               key={`${notification.title}${notification.text}${notification.author}}`}
             >
               <Alert
-                severity={isSelfAuthor ? 'success' : 'info'}
+                severity={isSelfAuthor ? notificationType : 'info'}
                 action={action}
                 className="snackbar-notification-content"
               >
-                {`${notificationPlaceholder} posted a new announcement in ${notification.group}`}
+                {`${notificationPlaceholder} ${notification.group}`}
               </Alert>
             </div>
           );
         }, notificationsList)
       ) : (
         <Typography variant="h6" className="empty-drawer-text">
-          No new notifications
+          {noNotificationsGeneric}
         </Typography>
       )}
     </StyledNotificationsDrawer>

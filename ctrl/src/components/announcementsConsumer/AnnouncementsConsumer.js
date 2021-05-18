@@ -30,6 +30,10 @@ class AnnouncementsConsumer extends React.Component {
       actions.loadNotification(data);
       actions.loadGroupAnnouncements(lastVisitedGroupId);
     });
+
+    socket.on('error', (data) => {
+      actions.loadNotification(data);
+    });
   }
 
   render() {

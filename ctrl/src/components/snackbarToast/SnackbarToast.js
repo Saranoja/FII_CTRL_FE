@@ -2,6 +2,10 @@ import React from 'react';
 import * as R from 'ramda';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import {
+  NOTIFICATION_TYPES,
+  messageGeneric,
+} from 'modules/notifications/constants';
 import { hideNotification } from 'modules/notifications/actions';
 import Snackbar from '@material-ui/core/Snackbar';
 import Slide from '@material-ui/core/Slide';
@@ -17,15 +21,27 @@ const SnackbarToast = ({
   actions,
 }) => {
   let isSelfAuthor = false;
+  let notificationType = NOTIFICATION_TYPES.success;
   if (lastAnnouncement) {
     isSelfAuthor = currentUserId === lastAnnouncement.author_id;
+    notificationType = lastAnnouncement.type;
   }
 
+  const notificationSelfMessage =
+    notificationType === NOTIFICATION_TYPES.error
+      ? messageGeneric.error
+      : messageGeneric.success;
+
+  const notificationPlaceholder = isSelfAuthor
+    ? notificationSelfMessage
+    : `${lastAnnouncement ? lastAnnouncement.author : ''} ${
+        messageGeneric.info
+      }`;
+
   const notificationMessage = lastAnnouncement
-    ? `${
-        isSelfAuthor ? 'Successfully' : lastAnnouncement.author
-      } posted a new announcement in ${lastAnnouncement.group}`
+    ? `${notificationPlaceholder} ${lastAnnouncement.group}`
     : '';
+
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
