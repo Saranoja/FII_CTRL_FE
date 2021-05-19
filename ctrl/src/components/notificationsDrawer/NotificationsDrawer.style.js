@@ -4,7 +4,21 @@ import Drawer from '@material-ui/core/Drawer';
 const StyledNotificationsDrawer = styled(Drawer)`
   ${({ theme }) => `
     .drawer-paper {
-      min-width: ${theme.spacing(35)}px;
+      min-width: 30vw;
+      max-width: 80vw;
+
+      ${theme.breakpoints.up('sm')} {
+        max-width: 60vw;
+      }
+
+      ${theme.breakpoints.up('md')} {
+        max-width: 40vw;
+      }
+
+      ${theme.breakpoints.up('lg')} {
+        min-width: 16vw;
+        max-width: 30vw;
+      }
     }
 
     .snackbar-notification-content, .empty-drawer-text {
