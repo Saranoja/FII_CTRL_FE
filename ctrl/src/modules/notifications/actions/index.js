@@ -22,5 +22,5 @@ export const hideNotification = () => (dispatch) => {
 };
 
 export const removeNotification = (notification) => (dispatch) => {
-  dispatch(displayNotification({ notification }));
+  dispatch(deleteNotification(notification));
 };

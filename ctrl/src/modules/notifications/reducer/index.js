@@ -6,11 +6,17 @@ import {
   dismissNotification,
   deleteNotification,
 } from '../actions';
+import { localStorageManager, STORE_KEYS } from 'utils';
 
 const notificationPushHandler = [
   displayNotification,
   (state, action) => {
     const { payload } = action;
+
+    localStorageManager.set(STORE_KEYS.NOTIFICATIONS_LIST, [
+      ...state.notfications_list,
+      payload,
+    ]);
 
     return {
       ...state,
@@ -35,9 +41,19 @@ const notificationRemovalHandler = [
   (state, action) => {
     const { payload } = action;
 
+    const filteredNotificationsList = R.filter(
+      (element) => element !== payload,
+      state.notfications_list
+    );
+
+    localStorageManager.set(
+      STORE_KEYS.NOTIFICATIONS_LIST,
+      filteredNotificationsList
+    );
+
     return {
       ...state,
-      notfications_list: R.remove(0, payload, state.notfications_list),
+      notfications_list: filteredNotificationsList,
     };
   },
 ];

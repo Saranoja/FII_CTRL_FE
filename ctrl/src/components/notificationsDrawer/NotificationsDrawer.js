@@ -2,6 +2,7 @@ import React from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { removeNotification } from 'modules/notifications/actions';
 import {
   NOTIFICATION_TYPES,
   eventToMessageMap,
@@ -12,8 +13,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import StyledNotificationsDrawer from './NotificationsDrawer.style';
 
-const action = (
-  <Button color="inherit" size="small" disableElevation>
+const DismissButton = ({ dismissAction }) => (
+  <Button color="inherit" size="small" disableElevation onClick={dismissAction}>
     Dismiss
   </Button>
 );
@@ -23,6 +24,7 @@ const NotificationsDrawer = ({
   onClose,
   notificationsList,
   currentUserId,
+  actions,
 }) => {
   return (
     <StyledNotificationsDrawer
@@ -54,7 +56,13 @@ const NotificationsDrawer = ({
             >
               <Alert
                 severity={isSelfAuthor ? notification.type : 'info'}
-                action={action}
+                action={
+                  <DismissButton
+                    dismissAction={() =>
+                      actions.removeNotification(notification)
+                    }
+                  />
+                }
                 className="snackbar-notification-content"
               >
                 {`${notificationPlaceholder} ${notification.group}`}
@@ -77,7 +85,12 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({}, dispatch),
+  actions: bindActionCreators(
+    {
+      removeNotification,
+    },
+    dispatch
+  ),
 });
 
 export default connect(
