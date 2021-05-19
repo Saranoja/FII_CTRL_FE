@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
   NOTIFICATION_TYPES,
-  messageGeneric,
+  eventToMessageMap,
   noNotificationsGeneric,
 } from 'modules/notifications/constants';
 import Alert from '@material-ui/lab/Alert';
@@ -36,17 +36,22 @@ const NotificationsDrawer = ({
       {notificationsList.length ? (
         R.map((notification) => {
           const isSelfAuthor = currentUserId === notification.author_id;
+          const notificationEventTrigger = notification.event;
+          const genericMessagePack =
+            eventToMessageMap[notificationEventTrigger];
           const notificationType = notification.type;
           const notificationSelfMessage =
             notificationType === NOTIFICATION_TYPES.error
-              ? messageGeneric.error
-              : messageGeneric.success;
+              ? genericMessagePack.error
+              : genericMessagePack.success;
           const notificationPlaceholder = isSelfAuthor
             ? notificationSelfMessage
-            : `${notification.author} ${messageGeneric.info}`;
+            : `${notification.author} ${genericMessagePack.info}`;
+          if (notificationType === NOTIFICATION_TYPES.error && !isSelfAuthor)
+            return null;
           return (
             <div
-              key={`${notification.title}${notification.text}${notification.author}}`}
+              key={`${notification.event}${notification.type}${notification.timestamp}}`}
             >
               <Alert
                 severity={isSelfAuthor ? notificationType : 'info'}

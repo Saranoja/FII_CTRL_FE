@@ -86,6 +86,7 @@ class Announcements extends React.Component {
                     author={announcement.author}
                     authorId={announcement.author_id}
                     createdAt={announcement.created_at}
+                    announcementId={announcement.id}
                   />
                 ),
                 currentGroupAnnouncements
@@ -149,6 +150,4 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default R.compose(connect(mapStateToProps, mapDispatchToProps))(
-  Announcements
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Announcements);

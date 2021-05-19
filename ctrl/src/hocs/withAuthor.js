@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 const withAuthor = (ChildComponent) => {
   class AuthorWrapper extends PureComponent {
     render() {
-      const { currentUserId, postAuthorId } = this.props;
-      const isAuthor = postAuthorId === currentUserId;
+      const { currentUserId, announcementAuthorId } = this.props;
+      const isAuthor = announcementAuthorId === currentUserId;
       return isAuthor ? <ChildComponent {...this.props} /> : null;
     }
   }

@@ -3,7 +3,14 @@ import { Typography } from '@material-ui/core';
 import ActionsSegment from 'modules/announcements/components/actionsSegment';
 import StyledAnnouncementSegment from './AnnouncementSegment.style';
 
-const AnnouncementSegment = ({ title, text, author, authorId, createdAt }) => {
+const AnnouncementSegment = ({
+  announcementId,
+  title,
+  text,
+  author,
+  authorId,
+  createdAt,
+}) => {
   return (
     <StyledAnnouncementSegment>
       <div className="announcement-container">
@@ -20,7 +27,12 @@ const AnnouncementSegment = ({ title, text, author, authorId, createdAt }) => {
           <Typography variant="overline" color="textSecondary">
             {createdAt}
           </Typography>
-          <ActionsSegment postAuthorId={authorId} />
+          <ActionsSegment
+            announcementAuthorId={authorId}
+            announcementId={announcementId}
+            announcementText={text}
+            announcementTitle={title}
+          />
         </div>
       </div>
     </StyledAnnouncementSegment>

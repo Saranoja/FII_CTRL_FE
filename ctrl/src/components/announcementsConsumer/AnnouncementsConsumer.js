@@ -24,11 +24,11 @@ class AnnouncementsConsumer extends React.Component {
       }, groups)
     );
 
-    const lastVisitedGroupId = this.getLastVisitedGroup().id || groups[0].id;
-
     socket.on('message', (data) => {
+      const currentGroupId = this.getLastVisitedGroup().id || groups[0].id;
       actions.loadNotification(data);
-      actions.loadGroupAnnouncements(lastVisitedGroupId);
+      if (data.group_id === String(currentGroupId))
+        actions.loadGroupAnnouncements(currentGroupId);
     });
 
     socket.on('error', (data) => {
