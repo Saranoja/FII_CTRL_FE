@@ -1,6 +1,7 @@
 export const NOTIFICATION_TYPES = {
   error: 'error',
   success: 'success',
+  info: 'info',
 };
 
 export const EVENT_TYPES = {

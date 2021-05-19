@@ -9,10 +9,10 @@ import {
 } from 'modules/notifications/constants';
 import { hideNotification } from 'modules/notifications/actions';
 import Snackbar from '@material-ui/core/Snackbar';
-import Slide from '@material-ui/core/Slide';
+import MuiAlert from '@material-ui/lab/Alert';
 
-function TransitionRight(props) {
-  return <Slide {...props} direction="left" />;
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const SnackbarToast = ({
@@ -50,15 +50,23 @@ const SnackbarToast = ({
   if (notificationType === NOTIFICATION_TYPES.error && !isSelfAuthor)
     return null;
 
+  if (!isSelfAuthor) notificationType = NOTIFICATION_TYPES.info;
+
   return (
     <Snackbar
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isToastOpen}
       onClose={actions.hideNotification}
-      TransitionComponent={TransitionRight}
-      message={notificationMessage}
       autoHideDuration={4000}
-    />
+    >
+      <Alert
+        variant="standard"
+        onClose={actions.hideNotification}
+        severity={notificationType}
+      >
+        {notificationMessage}
+      </Alert>
+    </Snackbar>
   );
 };
 

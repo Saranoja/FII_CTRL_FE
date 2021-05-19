@@ -36,25 +36,24 @@ const NotificationsDrawer = ({
       {notificationsList.length ? (
         R.map((notification) => {
           const isSelfAuthor = currentUserId === notification.author_id;
-          const notificationEventTrigger = notification.event;
-          const genericMessagePack =
-            eventToMessageMap[notificationEventTrigger];
-          const notificationType = notification.type;
+          const genericMessagePack = eventToMessageMap[notification.event];
           const notificationSelfMessage =
-            notificationType === NOTIFICATION_TYPES.error
+            notification.type === NOTIFICATION_TYPES.error
               ? genericMessagePack.error
               : genericMessagePack.success;
           const notificationPlaceholder = isSelfAuthor
             ? notificationSelfMessage
             : `${notification.author} ${genericMessagePack.info}`;
-          if (notificationType === NOTIFICATION_TYPES.error && !isSelfAuthor)
+
+          if (notification.type === NOTIFICATION_TYPES.error && !isSelfAuthor)
             return null;
+
           return (
             <div
               key={`${notification.event}${notification.type}${notification.timestamp}}`}
             >
               <Alert
-                severity={isSelfAuthor ? notificationType : 'info'}
+                severity={isSelfAuthor ? notification.type : 'info'}
                 action={action}
                 className="snackbar-notification-content"
               >
@@ -62,7 +61,7 @@ const NotificationsDrawer = ({
               </Alert>
             </div>
           );
-        }, notificationsList)
+        }, R.reverse(notificationsList))
       ) : (
         <Typography variant="h6" className="empty-drawer-text">
           {noNotificationsGeneric}
