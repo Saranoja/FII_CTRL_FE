@@ -6,7 +6,6 @@ const StyledSidebar = styled(Drawer)`
         .sidebar-paper {
           border-right: none;
           padding: ${theme.spacing(6)}px ${theme.spacing(2)}px;
-          min-width: 60vw;
           max-width: 80vw;
 
           ${theme.breakpoints.up('sm')} {
@@ -18,7 +17,6 @@ const StyledSidebar = styled(Drawer)`
           }
 
           ${theme.breakpoints.up('lg')} {
-            min-width: 16vw;
             max-width: 30vw;
           }
         }
