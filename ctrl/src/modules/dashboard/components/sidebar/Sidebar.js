@@ -5,12 +5,33 @@ import { LogoutButton } from 'components';
 import { loadAccountDetails } from 'modules/userManager/actions';
 import StyledSidebar from './Sidebar.style';
 
-const Sidebar = ({ username, className }) => (
-  <StyledSidebar className={className} elevation={3} square>
-    <h1 className="username-greet">Hello {username}!</h1>
-    <LogoutButton className="signout-button" />
-  </StyledSidebar>
-);
+const Sidebar = ({ username, isSidebarOpen, handleSidebarToggle }) => {
+  const drawer = (
+    <>
+      <h1 className="username-greet">Hello {username}!</h1>
+      <LogoutButton className="signout-button" />
+    </>
+  );
+
+  return (
+    <StyledSidebar
+      variant="temporary"
+      elevation={3}
+      anchor="left"
+      open={isSidebarOpen}
+      onClose={handleSidebarToggle}
+      classes={{
+        paperAnchorLeft: 'sidebar-paper',
+      }}
+      ModalProps={{
+        keepMounted: true, // Better open performance on mobile
+      }}
+      PaperProps={{ square: true }}
+    >
+      {drawer}
+    </StyledSidebar>
+  );
+};
 
 const mapStateToProps = (state) => ({
   username: state.userManager.first_name,

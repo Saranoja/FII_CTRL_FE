@@ -5,21 +5,20 @@ import { reloadPage } from '../../utils';
 import images from '../../assets/images/errors';
 import { GENERIC_ERROR_TEXT } from './constants';
 import StyledErrorPage from './ErrorPage.style';
+import Layout from 'components/layout';
 
 const ErrorPage = ({ image, errorText }) => (
-  <StyledErrorPage>
-    <div className="container">
-      <img src={image} alt="error-pic" className="large-image" />
-      <h2 className="error-text">
-        {' '}
-        {errorText}
-        {' '}
-      </h2>
-      <h2 className="error-text" onClick={reloadPage}>
-        <Link onClick={reloadPage}> Reload page 🏠 </Link>
-      </h2>
-    </div>
-  </StyledErrorPage>
+  <Layout>
+    <StyledErrorPage>
+      <div className="container">
+        <img src={image} alt="error-pic" className="large-image" />
+        <h2 className="error-text"> {errorText} </h2>
+        <h2 className="error-text" onClick={reloadPage}>
+          <Link onClick={reloadPage}> Reload page 🏠 </Link>
+        </h2>
+      </div>
+    </StyledErrorPage>
+  </Layout>
 );
 
 ErrorPage.defaultProps = {

@@ -24,26 +24,18 @@ class Dashboard extends React.Component {
             <Grid
               container
               justify="center"
-              spacing={2}
               className="dashboard-cards-stack"
+              alignContent="center"
             >
               {R.map(
                 (column) => (
-                  <Grid item className="column" key={column.id}>
+                  <Grid item key={column.id}>
                     <ActionCard
-                      image={column.first.image}
-                      title={column.first.title}
-                      description={column.first.description}
-                      route={column.first.route}
+                      image={column.image}
+                      title={column.title}
+                      description={column.description}
+                      route={column.route}
                     />
-                    {column.second ? (
-                      <ActionCard
-                        image={column.second.image}
-                        title={column.second.title}
-                        route={column.second.route}
-                        description={column.second.description}
-                      />
-                    ) : null}
                   </Grid>
                 ),
                 cardsType
