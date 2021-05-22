@@ -136,7 +136,7 @@ class Resources extends React.Component {
                 />
                 <Button
                   className="resource-submit-button"
-                  color="secondary"
+                  color="primary"
                   variant="contained"
                   onClick={this.handleFileSubmit}
                   disabled={this.state.subjectId && current_file ? false : true}
@@ -162,7 +162,7 @@ class Resources extends React.Component {
                 />
                 <Button
                   className="resource-submit-button"
-                  color="secondary"
+                  color="primary"
                   variant="contained"
                   onClick={this.handleKeywordsSubmit}
                   disabled={

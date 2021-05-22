@@ -33,10 +33,19 @@ class UserManager {
 
   clearData = () => {
     localStorageManager.removeItem(STORE_KEYS.ID);
+    localStorageManager.removeItem(STORE_KEYS.PERSISTED_PATH);
   };
 
-  isTeaching = async () => {
+  isTeaching = () => {
     return R.prop('teaching', this.getIdmData());
+  };
+
+  getGroup = () => {
+    return R.prop('group', this.getIdmData());
+  };
+
+  getYear = () => {
+    return R.prop('year', this.getIdmData());
   };
 
   logout = () => {

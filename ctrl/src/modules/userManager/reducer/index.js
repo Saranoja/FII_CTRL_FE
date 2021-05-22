@@ -78,10 +78,7 @@ const getAccountDetailsHandler = [
     return {
       ...state,
       isLoading: false,
-      first_name: R.prop('first_name', data),
-      last_name: R.prop('last_name', data),
-      teaching: R.prop('teaching', data),
-      id: R.prop('id', data),
+      ...data,
     };
   },
 ];

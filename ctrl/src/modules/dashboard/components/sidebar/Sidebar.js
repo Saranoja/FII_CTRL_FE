@@ -11,11 +11,17 @@ import { LogoutButton } from 'components';
 import { loadAccountDetails } from 'modules/userManager/actions';
 import StyledSidebar from './Sidebar.style';
 
-const Sidebar = ({ username, isSidebarOpen, handleSidebarToggle }) => {
+const Sidebar = ({
+  username,
+  teaching,
+  isSidebarOpen,
+  handleSidebarToggle,
+}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
-  const handleListItemClick = (event, index) => {
+  const handleListItemClick = (event, index, callback) => {
     setSelectedIndex(index);
+    callback();
   };
 
   const Drawer = (
@@ -23,11 +29,15 @@ const Sidebar = ({ username, isSidebarOpen, handleSidebarToggle }) => {
       <h1 className="username-greet">Hello {username}!</h1>
       <List component="nav" aria-label="main sidebar items">
         {R.map((item) => {
+          if (item.teachingRequired && !teaching) return null;
           return (
             <ListItem
               button
+              divider
               selected={selectedIndex === item.index}
-              onClick={(event) => handleListItemClick(event, item.index)}
+              onClick={(event) =>
+                handleListItemClick(event, item.index, item.action)
+              }
               key={item.index}
             >
               <ListItemIcon>
@@ -64,6 +74,7 @@ const Sidebar = ({ username, isSidebarOpen, handleSidebarToggle }) => {
 
 const mapStateToProps = (state) => ({
   username: state.userManager.first_name,
+  teaching: state.userManager.teaching,
 });
 
 const mapDispatchToProps = (dispatch) => ({

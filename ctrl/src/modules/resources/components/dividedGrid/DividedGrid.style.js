@@ -5,7 +5,7 @@ const StyledDividedGrid = styled.div`
 	.divided-grid-segment {
 		border-radius: ${theme.spacing(1)}px;
 		border: none;
-		padding: ${theme.spacing(3)}px ${theme.spacing(8)}px ${theme.spacing(6)}px;
+		padding: ${theme.spacing(3)}px ${theme.spacing(4)}px ${theme.spacing(6)}px;
 
 		${theme.breakpoints.down('sm')} {
 			padding: ${theme.spacing(3)}px;

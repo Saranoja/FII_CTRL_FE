@@ -1,5 +1,5 @@
 import * as R from 'ramda';
-import { AMAZON_SEARCH_URL } from './constants';
+import { amazonSearchUrl } from 'utils/externalLinks';
 
 export const coursesList = [
   {
@@ -65,7 +65,7 @@ export const formatRecommendations = (recommendationsJson) => {
       title: key.split('by')[0],
       author: key.split('by')[1],
       pages: formattedPages,
-      link: `${AMAZON_SEARCH_URL}${key}`,
+      link: `${amazonSearchUrl}${key}`,
     };
     formattedRecommendations.push(reference);
   });

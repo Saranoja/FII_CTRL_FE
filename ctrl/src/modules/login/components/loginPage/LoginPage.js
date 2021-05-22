@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createAuthHeader, createHeaderWithToken } from 'config/http';
 import { localStorageManager } from 'utils';
-import { PERSISTED_PATH } from 'routes/constants';
+import { STORE_KEYS } from 'utils';
 import { loadAuthToken, loadAccountDetails } from 'modules/userManager/actions';
 import StyledLoginPage from './LoginPage.style';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -38,7 +38,9 @@ class LoginPage extends React.Component {
       .loadAuthToken(header)
       .then(() => actions.loadAccountDetails(createHeaderWithToken()))
       .then(() =>
-        this.props.history.push(localStorageManager.get(PERSISTED_PATH))
+        this.props.history.push(
+          localStorageManager.get(STORE_KEYS.PERSISTED_PATH)
+        )
       )
       .catch(() => this.setState({ shouldDisplayError: true }));
   };

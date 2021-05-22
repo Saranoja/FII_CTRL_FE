@@ -32,6 +32,7 @@ export const STORE_KEYS = {
   IS_DARK_THEME: 'dark_theme',
   LAST_VISITED_GROUP: 'last_visited_group',
   NOTIFICATIONS_LIST: 'notifications_list',
+  PERSISTED_PATH: 'persisted_path',
 };
 
 export const clearInternalCache = () => {
@@ -71,3 +72,7 @@ export const safeJSONParse = (data) => {
 
 export const isStatus = (status, error) =>
   R.path(['response', 'status'], error) === status;
+
+export const openLinkInNewTab = (url) => {
+  window.open(url, '_blank');
+};
