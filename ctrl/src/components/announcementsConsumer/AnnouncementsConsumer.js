@@ -14,15 +14,15 @@ class AnnouncementsConsumer extends React.Component {
     return localStorageManager.get(STORE_KEYS.LAST_VISITED_GROUP);
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     const { socket, actions, groups } = this.props;
     if (isBlank(socket)) return;
 
-    await actions.loadGroups().then(() =>
+    actions.loadGroups().then((result) => {
       R.forEach((group) => {
         socket.emit('join', { room: group.id });
-      }, groups)
-    );
+      }, R.path(['payload', 'data', 'current_user_groups'], result));
+    });
 
     socket.on('message', (data) => {
       const currentGroupId = this.getLastVisitedGroup().id || groups[0].id;

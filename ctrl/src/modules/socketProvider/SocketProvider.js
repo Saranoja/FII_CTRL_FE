@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as R from 'ramda';
-import { SocketContext } from './hepers';
+import { SocketContext } from './helpers';
 import { registerListener, unregisterListener } from 'config/registerListener';
 import io from 'socket.io-client';
 import userManager from 'modules/userManager';
@@ -17,7 +17,6 @@ const TOKEN_REFRESH_ERROR = 'tokenRefreshError';
 class SocketProvider extends Component {
   constructor(props) {
     super(props);
-
     this.retryCounter = 0;
     this.shouldReconnect = true;
     this.state = {
@@ -25,12 +24,12 @@ class SocketProvider extends Component {
     };
   }
 
-  componentDidMount() {
-    registerListener(TOKEN_REFRESH_SUCCESS, this.connectSocket);
+  async componentDidMount() {
+    registerListener(TOKEN_REFRESH_SUCCESS, this.connectSocket); //TODO: fire event on refresh
     registerListener(TOKEN_REFRESH_ERROR, this.disconnectSocket);
     const token = userManager.getIdToken();
     if (token) {
-      this.connectSocket();
+      await this.connectSocket();
     }
   }
 
@@ -40,19 +39,19 @@ class SocketProvider extends Component {
     this.disconnectSocket(false);
   }
 
-  connectSocket = () => {
+  connectSocket = async () => {
     const internalSocket = this.state.socket;
     if (internalSocket) return;
 
     const socket = io(ENDPOINT);
 
     if (isBlank(socket)) return;
-
-    console.log('Socket connection opened');
-
     this.retryCounter = 0;
     this.shouldReconnect = true;
-    this.setState({ socket });
+
+    socket.on('connect', () => {
+      this.setState({ socket });
+    });
 
     socket.on('message', (message) => {
       console.log('New message received: ', message);
@@ -62,7 +61,7 @@ class SocketProvider extends Component {
       console.log('Socket connection closed');
       if (this.shouldReconnect) {
         this.reconnectSocket();
-      }
+      } else this.disconnectSocket();
     });
   };
 
@@ -70,6 +69,7 @@ class SocketProvider extends Component {
     const { socket } = this.state;
     this.shouldReconnect = shouldReconnect;
     if (!isBlank(socket)) socket.disconnect();
+    console.log('Socket disconnected');
   };
 
   reconnectSocket = () => {
@@ -86,9 +86,13 @@ class SocketProvider extends Component {
 
   render() {
     const { children } = this.props;
-    const { socket } = this.state;
+
+    if (!this.state.socket) return null;
+
     return (
-      <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+      <SocketContext.Provider value={this.state.socket}>
+        {children}
+      </SocketContext.Provider>
     );
   }
 }

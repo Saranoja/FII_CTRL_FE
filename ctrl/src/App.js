@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import SocketProvider from 'modules/socketProvider/SocketProvider';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider as MuiThemePRovider } from '@material-ui/core/styles';
 import { ThemeProvider as ScThemeProvider } from 'styled-components';
@@ -13,6 +12,7 @@ import {
   SnackbarToast,
   AnnouncementsConsumer,
 } from 'components';
+import SocketProvider from 'modules/socketProvider/SocketProvider';
 
 const App = () => {
   const [darkTheme, setDarkTheme] = useState(
