@@ -1,5 +1,6 @@
 import React from 'react';
 import * as R from 'ramda';
+import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import List from '@material-ui/core/List';
@@ -16,12 +17,10 @@ const Sidebar = ({
   teaching,
   isSidebarOpen,
   handleSidebarToggle,
+  history,
 }) => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  const handleListItemClick = (event, index, callback) => {
-    setSelectedIndex(index);
-    callback();
+  const handleListItemClick = (callback) => {
+    callback(history);
   };
 
   const Drawer = (
@@ -30,14 +29,12 @@ const Sidebar = ({
       <List component="nav" aria-label="main sidebar items">
         {R.map((item) => {
           if (item.teachingRequired && !teaching) return null;
+          if (item.studentRequired && teaching) return null;
           return (
             <ListItem
               button
               divider
-              selected={selectedIndex === item.index}
-              onClick={(event) =>
-                handleListItemClick(event, item.index, item.action)
-              }
+              onClick={() => handleListItemClick(item.action)}
               key={item.index}
             >
               <ListItemIcon>
@@ -86,4 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
+export default R.compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter
+)(Sidebar);

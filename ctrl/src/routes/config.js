@@ -9,10 +9,18 @@ import Announcements from 'modules/announcements';
 // import Meetings from 'modules/meetings';
 // import Groups from 'modules/groups';
 // import Notes from 'modules/notes';
-// import PersonalPage from 'modules/personalPage';
+import Profile from 'modules/profile';
 
 //TODO: actually separate this into routes for students and routes for teachers
 
+/* 
+(
+        <ErrorPage
+          image={Forbidden}
+          errorText="Oops... this route is not for you!"
+        />
+      )
+*/
 export const privateRoutes = [
   {
     id: 'root',
@@ -68,12 +76,12 @@ export const privateRoutes = [
   //     component: Notes,
   //     title: 'Notes',
   // },
-  // {
-  //     id: 'personal',
-  //     path: routePaths.PERSONAL,
-  //     component: PersonalPage,
-  //     title: 'Personal',
-  // },
+  {
+    id: 'profile',
+    path: routePaths.PROFILE,
+    component: Profile,
+    title: 'Profile',
+  },
 ];
 export const publicRoutes = [
   {

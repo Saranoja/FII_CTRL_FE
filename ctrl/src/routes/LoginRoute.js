@@ -13,7 +13,6 @@ const LoginRoute = ({ redirectToPath, hasId, ...otherProps }) => (
     {...otherProps}
     render={() => {
       if (hasId) {
-        console.log('LGON');
         localStorageManager.set(
           'persisted_path',
           window.location.pathname + window.location.search

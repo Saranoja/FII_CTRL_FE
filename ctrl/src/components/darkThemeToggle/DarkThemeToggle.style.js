@@ -4,8 +4,8 @@ const StyledDarkThemeToggle = styled.div`
   ${({ theme }) => `
   .toggle-root {
     position: absolute;
-    top: ${theme.spacing(0.5)}px;;
-    right: ${theme.spacing(5)}px;
+    top: ${theme.spacing(1)}px;;
+    right: ${theme.spacing(7)}px;
   }`}
 `;
 

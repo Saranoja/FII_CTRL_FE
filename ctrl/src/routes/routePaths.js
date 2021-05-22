@@ -11,7 +11,9 @@ const routePaths = {
   COURSES: '/courses',
   ANNOUNCEMENTS: '/announcements',
   NOTES: '/notes',
-  PERSONAL: '/personal',
+  PROFILE: '/profile',
+  CHANNEL: '/channel',
+  TEACHERS: '/teachers',
 };
 
 export default routePaths;

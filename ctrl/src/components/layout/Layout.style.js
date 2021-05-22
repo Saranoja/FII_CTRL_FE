@@ -5,34 +5,28 @@ const StyledLayout = styled.div`
         padding: ${theme.spacing(6)}px ${theme.spacing(4)}px 0;
 
         ${theme.breakpoints.up('sm')} {
-            padding: ${theme.spacing(6)}px ${theme.spacing(3)}px;
+            padding: ${theme.spacing(8)}px ${theme.spacing(8)}px;
         }
 
         ${theme.breakpoints.up('md')} {
-            padding: ${theme.spacing(6)}px ${theme.spacing(20)}px;
+            padding: ${theme.spacing(8)}px ${theme.spacing(20)}px;
         }
 
         ${theme.breakpoints.up('lg')} {
-            padding: ${theme.spacing(6)}px ${theme.spacing(24)}px;
+            padding: ${theme.spacing(8)}px ${theme.spacing(24)}px;
         }
 
         ${theme.breakpoints.up('xl')} {
-            padding: ${theme.spacing(6)}px ${theme.spacing(48)}px;
-        }
-
-        .content-wrapper {
-            
+            padding: ${theme.spacing(8)}px ${theme.spacing(48)}px;
         }
 
         .notifications-icon {
-            z-index: ${theme.zIndex.mobileStepper};
             position: absolute;
-            top: 0;
-            right: 0;
+            top: ${theme.spacing(0.5)}px;;
+            right: ${theme.spacing(2)}px;
         }
 
         .hamburger-menu {
-          z-index: ${theme.zIndex.tooltip};
           position: absolute;
           top: 0;
           left: ${theme.spacing(6)}px;

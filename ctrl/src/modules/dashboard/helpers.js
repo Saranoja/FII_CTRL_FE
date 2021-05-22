@@ -1,4 +1,5 @@
-import images from '../../assets/images/cards';
+import images from 'assets/images/cards';
+import routePaths from 'routes/routePaths';
 
 export const studentCardsInfo = [
   {
@@ -6,42 +7,42 @@ export const studentCardsInfo = [
     image: images.resources,
     title: 'Additional resources',
     description: 'Get resources for your courses',
-    route: '/resources',
+    route: routePaths.RESOURCES,
   },
   {
     id: 2,
     image: images.group,
     title: 'Group',
     description: "Your group's channels",
-    route: '/group',
+    route: routePaths.CHANNEL,
   },
   {
     id: 3,
     image: images.team,
     title: 'Meetings',
     description: 'Check your meetings calendar',
-    route: '/meetings',
+    route: routePaths.meetings,
   },
   {
     id: 4,
     image: images.courses,
     title: 'Courses',
     description: 'Find courses pages and lecture notes',
-    route: '/courses',
+    route: routePaths.COURSES,
   },
   {
     id: 5,
     image: images.announcements,
     title: 'Announcements',
     description: 'See the latest official announcements',
-    route: '/announcements',
+    route: routePaths.ANNOUNCEMENTS,
   },
   {
     id: 6,
     image: images.assignments,
     title: 'Assignments',
     description: 'Check your due assignments',
-    route: '/assignments',
+    route: routePaths.ASSIGNMENTS,
   },
 ];
 
@@ -51,14 +52,14 @@ export const teacherCardsInfo = [
     image: images.postResources,
     title: 'Courses',
     description: 'Post resources for your courses',
-    route: '/courses',
+    route: routePaths.COURSES,
   },
   {
     id: 2,
     image: images.postAnnouncement,
     title: 'Announcements',
     description: 'Post an announcement to one of your groups',
-    route: '/announcements',
+    route: routePaths.ANNOUNCEMENTS,
   },
 
   {
@@ -66,27 +67,27 @@ export const teacherCardsInfo = [
     image: images.personalInfo,
     title: 'Your page',
     description: 'See and edit your page',
-    route: '/personal',
+    route: routePaths.PROFILE,
   },
   {
     id: 4,
     image: images.meetings,
     title: 'Meetings',
     description: 'Post or edit a meeting',
-    route: '/meetings',
+    route: routePaths.MEETINGS,
   },
   {
     id: 5,
     image: images.postAssignment,
     title: 'Assignments',
     description: 'Post or edit an assignment',
-    route: '/assignments',
+    route: routePaths.ASSIGNMENTS,
   },
   {
     id: 6,
     image: images.notes,
     title: 'Notes',
     description: 'Write some notes down',
-    route: '/notes',
+    route: routePaths.NOTES,
   },
 ];

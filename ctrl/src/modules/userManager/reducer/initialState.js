@@ -12,6 +12,7 @@ export default {
   first_name: initialData.first_name,
   last_name: initialData.last_name,
   teaching: initialData.teaching,
+  email: initialData.email,
   group: initialData.group,
   year: initialData.year,
   admin: initialData.admin,
