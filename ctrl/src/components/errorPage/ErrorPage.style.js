@@ -11,6 +11,11 @@ const StyledErrorPage = styled.div`
       text-align: center;
     }
 
+    a:hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+
     .large-image {
       width: 100%;
       display: block;

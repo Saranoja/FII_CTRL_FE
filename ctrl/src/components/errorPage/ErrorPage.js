@@ -1,12 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { reloadPage } from 'utils';
 import images from 'assets/images/errors';
 import { GENERIC_ERROR_TEXT } from './constants';
 import StyledErrorPage from './ErrorPage.style';
 import Layout from 'components/layout';
-import { Button } from '@material-ui/core';
+import { Link } from '@material-ui/core';
 
 const ErrorPage = ({ image, errorText }) => (
   <Layout>
@@ -15,9 +14,7 @@ const ErrorPage = ({ image, errorText }) => (
         <img src={image} alt="error-pic" className="large-image" />
         <h2 className="error-text"> {errorText} </h2>
         <h2 className="error-text" onClick={reloadPage}>
-          <Button color="primary" onClick={reloadPage}>
-            Reload page 🏠
-          </Button>
+          <Link onClick={reloadPage}> Reload page 🏠 </Link>
         </h2>
       </div>
     </StyledErrorPage>
