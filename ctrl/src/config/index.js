@@ -14,5 +14,6 @@ export default {
     groups: `${BASE}/discussion-groups`,
     refresh: `${BASE}/refresh`,
     logout: `${BASE}/logout`,
+    profile: `${BASE}/profile`,
   },
 };

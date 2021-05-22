@@ -14,6 +14,7 @@ const API = {
   articles: `${BASE}/articles`,
   announcements: `${BASE}/announcements`,
   groups: `${BASE}/discussion-groups`,
+  profile: `${BASE}/profile`,
 };
 
 export default API;
