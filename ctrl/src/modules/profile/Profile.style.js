@@ -6,13 +6,20 @@ const StyledProfile = styled(Paper)`
     padding: ${theme.spacing(3)}px;
     min-height: 80vh;
 
-    .header-wrapper {
+    .top-wrapper {
       display: flex;
+      flex-direction: row;
       align-items: center;
+      justify-content: space-between;
       margin-bottom: ${theme.spacing(3)}px;
-      
-      .avatar-root {
-        margin-right: ${theme.spacing(2)}px;
+
+      .header-wrapper {
+        display: flex;
+        align-items: center;
+        
+        .avatar-root {
+          margin-right: ${theme.spacing(2)}px;
+        }
       }
     }
 

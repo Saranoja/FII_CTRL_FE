@@ -35,8 +35,6 @@ const EditAnnouncementDialog = ({
       title: titleValue,
       text: textValue,
     });
-    setTitleValue(announcementTitle);
-    setTextValue(announcementText);
   };
 
   return (

@@ -18,7 +18,6 @@ import StyledActionsSegment from './ActionsSegment.style';
 
 const ActionsSegment = ({
   announcementId,
-  announcementAuthorId,
   announcementText,
   announcementTitle,
   actions,

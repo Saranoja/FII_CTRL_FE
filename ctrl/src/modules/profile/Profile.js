@@ -1,22 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withTeacher } from 'hocs';
 import { loadAccountDetails } from 'modules/userManager/actions';
-import { loadProfileDetails } from 'modules/profile/actions';
+import {
+  loadProfileDetails,
+  patchProfileDetails,
+} from 'modules/profile/actions';
 import {
   Avatar,
-  CircularProgress,
+  IconButton,
   Link,
   List,
   ListItem,
   ListItemText,
   Typography,
+  Tooltip,
+  LinearProgress,
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import { Layout } from 'components';
 import { contactFields } from './helpers';
 import StyledProfile from './Profile.style';
+import EditProfileDialog from './components/editProfileDialog';
 
 const Profile = ({
   id,
@@ -41,6 +48,19 @@ const Profile = ({
     retrieveData(id);
   }, [actions, id]);
 
+  const [isEditDialogOpen, setEditDialogOpen] = useState(false);
+
+  const handleEditClick = () => {
+    setEditDialogOpen(true);
+  };
+
+  const handleSaveEditClick = (newDetailsData) => {
+    setEditDialogOpen(false);
+    actions
+      .patchProfileDetails(id, newDetailsData)
+      .then(() => actions.loadProfileDetails(id));
+  };
+
   const fieldToPropMap = {
     degree: degree,
     subjects: subjects ? R.join(', ', subjects) : null,
@@ -59,10 +79,10 @@ const Profile = ({
         {R.map(
           (example) => (
             <ListItem key={example} dense disableGutters>
-              <ListItemText>- {example}</ListItemText>
+              <ListItemText component={'span'} primary={`- ${example}`} />
             </ListItem>
           ),
-          R.split('*', thesisExamples)
+          R.split('\n', thesisExamples)
         )}
       </List>
     ) : null,
@@ -72,21 +92,33 @@ const Profile = ({
     <Layout>
       <StyledProfile elevation={3}>
         {isLoading ? (
-          <CircularProgress />
+          <LinearProgress />
         ) : (
           <>
-            <div className="header-wrapper">
-              <Avatar
-                classes={{
-                  root: 'avatar-root',
-                }}
-              >
-                {firstName[0]}
-                {lastName[0]}
-              </Avatar>
-              <Typography variant="h5">
-                {firstName} {lastName}
-              </Typography>
+            <div className="top-wrapper">
+              <div className="header-wrapper">
+                <Avatar
+                  classes={{
+                    root: 'avatar-root',
+                  }}
+                >
+                  {firstName[0]}
+                  {lastName[0]}
+                </Avatar>
+                <Typography variant="h5">
+                  {firstName} {lastName}
+                </Typography>
+              </div>
+              <div className="edit-section">
+                <Tooltip title="Edit">
+                  <IconButton
+                    className="edit-announcement-button"
+                    onClick={handleEditClick}
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
+              </div>
             </div>
             <div className="info-wrapper ">
               {R.map((field) => {
@@ -95,13 +127,27 @@ const Profile = ({
                     <Typography color="textPrimary" variant="subtitle2">
                       {field.label}
                     </Typography>
-                    <Typography color="textSecondary" variant="body2">
+                    <Typography
+                      color="textSecondary"
+                      variant="body2"
+                      component={'span'}
+                    >
                       {fieldToPropMap[field.field] || '-'}
                     </Typography>
                   </div>
                 );
               }, contactFields)}
             </div>
+            <EditProfileDialog
+              secondaryEmail={secondaryEmail}
+              phoneNumber={phoneNumber}
+              office={officeNumber}
+              interests={fields}
+              thesis={thesisExamples}
+              isOpen={isEditDialogOpen}
+              handleClose={() => setEditDialogOpen(false)}
+              handleSave={handleSaveEditClick}
+            />
           </>
         )}
       </StyledProfile>
@@ -131,6 +177,7 @@ const mapDispatchToProps = (dispatch) => ({
     {
       loadAccountDetails,
       loadProfileDetails,
+      patchProfileDetails,
     },
     dispatch
   ),

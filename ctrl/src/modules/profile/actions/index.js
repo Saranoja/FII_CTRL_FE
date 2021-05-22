@@ -24,7 +24,7 @@ export const patchProfileDetails = (userId, newDetailsData = {}) => (
   dispatch
 ) => {
   const header = createHeaderWithToken();
-  dispatch(
+  return dispatch(
     updateProfileDetails(
       PATCH(`${userManager.config.profile}/${userId}`, newDetailsData, header)
     )
