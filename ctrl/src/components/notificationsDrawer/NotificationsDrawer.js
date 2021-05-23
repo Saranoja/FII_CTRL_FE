@@ -65,7 +65,8 @@ const NotificationsDrawer = ({
                 }
                 className="snackbar-notification-content"
               >
-                {`${notificationPlaceholder} ${notification.group}`}
+                {notification.message ??
+                  `${notificationPlaceholder} ${notification.group}`}
               </Alert>
             </div>
           );

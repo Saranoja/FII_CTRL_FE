@@ -8,6 +8,7 @@ import {
   loadProfileDetails,
   patchProfileDetails,
 } from 'modules/profile/actions';
+import { loadNotification } from 'modules/notifications/actions';
 import {
   Avatar,
   IconButton,
@@ -19,6 +20,10 @@ import {
   Tooltip,
   LinearProgress,
 } from '@material-ui/core';
+import {
+  NOTIFICATION_TYPES,
+  EVENT_TYPES,
+} from 'modules/notifications/constants';
 import EditIcon from '@material-ui/icons/Edit';
 import { Layout } from 'components';
 import { contactFields } from './helpers';
@@ -58,7 +63,25 @@ const Profile = ({
     setEditDialogOpen(false);
     actions
       .patchProfileDetails(id, newDetailsData)
-      .then(() => actions.loadProfileDetails(id));
+      .then(() =>
+        actions.loadNotification({
+          type: NOTIFICATION_TYPES.success,
+          author_id: id,
+          event: EVENT_TYPES.patch,
+          message: 'Profile updated successfully.',
+          timestamp: Date.now(),
+        })
+      )
+      .then(() => actions.loadProfileDetails(id))
+      .catch(() =>
+        actions.loadNotification({
+          type: NOTIFICATION_TYPES.error,
+          author_id: id,
+          event: EVENT_TYPES.patch,
+          message: 'Error updating profile.',
+          timestamp: Date.now(),
+        })
+      );
   };
 
   const fieldToPropMap = {
@@ -178,6 +201,7 @@ const mapDispatchToProps = (dispatch) => ({
       loadAccountDetails,
       loadProfileDetails,
       patchProfileDetails,
+      loadNotification,
     },
     dispatch
   ),

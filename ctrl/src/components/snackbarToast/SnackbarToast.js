@@ -17,17 +17,17 @@ function Alert(props) {
 
 const SnackbarToast = ({
   isToastOpen,
-  lastAnnouncement,
+  lastNotification,
   currentUserId,
   actions,
 }) => {
   let isSelfAuthor = false;
   let notificationType = NOTIFICATION_TYPES.success;
   let notificationEventTrigger = EVENT_TYPES.post;
-  if (lastAnnouncement) {
-    isSelfAuthor = currentUserId === lastAnnouncement.author_id;
-    notificationType = lastAnnouncement.type;
-    notificationEventTrigger = lastAnnouncement.event;
+  if (lastNotification) {
+    isSelfAuthor = currentUserId === lastNotification.author_id;
+    notificationType = lastNotification.type;
+    notificationEventTrigger = lastNotification.event;
   }
 
   const genericMessagePack = eventToMessageMap[notificationEventTrigger];
@@ -39,12 +39,12 @@ const SnackbarToast = ({
 
   const notificationPlaceholder = isSelfAuthor
     ? notificationSelfMessage
-    : `${lastAnnouncement ? lastAnnouncement.author : ''} ${
+    : `${lastNotification ? lastNotification.author : ''} ${
         genericMessagePack.info
       }`;
 
-  const notificationMessage = lastAnnouncement
-    ? `${notificationPlaceholder} ${lastAnnouncement.group}`
+  const notificationMessage = lastNotification
+    ? `${notificationPlaceholder} ${lastNotification.group}`
     : '';
 
   if (notificationType === NOTIFICATION_TYPES.error && !isSelfAuthor)
@@ -64,7 +64,7 @@ const SnackbarToast = ({
         onClose={actions.hideNotification}
         severity={notificationType}
       >
-        {notificationMessage}
+        {lastNotification?.message ?? notificationMessage}
       </Alert>
     </Snackbar>
   );
@@ -72,7 +72,7 @@ const SnackbarToast = ({
 
 const mapStateToProps = (state) => ({
   isToastOpen: state.notifications.is_toast_on,
-  lastAnnouncement: R.last(state.notifications.notfications_list),
+  lastNotification: R.last(state.notifications.notfications_list),
   currentUserId: state.userManager.id,
 });
 
