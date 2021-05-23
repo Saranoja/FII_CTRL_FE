@@ -1,4 +1,4 @@
-import { ErrorPage } from 'components';
+import { ErrorPage, TeachersPage, ProfilePage } from 'components';
 import Dashboard from 'modules/dashboard';
 import Resources from 'modules/resources';
 import Login from 'modules/login';
@@ -45,6 +45,18 @@ export const privateRoutes = [
     path: routePaths.ANNOUNCEMENTS,
     component: Announcements,
     title: 'Announcements',
+  },
+  {
+    id: 'teachers',
+    path: routePaths.TEACHERS_ALL,
+    component: TeachersPage,
+    title: 'Teachers',
+  },
+  {
+    id: 'teacher_profile',
+    path: routePaths.TEACHERS,
+    component: ProfilePage,
+    title: 'Teacher Profile',
   },
   // {
   //     id: 'courses',

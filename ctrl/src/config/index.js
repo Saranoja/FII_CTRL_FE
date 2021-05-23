@@ -15,5 +15,7 @@ export default {
     refresh: `${BASE}/refresh`,
     logout: `${BASE}/logout`,
     profile: `${BASE}/profile`,
+    teachers: `${BASE}/teachers`,
+    students: `${BASE}/students`,
   },
 };

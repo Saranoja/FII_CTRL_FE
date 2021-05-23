@@ -15,6 +15,8 @@ const API = {
   announcements: `${BASE}/announcements`,
   groups: `${BASE}/discussion-groups`,
   profile: `${BASE}/profile`,
+  teachers: `${BASE}/teachers`,
+  students: `${BASE}/students`,
 };
 
 export default API;

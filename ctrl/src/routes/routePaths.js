@@ -13,7 +13,10 @@ const routePaths = {
   NOTES: '/notes',
   PROFILE: '/profile',
   CHANNEL: '/channel',
-  TEACHERS: '/teachers',
+  TEACHERS_ROOT: '/teachers',
+  TEACHERS_ALL: '/teachers/all',
+  TEACHERS: '/teachers/:teacher_id',
+  STUDENTS: '/students',
 };
 
 export default routePaths;

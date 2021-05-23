@@ -21,7 +21,7 @@ export const studentCardsInfo = [
     image: images.team,
     title: 'Meetings',
     description: 'Check your meetings calendar',
-    route: routePaths.meetings,
+    route: routePaths.MEETINGS,
   },
   {
     id: 4,

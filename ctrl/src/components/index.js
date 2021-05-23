@@ -11,3 +11,5 @@ export { default as LogoutButton } from './logoutButton';
 export { default as NotificationsDrawer } from './notificationsDrawer';
 export { default as SnackbarToast } from './snackbarToast';
 export { default as AnnouncementsConsumer } from './announcementsConsumer';
+export { default as ProfilePage } from './profilePage';
+export { default as TeachersPage } from './teachersPage';

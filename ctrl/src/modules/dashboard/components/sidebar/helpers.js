@@ -73,7 +73,7 @@ export const sidebarMenuItems = [
     label: 'Find your teachers',
     icon: SupervisorAccountIcon,
     action: (history) => {
-      console.log('teachers click');
+      history.push(routePaths.TEACHERS_ALL);
     },
     teachingRequired: false,
     studentRequired: true,

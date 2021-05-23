@@ -91,6 +91,11 @@ class Announcements extends React.Component {
                 ),
                 currentGroupAnnouncements
               )}
+              {!areAnnouncementsLoading && !currentGroupAnnouncements.length ? (
+                <Typography variant="subtitle1" color="textSecondary">
+                  No announcements published yet
+                </Typography>
+              ) : null}
             </div>
             <AnnouncementsCreationSegment />
           </Paper>
