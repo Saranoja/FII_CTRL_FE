@@ -6,6 +6,7 @@ import announcements from 'modules/announcements/reducer';
 import notifications from 'modules/notifications/reducer';
 import profile from 'modules/profile/reducer';
 import usersService from 'modules/usersService/reducer';
+import assignments from 'modules/assignments/reducer';
 
 export const REDUCER_KEYS = {
   userManager: 'userManager',
@@ -14,6 +15,7 @@ export const REDUCER_KEYS = {
   notifications: 'notifications',
   profile: 'profile',
   usersService: 'usersService',
+  assignments: 'assignments',
 };
 
 export const rootReducers = {
@@ -23,6 +25,7 @@ export const rootReducers = {
   [REDUCER_KEYS.notifications]: notifications,
   [REDUCER_KEYS.profile]: profile,
   [REDUCER_KEYS.usersService]: usersService,
+  [REDUCER_KEYS.assignments]: assignments,
 };
 
 const createReducer = (asyncReducers) =>

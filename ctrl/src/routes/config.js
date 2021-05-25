@@ -5,7 +5,7 @@ import Login from 'modules/login';
 import routePaths from './routePaths';
 import Announcements from 'modules/announcements';
 // import Courses from 'modules/courses';
-// import Assignments from 'modules/assignments';
+import Assignments from 'modules/assignments';
 // import Meetings from 'modules/meetings';
 // import Groups from 'modules/groups';
 // import Notes from 'modules/notes';
@@ -64,12 +64,12 @@ export const privateRoutes = [
   //     component: Courses,
   //     title: 'Courses',
   // },
-  // {
-  //     id: 'assignments',
-  //     path: routePaths.ASSIGNMENTS,
-  //     component: Assignments,
-  //     title: 'Assignments',
-  // },
+  {
+    id: 'assignments',
+    path: routePaths.ASSIGNMENTS,
+    component: Assignments,
+    title: 'Assignments',
+  },
   // {
   //     id: 'meetings',
   //     path: routePaths.MEETINGS,

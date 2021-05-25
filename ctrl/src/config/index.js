@@ -17,5 +17,6 @@ export default {
     profile: `${BASE}/profile`,
     teachers: `${BASE}/teachers`,
     students: `${BASE}/students`,
+    assignments: `${BASE}/assignments`,
   },
 };
