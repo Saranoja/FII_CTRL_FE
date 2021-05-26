@@ -8,6 +8,7 @@ import { loadAssignments } from 'modules/assignments/actions';
 import { Layout } from 'components';
 import AssignmentSegment from './components/assignmentSegment';
 import StyledAssignments from './Assignments.style';
+import AssignmentsCreationSegment from './components/assignmentsCreationSegment';
 
 class Assignments extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Assignments extends React.Component {
   }
 
   componentDidMount() {
-    const { actions, currentAssignments } = this.props;
+    const { actions } = this.props;
     actions.loadAssignments().then((result) =>
       this.setState({
         currentTab: R.path(['payload', 'data'], result)[0].subject,
@@ -27,7 +28,7 @@ class Assignments extends React.Component {
   }
 
   render() {
-    const { isLoading, currentAssignments } = this.props;
+    const { isLoading, currentAssignments, groups } = this.props;
     const { currentTab } = this.state;
     const availableSubjects = [];
 
@@ -48,7 +49,7 @@ class Assignments extends React.Component {
               <div className="header-wrapper">
                 <Typography variant="h5">Your Assignments</Typography>
               </div>
-              <div className="assignmens-wrapper">
+              <div className="assignments-wrapper">
                 <TabContext value={currentTab || ''}>
                   <Tabs
                     value={currentTab}
@@ -70,10 +71,16 @@ class Assignments extends React.Component {
                   </Tabs>
                   <div className="assignment-segments-wrapper">
                     {currentAssignments && currentTab ? (
-                      <TabPanel value={currentTab}>
+                      <TabPanel
+                        value={currentTab}
+                        classes={{
+                          root: 'tab-panel-root',
+                        }}
+                      >
                         {R.map(
                           (assignment) => (
                             <AssignmentSegment
+                              key={assignment.id}
                               assignmentId={assignment.id}
                               title={assignment.title}
                               description={assignment.description}
@@ -81,6 +88,11 @@ class Assignments extends React.Component {
                               createdAt={assignment.created_at}
                               deadline={assignment.deadline}
                               fileUrl={assignment.file_url}
+                              groupName={
+                                R.find(
+                                  R.propEq('id', assignment.discussion_group_id)
+                                )(groups).name
+                              }
                             />
                           ),
                           currentAssignments[currentTab]
@@ -92,6 +104,9 @@ class Assignments extends React.Component {
                   </div>
                 </TabContext>
               </div>
+              <AssignmentsCreationSegment
+                availableSubjects={availableSubjects}
+              />
             </>
           )}
         </StyledAssignments>
@@ -102,6 +117,7 @@ class Assignments extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentAssignments: state.assignments.currentAssignments,
+  groups: state.announcements.groups,
   isLoading: state.assignments.isLoading,
 });
 

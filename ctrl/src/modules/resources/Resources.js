@@ -133,6 +133,8 @@ class Resources extends React.Component {
                 <h2> Search by uploading a course file </h2>
                 <FilePicker
                   onFileUploadSuccess={actions.loadResourcesForFile}
+                  uploadMessage="Upload your .pdf course"
+                  availableExtensions={['pdf']}
                 />
                 <Button
                   className="resource-submit-button"

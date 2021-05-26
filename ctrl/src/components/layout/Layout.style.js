@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledLayout = styled.div`
   ${({ theme }) => `
-        padding: ${theme.spacing(6)}px ${theme.spacing(4)}px 0;
+        padding: ${theme.spacing(8)}px ${theme.spacing(4)}px 0;
 
         ${theme.breakpoints.up('sm')} {
             padding: ${theme.spacing(8)}px ${theme.spacing(8)}px;

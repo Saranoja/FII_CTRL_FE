@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Link, Typography } from '@material-ui/core';
+import { Button, Typography, Chip } from '@material-ui/core';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import StyledAssignmentSegment from './AssignmentSegment.style';
 import { openLinkInNewTab } from 'utils';
@@ -13,13 +13,17 @@ const AssignmentSegment = ({
   createdAt,
   deadline,
   fileUrl,
+  groupName,
 }) => {
   return (
     <StyledAssignmentSegment>
       <div className="assignment-container">
-        <Typography color="primary" variant="overline">
-          {author}
-        </Typography>
+        <div className="assignment-header-wrapper">
+          <Typography color="primary" variant="overline">
+            {author}
+          </Typography>
+          <Chip label={groupName} color="default" size="small" />
+        </div>
         <Typography variant="subtitle1" className="assignment-title">
           {title}
         </Typography>
@@ -33,6 +37,7 @@ const AssignmentSegment = ({
             variant="outlined"
             startIcon={<AttachFileIcon />}
             onClick={() => openLinkInNewTab(fileUrl)}
+            className="attachment-button"
           >
             Open attached file
           </Button>
@@ -41,7 +46,7 @@ const AssignmentSegment = ({
           Deadline: {deadline}
         </Typography>
         <Typography variant="overline" color="textSecondary">
-          Created at: {createdAt}
+          {createdAt}
         </Typography>
       </div>
     </StyledAssignmentSegment>

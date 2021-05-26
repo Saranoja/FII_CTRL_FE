@@ -18,3 +18,12 @@ export const transformAssignmentsPayloadData = (payload) => {
   const groupBySubject = R.groupBy((assignment) => assignment.subject);
   return groupBySubject(transformedPayload);
 };
+
+export const extractSubjectsFromPayloadData = (payload) => {
+  const subjects = {};
+  R.forEach((assignment) => {
+    subjects[assignment.subject] = assignment.subject_id;
+  }, payload);
+
+  return subjects;
+};

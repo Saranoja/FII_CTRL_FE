@@ -11,6 +11,7 @@ const StyledCustomFilePicker = styled.div`
 			padding: ${theme.spacing(0.5)}px;
 			padding-right: ${theme.spacing(1)}px;
 			border-radius: ${theme.spacing(1)}px;
+			max-width: ${theme.spacing(32)}px;
 
 			.uploaded-filename {
 				color: ${theme.palette.grey[400]};

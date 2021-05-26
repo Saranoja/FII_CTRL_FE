@@ -14,6 +14,17 @@ export const createHeaderWithToken = (headers = {}) => {
     ...headers,
   };
 };
+export const createFormDataHeaderWithToken = (headers = {}) => {
+  const token = getToken();
+  if (isBlank(token)) return headers;
+
+  return {
+    'Content-Type': 'multipart/form-data',
+    Accept: 'multipart/form-data',
+    Authorization: `Bearer ${token}`,
+    ...headers,
+  };
+};
 
 export const createHeaderWithRefreshToken = (headers = {}) => {
   const token = getRefreshToken();

@@ -11,13 +11,24 @@ const StyledAssignmentSegment = styled.div`
         : theme.palette.grey[200]
     };
 
+    .assignment-header-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     .assignment-title {
       font-weight: ${theme.typography.fontWeightMedium};
       margin: ${theme.spacing(1)}px 0;
     }
 
     .assignment-subtitle {
-      margin: ${theme.spacing(0.5)}px 0;
+      margin: ${theme.spacing(1)}px 0;
+    }
+
+    .attachment-button {
+      margin-bottom: ${theme.spacing(1)}px;
     }
 
   `}
