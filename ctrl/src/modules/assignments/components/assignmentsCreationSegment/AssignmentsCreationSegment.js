@@ -173,7 +173,7 @@ const AssignmentsCreationSegment = ({
                     {subject}
                   </MenuItem>
                 ),
-                availableSubjects
+                R.keys(subjects)
               )}
             </Select>
           </FormControl>
@@ -235,17 +235,7 @@ const AssignmentsCreationSegment = ({
               actions.loadResourcesForFile(file);
               setWasFileUploaded(true);
             }}
-            availableExtensions={[
-              'pdf',
-              'docx',
-              'doc',
-              'ppt',
-              'pptx',
-              'jpeg',
-              'png',
-              'jpg',
-              'txt',
-            ]}
+            availableExtensions={null}
             uploadMessage="Upload a resource"
           />
         </DialogContent>
@@ -270,7 +260,7 @@ const mapStateToProps = (state) => ({
   isLoading: state.announcements.isLoading,
   groups: state.announcements.groups,
   current_file: state.resources.current_file,
-  subjects: state.assignments.subjects,
+  subjects: state.userManager.subjects,
 });
 
 const mapDispatchToProps = (dispatch) => ({

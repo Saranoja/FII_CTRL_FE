@@ -10,28 +10,72 @@ export const EVENT_TYPES = {
   delete: 'delete',
 };
 
-export const postMessageGeneric = {
-  error: 'Error when posting a new announcement in ',
-  success: 'Successfully posted a new announcement in ',
-  info: 'posted a new announcement in',
+export const DOMAINS = {
+  ASSIGNMENTS: 'assignments',
+  ANNOUNCEMENTS: 'announcements',
 };
 
-export const deleteMessageGeneric = {
-  error: 'Error deleting announcement in ',
-  success: 'Successfully deleted announcement in ',
-  info: 'deleted an announcement in',
-};
+// export const postMessageGeneric = {
+//   error: 'Error when posting a new announcement in ',
+//   success: 'Successfully posted a new announcement in ',
+//   info: 'posted a new announcement in',
+// };
 
-export const patchMessageGeneric = {
-  error: 'Error updating announcement in ',
-  success: 'Successfully updated announcement in ',
-  info: 'updated an announcement in',
+// export const deleteMessageGeneric = {
+//   error: 'Error deleting announcement in ',
+//   success: 'Successfully deleted announcement in ',
+//   info: 'deleted an announcement in',
+// };
+
+// export const patchMessageGeneric = {
+//   error: 'Error updating announcement in ',
+//   success: 'Successfully updated announcement in ',
+//   info: 'updated an announcement in',
+// };
+
+export const generics = {
+  postMessageGeneric: {
+    [DOMAINS.ANNOUNCEMENTS]: {
+      error: 'Error when posting a new announcement in ',
+      success: 'Successfully posted a new announcement in ',
+      info: 'posted a new announcement in',
+    },
+    [DOMAINS.ASSIGNMENTS]: {
+      error: 'Error when posting a new assignment in ',
+      success: 'Successfully posted a new assignment in ',
+      info: 'posted a new assignment in',
+    },
+  },
+  deleteMessageGeneric: {
+    [DOMAINS.ANNOUNCEMENTS]: {
+      error: 'Error deleting announcement in ',
+      success: 'Successfully deleted announcement in ',
+      info: 'deleted an announcement in',
+    },
+    [DOMAINS.ASSIGNMENTS]: {
+      error: 'Error deleting assignment in ',
+      success: 'Successfully deleted assignment in ',
+      info: 'deleted an assignment in',
+    },
+  },
+  patchMessageGeneric: {
+    [DOMAINS.ANNOUNCEMENTS]: {
+      error: 'Error updating announcement in ',
+      success: 'Successfully updated announcement in ',
+      info: 'updated an announcement in',
+    },
+    [DOMAINS.ASSIGNMENTS]: {
+      error: 'Error updating assignment in ',
+      success: 'Successfully updated assignment in ',
+      info: 'updated an assignment in',
+    },
+  },
 };
 
 export const eventToMessageMap = {
-  [EVENT_TYPES.post]: postMessageGeneric,
-  [EVENT_TYPES.delete]: deleteMessageGeneric,
-  [EVENT_TYPES.patch]: patchMessageGeneric,
+  [EVENT_TYPES.post]: generics.postMessageGeneric,
+  [EVENT_TYPES.delete]: generics.deleteMessageGeneric,
+  [EVENT_TYPES.patch]: generics.patchMessageGeneric,
 };
 
 export const noNotificationsGeneric = 'No new notifications';

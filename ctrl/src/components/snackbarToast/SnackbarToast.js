@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {
   NOTIFICATION_TYPES,
   EVENT_TYPES,
+  DOMAINS,
   eventToMessageMap,
 } from 'modules/notifications/constants';
 import { hideNotification } from 'modules/notifications/actions';
@@ -24,13 +25,16 @@ const SnackbarToast = ({
   let isSelfAuthor = false;
   let notificationType = NOTIFICATION_TYPES.success;
   let notificationEventTrigger = EVENT_TYPES.post;
+  let domain = DOMAINS.ANNOUNCEMENTS;
   if (lastNotification) {
     isSelfAuthor = currentUserId === lastNotification.author_id;
     notificationType = lastNotification.type;
     notificationEventTrigger = lastNotification.event;
+    domain = lastNotification.domain;
   }
 
-  const genericMessagePack = eventToMessageMap[notificationEventTrigger];
+  const genericMessagePack =
+    eventToMessageMap[notificationEventTrigger][domain];
 
   const notificationSelfMessage =
     notificationType === NOTIFICATION_TYPES.error

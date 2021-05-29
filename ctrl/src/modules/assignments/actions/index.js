@@ -50,3 +50,33 @@ export const postAssignment = (groupId, assignment) => (dispatch) => {
     )
   );
 };
+
+export const deleteAssignment = (groupId, assignmentId) => (dispatch) => {
+  const header = createHeaderWithToken();
+  dispatch(
+    removeAssignment(
+      DELETE(
+        `${userManager.config.assignments}/${groupId}?id=${assignmentId}`,
+        {},
+        header
+      )
+    )
+  );
+};
+
+export const patchAssignment = (
+  groupId,
+  announcementId,
+  newAssignmentData = {}
+) => (dispatch) => {
+  const header = createHeaderWithToken();
+  dispatch(
+    updateAssignment(
+      PATCH(
+        `${userManager.config.assignments}/${groupId}?id=${announcementId}`,
+        newAssignmentData,
+        header
+      )
+    )
+  );
+};

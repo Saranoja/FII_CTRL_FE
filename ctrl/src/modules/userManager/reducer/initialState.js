@@ -20,4 +20,5 @@ export default {
   hasId: !isBlank(account),
   idm: account,
   id: initialData.id,
+  subjects: initialData.subjects,
 };

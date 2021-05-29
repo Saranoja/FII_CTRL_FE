@@ -85,14 +85,16 @@ class Assignments extends React.Component {
                               title={assignment.title}
                               description={assignment.description}
                               author={assignment.author}
+                              authorId={assignment.author_id}
                               createdAt={assignment.created_at}
                               deadline={assignment.deadline}
                               fileUrl={assignment.file_url}
                               groupName={
                                 R.find(
                                   R.propEq('id', assignment.discussion_group_id)
-                                )(groups).name
+                                )(groups)?.name
                               }
+                              groupId={assignment.discussion_group_id}
                             />
                           ),
                           currentAssignments[currentTab]
@@ -104,9 +106,7 @@ class Assignments extends React.Component {
                   </div>
                 </TabContext>
               </div>
-              <AssignmentsCreationSegment
-                availableSubjects={availableSubjects}
-              />
+              <AssignmentsCreationSegment />
             </>
           )}
         </StyledAssignments>

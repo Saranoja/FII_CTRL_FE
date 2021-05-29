@@ -38,7 +38,8 @@ const NotificationsDrawer = ({
       {notificationsList.length ? (
         R.map((notification) => {
           const isSelfAuthor = currentUserId === notification.author_id;
-          const genericMessagePack = eventToMessageMap[notification.event];
+          const genericMessagePack =
+            eventToMessageMap[notification.event][notification.domain];
           const notificationSelfMessage =
             notification.type === NOTIFICATION_TYPES.error
               ? genericMessagePack.error

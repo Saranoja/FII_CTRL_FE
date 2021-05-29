@@ -11,6 +11,7 @@ import {
   DarkThemeToggle,
   SnackbarToast,
   AnnouncementsConsumer,
+  AssignmentsConsumer,
 } from 'components';
 import SocketProvider from 'modules/socketProvider/SocketProvider';
 
@@ -29,6 +30,7 @@ const App = () => {
       <ScThemeProvider theme={theme(themeType)}>
         <SocketProvider>
           <AnnouncementsConsumer />
+          <AssignmentsConsumer />
         </SocketProvider>
         <Router>
           <Header />

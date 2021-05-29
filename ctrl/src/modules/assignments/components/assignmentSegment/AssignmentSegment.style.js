@@ -16,6 +16,13 @@ const StyledAssignmentSegment = styled.div`
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+
+      .info-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+      }
     }
 
     .assignment-title {

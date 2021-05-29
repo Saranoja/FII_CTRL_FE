@@ -28,7 +28,7 @@ const AnnouncementSegment = ({
             {createdAt}
           </Typography>
           <ActionsSegment
-            announcementAuthorId={authorId}
+            authorId={authorId}
             announcementId={announcementId}
             announcementText={text}
             announcementTitle={title}

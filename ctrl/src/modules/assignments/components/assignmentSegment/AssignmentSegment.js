@@ -3,6 +3,7 @@ import { Button, Typography, Chip } from '@material-ui/core';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import StyledAssignmentSegment from './AssignmentSegment.style';
 import { openLinkInNewTab } from 'utils';
+import ActionsSegment from '../actionsSegment';
 
 const AssignmentSegment = ({
   assignmentId,
@@ -14,6 +15,7 @@ const AssignmentSegment = ({
   deadline,
   fileUrl,
   groupName,
+  groupId,
 }) => {
   return (
     <StyledAssignmentSegment>
@@ -22,7 +24,16 @@ const AssignmentSegment = ({
           <Typography color="primary" variant="overline">
             {author}
           </Typography>
-          <Chip label={groupName} color="default" size="small" />
+          <div className="info-wrapper">
+            <Chip label={groupName} color="default" size="small" />
+            <ActionsSegment
+              authorId={authorId}
+              assignmentId={assignmentId}
+              assignmentText={description}
+              assignmentTitle={title}
+              deadline={deadline}
+            />
+          </div>
         </div>
         <Typography variant="subtitle1" className="assignment-title">
           {title}
