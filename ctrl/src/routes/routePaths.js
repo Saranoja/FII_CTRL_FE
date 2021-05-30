@@ -17,6 +17,7 @@ const routePaths = {
   TEACHERS_ALL: '/teachers/all',
   TEACHERS: '/teachers/:teacher_id',
   STUDENTS: '/students',
+  GROUPS_MANAGER: '/groups-manager',
 };
 
 export default routePaths;

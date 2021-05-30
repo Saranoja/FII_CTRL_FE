@@ -11,7 +11,7 @@ export default {
     resources: `${BASE}/resources`,
     articles: `${BASE}/articles`,
     announcements: `${BASE}/announcements`,
-    groups: `${BASE}/discussion-groups`,
+    groups: `${BASE}/groups`,
     refresh: `${BASE}/refresh`,
     logout: `${BASE}/logout`,
     profile: `${BASE}/profile`,

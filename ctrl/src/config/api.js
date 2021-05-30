@@ -13,7 +13,7 @@ const API = {
   resources: `${BASE}/resources`,
   articles: `${BASE}/articles`,
   announcements: `${BASE}/announcements`,
-  groups: `${BASE}/discussion-groups`,
+  groups: `${BASE}/groups`,
   profile: `${BASE}/profile`,
   teachers: `${BASE}/teachers`,
   students: `${BASE}/students`,

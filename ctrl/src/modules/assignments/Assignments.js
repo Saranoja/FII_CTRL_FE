@@ -42,73 +42,78 @@ class Assignments extends React.Component {
     return (
       <Layout>
         <StyledAssignments elevation={3}>
-          {isLoading ? (
-            <LinearProgress />
-          ) : (
-            <>
-              <div className="header-wrapper">
-                <Typography variant="h5">Your Assignments</Typography>
-              </div>
-              <div className="assignments-wrapper">
-                <TabContext value={currentTab || ''}>
-                  <Tabs
-                    value={currentTab}
-                    onChange={(event, newValue) =>
-                      this.setState({ currentTab: newValue })
-                    }
-                    indicatorColor="primary"
-                    textColor="primary"
-                    aria-label="label tabs"
-                    variant="scrollable"
-                    scrollButtons="auto"
-                  >
-                    {R.map(
-                      (subject) => (
-                        <Tab label={subject} value={subject} key={subject} />
-                      ),
-                      availableSubjects
-                    )}
-                  </Tabs>
-                  <div className="assignment-segments-wrapper">
-                    {currentAssignments && currentTab ? (
-                      <TabPanel
-                        value={currentTab}
-                        classes={{
-                          root: 'tab-panel-root',
-                        }}
-                      >
-                        {R.map(
-                          (assignment) => (
-                            <AssignmentSegment
-                              key={assignment.id}
-                              assignmentId={assignment.id}
-                              title={assignment.title}
-                              description={assignment.description}
-                              author={assignment.author}
-                              authorId={assignment.author_id}
-                              createdAt={assignment.created_at}
-                              deadline={assignment.deadline}
-                              fileUrl={assignment.file_url}
-                              groupName={
-                                R.find(
-                                  R.propEq('id', assignment.discussion_group_id)
-                                )(groups)?.name
-                              }
-                              groupId={assignment.discussion_group_id}
-                            />
-                          ),
-                          currentAssignments[currentTab]
-                        )}
-                      </TabPanel>
-                    ) : (
-                      <p> Nothing to display :) </p>
-                    )}
-                  </div>
-                </TabContext>
-              </div>
-              <AssignmentsCreationSegment />
-            </>
-          )}
+          <>
+            <div className="header-wrapper">
+              <Typography variant="h5">Your Assignments</Typography>
+            </div>
+            {isLoading ? (
+              <LinearProgress />
+            ) : (
+              <>
+                <div className="assignments-wrapper">
+                  <TabContext value={currentTab || ''}>
+                    <Tabs
+                      value={currentTab}
+                      onChange={(event, newValue) =>
+                        this.setState({ currentTab: newValue })
+                      }
+                      indicatorColor="primary"
+                      textColor="primary"
+                      aria-label="label tabs"
+                      variant="scrollable"
+                      scrollButtons="auto"
+                    >
+                      {R.map(
+                        (subject) => (
+                          <Tab label={subject} value={subject} key={subject} />
+                        ),
+                        availableSubjects
+                      )}
+                    </Tabs>
+                    <div className="assignment-segments-wrapper">
+                      {currentAssignments && currentTab ? (
+                        <TabPanel
+                          value={currentTab}
+                          classes={{
+                            root: 'tab-panel-root',
+                          }}
+                        >
+                          {R.map(
+                            (assignment) => (
+                              <AssignmentSegment
+                                key={assignment.id}
+                                assignmentId={assignment.id}
+                                title={assignment.title}
+                                description={assignment.description}
+                                author={assignment.author}
+                                authorId={assignment.author_id}
+                                createdAt={assignment.created_at}
+                                deadline={assignment.deadline}
+                                fileUrl={assignment.file_url}
+                                groupName={
+                                  R.find(
+                                    R.propEq(
+                                      'id',
+                                      assignment.discussion_group_id
+                                    )
+                                  )(groups)?.name
+                                }
+                                groupId={assignment.discussion_group_id}
+                              />
+                            ),
+                            currentAssignments[currentTab]
+                          )}
+                        </TabPanel>
+                      ) : (
+                        <p> Nothing to display :) </p>
+                      )}
+                    </div>
+                  </TabContext>
+                </div>
+                <AssignmentsCreationSegment />
+              </>
+            )}
+          </>
         </StyledAssignments>
       </Layout>
     );

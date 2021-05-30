@@ -4,6 +4,7 @@ import Resources from 'modules/resources';
 import Login from 'modules/login';
 import routePaths from './routePaths';
 import Announcements from 'modules/announcements';
+import GroupsManager from 'modules/groupsManager';
 // import Courses from 'modules/courses';
 import Assignments from 'modules/assignments';
 // import Meetings from 'modules/meetings';
@@ -69,6 +70,12 @@ export const privateRoutes = [
     path: routePaths.ASSIGNMENTS,
     component: Assignments,
     title: 'Assignments',
+  },
+  {
+    id: 'groups-manager',
+    path: routePaths.GROUPS_MANAGER,
+    component: GroupsManager,
+    title: 'Groups Manager',
   },
   // {
   //     id: 'meetings',

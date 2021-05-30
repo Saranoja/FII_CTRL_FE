@@ -31,7 +31,7 @@ export const sidebarMenuItems = [
     label: 'Manage your groups',
     icon: GroupIcon,
     action: (history) => {
-      console.log('manage groups click');
+      history.push(routePaths.GROUPS_MANAGER);
     },
     teachingRequired: true,
     studentRequired: false,

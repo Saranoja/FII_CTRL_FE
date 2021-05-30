@@ -27,6 +27,11 @@ const AnnouncementsCreationSegment = ({ actions }) => {
     setOpen(true);
   };
 
+  const checkSubmit = () => {
+    if (titleValue === '' || textValue === '') return true;
+    return false;
+  };
+
   const handleClose = () => {
     setTitleValue('');
     setTextValue('');
@@ -102,7 +107,11 @@ const AnnouncementsCreationSegment = ({ actions }) => {
           <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handlePostClick} color="secondary">
+          <Button
+            onClick={handlePostClick}
+            color="secondary"
+            disabled={checkSubmit()}
+          >
             Publish
           </Button>
         </DialogActions>

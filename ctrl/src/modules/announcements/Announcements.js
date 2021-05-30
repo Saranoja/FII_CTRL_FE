@@ -45,8 +45,7 @@ class Announcements extends React.Component {
   };
 
   componentDidMount() {
-    const { actions } = this.props;
-    actions.loadGroups().then(this.handleAnnouncementsInit);
+    this.handleAnnouncementsInit();
   }
 
   handleGroupChipClick = async (newGroup) => {
