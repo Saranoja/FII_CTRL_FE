@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { FilePicker } from 'react-file-picker';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 import StyledCustomFilePicker from './FilePicker.style';
 
 const CustomFilePicker = ({
   onFileUploadSuccess,
   availableExtensions,
   uploadMessage,
+  handleFileRemove,
 }) => {
-  const [fileName, setFileName] = useState(uploadMessage);
   const [errorMessage, setErrorMessage] = useState('');
+  const [fileName, setFileName] = useState(uploadMessage);
 
   const handleFileUploadSuccess = (file) => {
     setErrorMessage('');
     setFileName(file.name);
     onFileUploadSuccess(file);
+  };
+
+  const handleFileUploadRemove = () => {
+    if (handleFileRemove) handleFileRemove();
+    setFileName('');
   };
 
   return (
@@ -30,8 +38,18 @@ const CustomFilePicker = ({
             Browse
           </Button>
         </FilePicker>
-        <label className="uploaded-filename">{fileName}</label>
+        <label className="uploaded-filename">
+          {fileName || uploadMessage || 'Upload a file'}
+        </label>
+        <IconButton
+          size="small"
+          className="remove-upload-button"
+          onClick={handleFileUploadRemove}
+        >
+          <DeleteIcon />
+        </IconButton>
       </div>
+
       <label className="upload-error">{errorMessage}</label>
     </StyledCustomFilePicker>
   );

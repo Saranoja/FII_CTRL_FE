@@ -18,6 +18,7 @@ const ActionsSegment = ({
   assignmentId,
   assignmentText,
   assignmentTitle,
+  assignmentFileUrl,
   deadline,
   actions,
 }) => {
@@ -73,6 +74,8 @@ const ActionsSegment = ({
       <EditAssignmentDialog
         assignmentText={assignmentText}
         assignmentTitle={assignmentTitle}
+        assignmentDeadline={deadline}
+        assignmentFileUrl={assignmentFileUrl}
         isOpen={isEditDialogOpen}
         handleClose={() => setEditDialogOpen(false)}
         handleSave={handleAssignmentSaveEdit}

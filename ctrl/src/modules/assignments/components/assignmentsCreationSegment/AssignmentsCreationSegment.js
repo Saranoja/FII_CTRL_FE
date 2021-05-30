@@ -1,6 +1,6 @@
-import 'date-fns';
 import React, { useState } from 'react';
 import * as R from 'ramda';
+import 'date-fns';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withTeacher } from 'hocs';
@@ -36,7 +36,6 @@ const AssignmentsCreationSegment = ({
   actions,
   groups,
   current_file,
-  availableSubjects,
   subjects,
 }) => {
   const initialState = {
@@ -114,8 +113,6 @@ const AssignmentsCreationSegment = ({
         }),
       allGroups
     );
-
-    //TODO: subscribe to notification in order to refresh announcements
   };
 
   return (

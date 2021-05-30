@@ -31,6 +31,7 @@ const AssignmentSegment = ({
               assignmentId={assignmentId}
               assignmentText={description}
               assignmentTitle={title}
+              assignmentFileUrl={fileUrl}
               deadline={deadline}
             />
           </div>

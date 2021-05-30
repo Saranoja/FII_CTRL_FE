@@ -31,7 +31,6 @@ import {
 import StyledResources from './Resources.style';
 
 // TODO: split in separate components
-// TODO: clean inputs after sending request - add prop for this
 
 class Resources extends React.Component {
   constructor() {
@@ -135,6 +134,7 @@ class Resources extends React.Component {
                   onFileUploadSuccess={actions.loadResourcesForFile}
                   uploadMessage="Upload your .pdf course"
                   availableExtensions={['pdf']}
+                  handleFileRemove={actions.getResetSearch}
                 />
                 <Button
                   className="resource-submit-button"
