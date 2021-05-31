@@ -15,12 +15,12 @@ class AnnouncementsConsumer extends React.Component {
   };
 
   componentDidMount() {
-    const { socket, actions, groups } = this.props;
+    const { socket, actions, groups, currentUserId } = this.props;
     if (isBlank(socket)) return;
 
     actions.loadGroups().then((result) => {
       R.forEach((group) => {
-        socket.emit('join', { room: group.id });
+        socket.emit('join', { room: group.id, uid: currentUserId });
       }, R.path(['payload', 'data', 'current_user_groups'], result));
     });
 
@@ -43,6 +43,7 @@ class AnnouncementsConsumer extends React.Component {
 
 const mapStateToProps = (state) => ({
   groups: state.announcements.groups,
+  currentUserId: state.userManager.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

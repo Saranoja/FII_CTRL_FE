@@ -28,6 +28,7 @@ const AssignmentSegment = ({
             <Chip label={groupName} color="default" size="small" />
             <ActionsSegment
               authorId={authorId}
+              groupId={groupId}
               assignmentId={assignmentId}
               assignmentText={description}
               assignmentTitle={title}

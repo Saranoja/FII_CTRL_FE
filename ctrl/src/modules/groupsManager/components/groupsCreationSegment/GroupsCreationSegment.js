@@ -41,7 +41,8 @@ const GroupsCreationSegment = ({
   };
 
   const checkSubmit = () => {
-    if (name === '' || members.length === 0) return true;
+    if (name === '' || (members.length === 0 && teacherMembers.length === 0))
+      return true;
     return false;
   };
 

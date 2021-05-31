@@ -13,25 +13,8 @@ export const EVENT_TYPES = {
 export const DOMAINS = {
   ASSIGNMENTS: 'assignments',
   ANNOUNCEMENTS: 'announcements',
+  GROUPS: 'groups',
 };
-
-// export const postMessageGeneric = {
-//   error: 'Error when posting a new announcement in ',
-//   success: 'Successfully posted a new announcement in ',
-//   info: 'posted a new announcement in',
-// };
-
-// export const deleteMessageGeneric = {
-//   error: 'Error deleting announcement in ',
-//   success: 'Successfully deleted announcement in ',
-//   info: 'deleted an announcement in',
-// };
-
-// export const patchMessageGeneric = {
-//   error: 'Error updating announcement in ',
-//   success: 'Successfully updated announcement in ',
-//   info: 'updated an announcement in',
-// };
 
 export const generics = {
   postMessageGeneric: {
@@ -45,6 +28,11 @@ export const generics = {
       success: 'Successfully posted a new assignment in ',
       info: 'posted a new assignment in',
     },
+    [DOMAINS.GROUPS]: {
+      error: 'Error when creating a new group',
+      success: 'Successfully created new group',
+      info: 'added you to',
+    },
   },
   deleteMessageGeneric: {
     [DOMAINS.ANNOUNCEMENTS]: {
@@ -57,6 +45,11 @@ export const generics = {
       success: 'Successfully deleted assignment in ',
       info: 'deleted an assignment in',
     },
+    [DOMAINS.GROUPS]: {
+      error: 'Error deleting group ',
+      success: 'Successfully deleted group ',
+      info: 'deleted the group',
+    },
   },
   patchMessageGeneric: {
     [DOMAINS.ANNOUNCEMENTS]: {
@@ -68,6 +61,11 @@ export const generics = {
       error: 'Error updating assignment in ',
       success: 'Successfully updated assignment in ',
       info: 'updated an assignment in',
+    },
+    [DOMAINS.GROUPS]: {
+      error: 'Error updating info for group ',
+      success: 'Successfully updated info for group ',
+      info: 'updated info for the group',
     },
   },
 };

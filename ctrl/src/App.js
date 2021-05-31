@@ -12,6 +12,7 @@ import {
   SnackbarToast,
   AnnouncementsConsumer,
   AssignmentsConsumer,
+  GroupsConsumer,
 } from 'components';
 import SocketProvider from 'modules/socketProvider/SocketProvider';
 
@@ -31,6 +32,7 @@ const App = () => {
         <SocketProvider>
           <AnnouncementsConsumer />
           <AssignmentsConsumer />
+          <GroupsConsumer />
         </SocketProvider>
         <Router>
           <Header />

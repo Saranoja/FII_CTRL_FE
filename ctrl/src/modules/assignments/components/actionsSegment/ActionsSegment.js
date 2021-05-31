@@ -8,12 +8,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { localStorageManager, STORE_KEYS } from 'utils';
 import EditAssignmentDialog from './EditAssignmentDialog';
 import DeleteAssignmentDialog from './DeleteAssignmentDialog';
 import StyledActionsSegment from './ActionsSegment.style';
 
 const ActionsSegment = ({
+  groupId,
   authorId,
   assignmentId,
   assignmentText,
@@ -25,10 +25,6 @@ const ActionsSegment = ({
   const [isEditDialogOpen, setEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  const getCurrentGroup = () => {
-    return localStorageManager.get(STORE_KEYS.LAST_VISITED_GROUP);
-  };
-
   const handleEditClick = () => {
     setEditDialogOpen(true);
   };
@@ -39,16 +35,12 @@ const ActionsSegment = ({
 
   const handleAssignmentSaveEdit = (newAssignmentData) => {
     setEditDialogOpen(false);
-    actions.patchAssignment(
-      getCurrentGroup().id,
-      assignmentId,
-      newAssignmentData
-    );
+    actions.patchAssignment(groupId, assignmentId, newAssignmentData);
   };
 
   const handleAssignmentDeletion = () => {
     setDeleteDialogOpen(false);
-    actions.deleteAssignment(getCurrentGroup().id, assignmentId);
+    actions.deleteAssignment(groupId, assignmentId);
   };
 
   return (
