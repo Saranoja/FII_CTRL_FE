@@ -85,8 +85,8 @@ export const PUT = (url, data, headers = {}, ...options) =>
 export const PATCH = (url, data, headers = {}, ...options) =>
   RequestFactory('patch', url, headers, data, null, ...options);
 
-export const DELETE = (url, headers = {}, ...options) =>
-  RequestFactory('delete', url, headers, null, null, ...options);
+export const DELETE = (url, data, headers = {}, ...options) =>
+  RequestFactory('delete', url, headers, data, null, ...options);
 
 export const configureRefreshInterceptor = (signOut) => {
   axios.interceptors.response.use(

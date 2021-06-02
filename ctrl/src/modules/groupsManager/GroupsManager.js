@@ -21,20 +21,39 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { deleteGroup } from 'modules/groupsManager/actions';
+import {
+  deleteGroup,
+  patchGroup,
+  putMembers,
+  deleteMembers,
+  getMembers,
+} from 'modules/groupsManager/actions';
 
 import GroupsCreationSegment from './components/groupsCreationSegment';
 import StyledGroupsManager from './GroupsManager.style';
 import { LinearProgress, Typography } from '@material-ui/core';
 import DeleteGroupDialog from './components/DeleteGroupDialog';
+import UploadGroupAvatarDialog from './components/UploadGroupAvatarDialog';
+import MembersEditDialog from './components/MembersEditDialog';
 
-const GroupsManager = ({ groups, areGroupsLoading, actions }) => {
+const GroupsManager = ({
+  groups,
+  areGroupsLoading,
+  currentGroupMembers,
+  actions,
+  studentsList,
+  teachersList,
+  isLoading,
+}) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [isAvatarUploadDialogOpen, setAvatarUploadDialogOpen] = useState(false);
+  const [isMembersEditDialogOpen, setMembersEditDialogOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
 
-  const handleClick = (event) => {
+  const handleClick = (event, element) => {
     setAnchorEl(event.currentTarget);
+    setSelectedGroupId(element.id);
   };
 
   const handleClose = () => {
@@ -44,6 +63,16 @@ const GroupsManager = ({ groups, areGroupsLoading, actions }) => {
   const handleGroupDeletion = () => {
     setDeleteDialogOpen(false);
     actions.deleteGroup(selectedGroupId);
+  };
+
+  const handleAvatarUpload = (newGroupAvatar) => {
+    setAvatarUploadDialogOpen(false);
+    actions.patchGroup(selectedGroupId, newGroupAvatar);
+  };
+
+  const handleMembersEdit = async () => {
+    await actions.getMembers(selectedGroupId);
+    setMembersEditDialogOpen(true);
   };
 
   return (
@@ -82,32 +111,12 @@ const GroupsManager = ({ groups, areGroupsLoading, actions }) => {
                           <IconButton
                             edge="end"
                             aria-label="edit"
-                            onClick={handleClick}
+                            onClick={(e) => handleClick(e, element)}
                           >
                             <EditIcon />
                           </IconButton>
                         </Tooltip>
-                        <Menu
-                          id="simple-menu"
-                          anchorEl={anchorEl}
-                          keepMounted
-                          open={Boolean(anchorEl)}
-                          onClose={handleClose}
-                          elevation={2}
-                        >
-                          <MenuItem onClick={handleClose}>
-                            <ListItemIcon>
-                              <PhotoCameraIcon size="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Update group picture" />
-                          </MenuItem>
-                          <MenuItem onClick={handleClose}>
-                            <ListItemIcon>
-                              <GroupAddIcon size="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Manage group members" />
-                          </MenuItem>
-                        </Menu>
+
                         <Tooltip title="Delete group">
                           <IconButton
                             edge="end"
@@ -120,6 +129,39 @@ const GroupsManager = ({ groups, areGroupsLoading, actions }) => {
                             <DeleteIcon />
                           </IconButton>
                         </Tooltip>
+
+                        <Menu
+                          id="simple-menu"
+                          anchorEl={anchorEl}
+                          keepMounted
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                          elevation={2}
+                        >
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              setAvatarUploadDialogOpen(true);
+                            }}
+                          >
+                            <ListItemIcon>
+                              <PhotoCameraIcon size="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Update group picture" />
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              handleClose();
+                              setMembersEditDialogOpen(true);
+                              handleMembersEdit();
+                            }}
+                          >
+                            <ListItemIcon>
+                              <GroupAddIcon size="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Manage group members" />
+                          </MenuItem>
+                        </Menu>
                       </ListItemSecondaryAction>
                     </ListItem>
                   ),
@@ -135,6 +177,26 @@ const GroupsManager = ({ groups, areGroupsLoading, actions }) => {
           handleClose={() => setDeleteDialogOpen(false)}
           handleDelete={handleGroupDeletion}
         />
+        <UploadGroupAvatarDialog
+          isOpen={isAvatarUploadDialogOpen}
+          handleClose={() => setAvatarUploadDialogOpen(false)}
+          handleSubmit={(newGroupAvatar) => handleAvatarUpload(newGroupAvatar)}
+        />
+        <MembersEditDialog
+          isOpen={isMembersEditDialogOpen}
+          handleClose={() => setMembersEditDialogOpen(false)}
+          handleDelete={(toDelete) => {
+            if (toDelete.id.length > 0)
+              actions.deleteMembers(selectedGroupId, toDelete);
+          }}
+          handleAdd={(toAdd) => {
+            if (toAdd.id.length > 0) actions.putMembers(selectedGroupId, toAdd);
+          }}
+          currentMembers={currentGroupMembers}
+          studentsList={studentsList}
+          teachersList={teachersList}
+          isLoading={isLoading}
+        />
       </StyledGroupsManager>
     </Layout>
   );
@@ -143,12 +205,20 @@ const GroupsManager = ({ groups, areGroupsLoading, actions }) => {
 const mapStateToProps = (state) => ({
   groups: state.announcements.groups,
   areGroupsLoading: state.announcements.isLoading,
+  currentGroupMembers: state.groups.currentGroupMembers,
+  studentsList: state.usersService.studentsList,
+  teachersList: state.usersService.teachersList,
+  isLoading: state.groups.isLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
       deleteGroup,
+      patchGroup,
+      putMembers,
+      deleteMembers,
+      getMembers,
     },
     dispatch
   ),

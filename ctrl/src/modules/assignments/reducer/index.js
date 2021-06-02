@@ -8,7 +8,7 @@ import {
   extractSubjectsFromPayloadData,
 } from './helpers';
 
-const fileUploaToBucketdHandler = [
+const fileUploadToBucketdHandler = [
   uploadFile,
   (state, action) => {
     const { ready, error } = action;
@@ -95,7 +95,7 @@ const reducer = handleActions(
   new Map([
     assignmentsRetrievalHandler,
     assignmentsPostHandler,
-    fileUploaToBucketdHandler,
+    fileUploadToBucketdHandler,
   ]),
   R.clone(initialState)
 );

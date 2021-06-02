@@ -1,4 +1,12 @@
-import { POST, PATCH, DELETE, createHeaderWithToken } from 'config/http';
+import {
+  GET,
+  POST,
+  PUT,
+  PATCH,
+  DELETE,
+  createHeaderWithToken,
+  createFormDataHeaderWithToken,
+} from 'config/http';
 import { createPrefixedAction } from '../config';
 import userManager from 'modules/userManager';
 
@@ -9,12 +17,33 @@ export const removeGroup = createPrefixedAction(actionTypes.DELETE_GROUP);
 export const updateGroup = createPrefixedAction(actionTypes.PATCH_GROUP);
 export const addMembers = createPrefixedAction(actionTypes.ADD_MEMBERS);
 export const removeMembers = createPrefixedAction(actionTypes.DELETE_MEMBERS);
+export const retrieveMembers = createPrefixedAction(actionTypes.GET_MEMBERS);
+export const uploadAvatar = createPrefixedAction(actionTypes.UPLOAD_AVATAR);
 
-export const postMembers = (groupId, membersListObject) => (dispatch) => {
+export const uploadAvatarToBucket = (file) => (dispatch) => {
+  const header = createFormDataHeaderWithToken();
+  var formData = new FormData();
+  formData.append('file', file);
+  return dispatch(
+    uploadAvatar(
+      POST(`${userManager.config.files}?dir=avatars`, formData, header)
+    )
+  );
+};
+
+export const getMembers = (groupId) => (dispatch) => {
+  const header = createHeaderWithToken();
+  return dispatch(
+    retrieveMembers(
+      GET(`${userManager.config.groups}/${groupId}/members`, {}, header)
+    )
+  );
+};
+export const putMembers = (groupId, membersListObject) => (dispatch) => {
   const header = createHeaderWithToken();
   dispatch(
     addMembers(
-      POST(
+      PUT(
         `${userManager.config.groups}/${groupId}/members`,
         membersListObject,
         header
@@ -54,7 +83,7 @@ export const patchGroup = (groupId, newGroupData = {}) => (dispatch) => {
   const header = createHeaderWithToken();
   dispatch(
     updateGroup(
-      PATCH(`${userManager.config.groups}/?id=${groupId}`, newGroupData, header)
+      PATCH(`${userManager.config.groups}?id=${groupId}`, newGroupData, header)
     )
   );
 };

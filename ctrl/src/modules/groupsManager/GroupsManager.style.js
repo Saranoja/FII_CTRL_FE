@@ -4,7 +4,7 @@ import { Paper } from '@material-ui/core';
 const StyledGroupsManager = styled(Paper)`
   ${({ theme }) => `
     padding: ${theme.spacing(2)}px;
-    min-height: 80vh;
+    min-height: 60vh;
 
     .header-wrapper {
       margin-bottom: ${theme.spacing(3)}px;

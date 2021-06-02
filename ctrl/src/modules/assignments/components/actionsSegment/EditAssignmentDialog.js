@@ -124,17 +124,15 @@ const EditAssignmentDialog = ({
             style={{ marginBottom: '16px' }}
           />
         </MuiPickersUtilsProvider>
-        <div className="file-manager-wrapper" style={{ display: 'flex' }}>
-          <FilePicker
-            onFileUploadSuccess={(file) => {
-              actions.loadResourcesForFile(file);
-              setWasFileUploaded(true);
-            }}
-            availableExtensions={null}
-            uploadMessage={uploadedFileName}
-            handleFileRemove={handleFileRemove}
-          />
-        </div>
+        <FilePicker
+          onFileUploadSuccess={(file) => {
+            actions.loadResourcesForFile(file);
+            setWasFileUploaded(true);
+          }}
+          availableExtensions={null}
+          uploadMessage={uploadedFileName}
+          handleFileRemove={handleFileRemove}
+        />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleDialogClose} color="primary">
