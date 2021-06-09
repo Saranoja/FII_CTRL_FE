@@ -14,6 +14,7 @@ export const DOMAINS = {
   ASSIGNMENTS: 'assignments',
   ANNOUNCEMENTS: 'announcements',
   GROUPS: 'groups',
+  MEETINGS: 'meetings',
 };
 
 export const generics = {
@@ -33,6 +34,11 @@ export const generics = {
       success: 'Successfully created new group',
       info: 'added you to',
     },
+    [DOMAINS.MEETINGS]: {
+      error: 'Error when posting a new meeting for',
+      success: 'Successfully created new meeting for',
+      info: 'added you to a meeting for',
+    },
   },
   deleteMessageGeneric: {
     [DOMAINS.ANNOUNCEMENTS]: {
@@ -50,6 +56,11 @@ export const generics = {
       success: 'Successfully deleted group ',
       info: 'deleted the group',
     },
+    [DOMAINS.MEETINGS]: {
+      error: 'Error when deleting meeting for',
+      success: 'Successfully deleted meeting of',
+      info: 'deleted a meeting of',
+    },
   },
   patchMessageGeneric: {
     [DOMAINS.ANNOUNCEMENTS]: {
@@ -66,6 +77,11 @@ export const generics = {
       error: 'Error updating info for group ',
       success: 'Successfully updated info for group ',
       info: 'updated info for the group',
+    },
+    [DOMAINS.MEETINGS]: {
+      error: 'Error when updating the meeting info for',
+      success: 'Successfully updated meeting data for',
+      info: 'updated the deetails of a meeting for',
     },
   },
 };

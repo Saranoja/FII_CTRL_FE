@@ -1,4 +1,6 @@
 import * as R from 'ramda';
+import * as moment from 'moment';
+import { timeFormat } from 'utils';
 
 const compareDates = (assignment1, assignment2) =>
   new Date(assignment2.created_at) - new Date(assignment1.created_at);
@@ -9,8 +11,12 @@ export const transformAssignmentsPayloadData = (payload) => {
   R.forEach((assignment) => {
     const updatedDate = {
       ...assignment,
-      created_at: assignment.created_at.slice(0, -7),
-      deadline: assignment.deadline.slice(0, -7),
+      created_at: String(
+        moment(new Date(assignment.created_at)).format(timeFormat)
+      ),
+      deadline: String(
+        moment(new Date(assignment.deadline)).format(timeFormat)
+      ),
     };
     transformedPayload.push(updatedDate);
   }, payload);

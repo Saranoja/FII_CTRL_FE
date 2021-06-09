@@ -1,6 +1,8 @@
 import images from 'assets/images/cards';
 import routePaths from 'routes/routePaths';
 
+//TODO: check if these are still valid
+
 export const studentCardsInfo = [
   {
     id: 1,
@@ -23,20 +25,20 @@ export const studentCardsInfo = [
     description: 'Get resources for your courses',
     route: routePaths.RESOURCES,
   },
-  {
-    id: 4,
-    image: images.group,
-    title: 'Group',
-    description: "Your group's channels",
-    route: routePaths.CHANNEL,
-  },
-  {
-    id: 5,
-    image: images.courses,
-    title: 'Courses',
-    description: 'Find courses pages and lecture notes',
-    route: routePaths.COURSES,
-  },
+  // {
+  //   id: 4,
+  //   image: images.group,
+  //   title: 'Group',
+  //   description: "Your group's channels",
+  //   route: routePaths.CHANNEL,
+  // },
+  // {
+  //   id: 5,
+  //   image: images.courses,
+  //   title: 'Courses',
+  //   description: 'Find courses pages and lecture notes',
+  //   route: routePaths.COURSES,
+  // },
   {
     id: 6,
     image: images.assignments,
@@ -47,13 +49,13 @@ export const studentCardsInfo = [
 ];
 
 export const teacherCardsInfo = [
-  {
-    id: 1,
-    image: images.postResources,
-    title: 'Courses',
-    description: 'Post resources for your courses',
-    route: routePaths.COURSES,
-  },
+  // {
+  //   id: 1,
+  //   image: images.postResources,
+  //   title: 'Courses',
+  //   description: 'Post resources for your courses',
+  //   route: routePaths.COURSES,
+  // },
   {
     id: 2,
     image: images.postAnnouncement,
@@ -83,11 +85,11 @@ export const teacherCardsInfo = [
     description: 'Post or edit an assignment',
     route: routePaths.ASSIGNMENTS,
   },
-  {
-    id: 6,
-    image: images.notes,
-    title: 'Notes',
-    description: 'Write some notes down',
-    route: routePaths.NOTES,
-  },
+  // {
+  //   id: 6,
+  //   image: images.notes,
+  //   title: 'Notes',
+  //   description: 'Write some notes down',
+  //   route: routePaths.NOTES,
+  // },
 ];

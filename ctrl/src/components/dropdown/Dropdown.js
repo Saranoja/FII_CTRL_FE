@@ -8,6 +8,7 @@ const CustomDropdown = ({
   options,
   placeholder,
   actionOnChange,
+  disabled = false,
   className,
 }) => {
   const [currentValue, setCurrentValue] = useState('');
@@ -24,6 +25,7 @@ const CustomDropdown = ({
         onChange={handleOnChange}
         className={className}
         value={currentValue}
+        disabled={disabled}
       >
         {R.map(
           (element) => (
@@ -31,7 +33,7 @@ const CustomDropdown = ({
               {element.text}
             </MenuItem>
           ),
-          options,
+          options
         )}
       </Select>
     </FormControl>

@@ -13,6 +13,7 @@ import {
   AnnouncementsConsumer,
   AssignmentsConsumer,
   GroupsConsumer,
+  MeetingsConsumer,
 } from 'components';
 import SocketProvider from 'modules/socketProvider/SocketProvider';
 
@@ -33,6 +34,7 @@ const App = () => {
           <AnnouncementsConsumer />
           <AssignmentsConsumer />
           <GroupsConsumer />
+          <MeetingsConsumer />
         </SocketProvider>
         <Router>
           <Header />

@@ -47,11 +47,11 @@ const GroupsCreationSegment = ({
   };
 
   const handleClose = () => {
+    setOpen(false);
     setName('');
     setMembers([]);
     setSelectedGroups([]);
     setTeacherMembers([]);
-    setOpen(false);
   };
 
   const handleNameChange = (event) => {

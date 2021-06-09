@@ -8,6 +8,7 @@ import profile from 'modules/profile/reducer';
 import usersService from 'modules/usersService/reducer';
 import assignments from 'modules/assignments/reducer';
 import groups from 'modules/groupsManager/reducer';
+import meetings from 'modules/meetings/reducer';
 
 export const REDUCER_KEYS = {
   userManager: 'userManager',
@@ -18,6 +19,7 @@ export const REDUCER_KEYS = {
   usersService: 'usersService',
   assignments: 'assignments',
   groups: 'groups',
+  meetings: 'meetings',
 };
 
 export const rootReducers = {
@@ -29,6 +31,7 @@ export const rootReducers = {
   [REDUCER_KEYS.usersService]: usersService,
   [REDUCER_KEYS.assignments]: assignments,
   [REDUCER_KEYS.groups]: groups,
+  [REDUCER_KEYS.meetings]: meetings,
 };
 
 const createReducer = (asyncReducers) =>

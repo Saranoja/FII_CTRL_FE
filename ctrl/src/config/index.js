@@ -19,5 +19,6 @@ export default {
     students: `${BASE}/students`,
     assignments: `${BASE}/assignments`,
     files: `${BASE}/files`,
+    meetings: `${BASE}/meetings`,
   },
 };

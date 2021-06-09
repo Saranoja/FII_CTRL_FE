@@ -7,7 +7,7 @@ import Announcements from 'modules/announcements';
 import GroupsManager from 'modules/groupsManager';
 // import Courses from 'modules/courses';
 import Assignments from 'modules/assignments';
-// import Meetings from 'modules/meetings';
+import Meetings from 'modules/meetings';
 // import Groups from 'modules/groups';
 // import Notes from 'modules/notes';
 import Profile from 'modules/profile';
@@ -77,12 +77,12 @@ export const privateRoutes = [
     component: GroupsManager,
     title: 'Groups Manager',
   },
-  // {
-  //     id: 'meetings',
-  //     path: routePaths.MEETINGS,
-  //     component: Meetings,
-  //     title: 'Meetings',
-  // },
+  {
+    id: 'meetings',
+    path: routePaths.MEETINGS,
+    component: Meetings,
+    title: 'Meetings',
+  },
   // {
   //     id: 'groups',
   //     path: routePaths.GROUPS,

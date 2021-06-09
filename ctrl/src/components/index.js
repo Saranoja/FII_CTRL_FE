@@ -13,5 +13,6 @@ export { default as SnackbarToast } from './snackbarToast';
 export { default as AnnouncementsConsumer } from './announcementsConsumer';
 export { default as AssignmentsConsumer } from './assignmentsConsumer';
 export { default as GroupsConsumer } from './groupsConsumer';
+export { default as MeetingsConsumer } from './meetingsConsumer';
 export { default as ProfilePage } from './profilePage';
 export { default as TeachersPage } from './teachersPage';

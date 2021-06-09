@@ -76,3 +76,5 @@ export const isStatus = (status, error) =>
 export const openLinkInNewTab = (url) => {
   window.open(url, '_blank');
 };
+
+export const timeFormat = 'LLLL';
