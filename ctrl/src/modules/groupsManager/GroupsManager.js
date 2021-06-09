@@ -3,6 +3,7 @@ import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Layout } from 'components';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -20,6 +21,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import EditIcon from '@material-ui/icons/Edit';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import {
   deleteGroup,
@@ -44,6 +46,7 @@ const GroupsManager = ({
   studentsList,
   teachersList,
   isLoading,
+  width,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -113,22 +116,28 @@ const GroupsManager = ({
                             aria-label="edit"
                             onClick={(e) => handleClick(e, element)}
                           >
-                            <EditIcon />
+                            {isWidthUp('sm', width) ? (
+                              <EditIcon />
+                            ) : (
+                              <SettingsIcon />
+                            )}
                           </IconButton>
                         </Tooltip>
 
-                        <Tooltip title="Delete group">
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => {
-                              setSelectedGroupId(element.id);
-                              setDeleteDialogOpen(true);
-                            }}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </Tooltip>
+                        {isWidthUp('sm', width) && (
+                          <Tooltip title="Delete group">
+                            <IconButton
+                              edge="end"
+                              aria-label="delete"
+                              onClick={() => {
+                                setSelectedGroupId(element.id);
+                                setDeleteDialogOpen(true);
+                              }}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Tooltip>
+                        )}
 
                         <Menu
                           id="simple-menu"
@@ -161,6 +170,21 @@ const GroupsManager = ({
                             </ListItemIcon>
                             <ListItemText primary="Manage group members" />
                           </MenuItem>
+
+                          {!isWidthUp('sm', width) && (
+                            <MenuItem
+                              onClick={() => {
+                                handleClose();
+                                setSelectedGroupId(element.id);
+                                setDeleteDialogOpen(true);
+                              }}
+                            >
+                              <ListItemIcon>
+                                <DeleteIcon size="small" />
+                              </ListItemIcon>
+                              <ListItemText primary="Delete this group" />
+                            </MenuItem>
+                          )}
                         </Menu>
                       </ListItemSecondaryAction>
                     </ListItem>
@@ -224,4 +248,7 @@ const mapDispatchToProps = (dispatch) => ({
   ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupsManager);
+export default R.compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withWidth()
+)(GroupsManager);
