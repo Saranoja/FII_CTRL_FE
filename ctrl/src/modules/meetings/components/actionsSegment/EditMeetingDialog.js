@@ -4,59 +4,75 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { uploadFileToBucket } from 'modules/assignments/actions';
 import { loadResourcesForFile } from 'modules/resources/actions';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DateFnsUtils from '@date-io/date-fns';
-import { FilePicker } from 'components';
+import { recurrenceIntervals, intervalsMap } from 'modules/meetings/constants';
 import { getResetState } from 'modules/resources/actions';
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
-
-// TODO: ....
 
 const EditMeetingDialog = ({
   meetingTitle,
   meetingTimestamp,
   meetingUrl,
   meetingRecurrence,
+  isMeetingRecurrent,
   isOpen,
   handleClose,
   handleSave,
   actions,
 }) => {
   const [titleValue, setTitleValue] = useState(meetingTitle);
-  const [textValue, setTextValue] = useState(meetingUrl);
-  const [selectedDeadline, setSelectedDeadline] = useState(meetingTimestamp);
-  const [wasFileUploaded, setWasFileUploaded] = useState(false);
+  const [urlValue, setUrlValue] = useState(meetingUrl);
+  const [recurrenceValue, setRecurrenceValue] = useState(
+    intervalsMap[meetingRecurrence] || ''
+  );
+  const [isRecurrent, setRecurrent] = useState(isMeetingRecurrent);
+  const [selectedTimsetamp, setSelectedTimestamp] = useState(meetingTimestamp);
 
   const handleTitleChange = (event) => {
     setTitleValue(event.target.value);
   };
 
   const handleTextChange = (event) => {
-    setTextValue(event.target.value);
+    setUrlValue(event.target.value);
   };
 
   const handleDateChange = (date) => {
-    setSelectedDeadline(date);
-  };
-
-  const handleFileRemove = (event) => {
-    setWasFileUploaded(false);
-    actions.getResetState();
+    setSelectedTimestamp(date);
   };
 
   const handleDialogClose = () => {
     handleClose();
     setTitleValue(meetingTitle);
-    setSelectedDeadline(meetingTimestamp);
-    actions.getResetState();
+    setSelectedTimestamp(meetingTimestamp);
+    setRecurrent(isMeetingRecurrent);
+    setSelectedTimestamp(meetingTimestamp);
+    setRecurrenceValue(intervalsMap[meetingRecurrence] || '');
   };
 
-  const handleDialogSave = async () => {};
+  const handleDialogSave = async () => {
+    const meetingData = {
+      title: titleValue,
+      url: urlValue,
+      recurrent: isRecurrent,
+      recurrence_interval: recurrenceValue.length > 0 ? recurrenceValue : null,
+      timestamp: selectedTimsetamp,
+    };
+
+    handleSave(meetingData);
+    handleClose();
+  };
 
   return (
     <Dialog
@@ -64,10 +80,10 @@ const EditMeetingDialog = ({
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Edit your assignment</DialogTitle>
+      <DialogTitle id="form-dialog-title">Edit meeting details</DialogTitle>
       <DialogContent>
         <TextField
-          color="primary"
+          color="secondary"
           autoFocus
           variant="outlined"
           id="name"
@@ -79,46 +95,69 @@ const EditMeetingDialog = ({
           style={{ marginBottom: '16px' }}
         />
         <TextField
-          color="primary"
+          color="secondary"
           variant="outlined"
-          id="standard-multiline-static"
-          multiline
-          rows={3}
-          label="Description"
+          label="Url"
           type="text"
-          value={textValue}
+          value={urlValue}
           onChange={handleTextChange}
           fullWidth
           style={{ marginBottom: '16px' }}
         />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={isRecurrent}
+              onChange={(e) => setRecurrent(e.target.checked)}
+              name="isRecurrent"
+              color="secondary"
+            />
+          }
+          label="Meeting is recurrent"
+          style={{ marginBottom: '16px' }}
+        />
+        <FormControl
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          style={{ marginBottom: '16px' }}
+        >
+          <InputLabel id="interval-label">Recurrence Interval</InputLabel>
+          <Select
+            onChange={(e) => setRecurrenceValue(e.target.value)}
+            value={recurrenceValue}
+            disabled={!isRecurrent}
+            label="Recurrence Interval"
+          >
+            {R.map(
+              (element) => (
+                <MenuItem key={element.key} value={element.value}>
+                  {element.text}
+                </MenuItem>
+              ),
+              recurrenceIntervals
+            )}
+          </Select>
+        </FormControl>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <DateTimePicker
             autoOk
-            label="Deadline"
+            label="Timestamp"
             variant="inline"
             inputVariant="outlined"
-            value={selectedDeadline}
+            value={selectedTimsetamp}
             onChange={handleDateChange}
             format="dd/MM/yyyy hh:mm a"
             disablePast
             style={{ marginBottom: '16px' }}
           />
         </MuiPickersUtilsProvider>
-        {/* <FilePicker
-          onFileUploadSuccess={(file) => {
-            actions.loadResourcesForFile(file);
-            setWasFileUploaded(true);
-          }}
-          availableExtensions={null}
-          uploadMessage={uploadedFileName}
-          handleFileRemove={handleFileRemove}
-        /> */}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleDialogClose} color="primary">
+        <Button onClick={handleDialogClose} color="secondary">
           Cancel
         </Button>
-        <Button onClick={handleDialogSave} color="primary">
+        <Button onClick={handleDialogSave} color="secondary">
           Save
         </Button>
       </DialogActions>

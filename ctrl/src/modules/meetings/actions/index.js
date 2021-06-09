@@ -37,7 +37,7 @@ export const patchMeeting = (meetingId, newMeetingData = {}) => (dispatch) => {
   dispatch(
     updateMeeting(
       PATCH(
-        `${userManager.config.groups}?id=${meetingId}`,
+        `${userManager.config.meetings}?id=${meetingId}`,
         newMeetingData,
         header
       )

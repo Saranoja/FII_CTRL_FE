@@ -1,9 +1,11 @@
 import React from 'react';
 import { Typography, Link, Chip } from '@material-ui/core';
-// import ActionsSegment from 'modules/meetings/components/actionsSegment';
+import ActionsSegment from 'modules/meetings/components/actionsSegment';
+import { recurrenceToTimeMap } from 'modules/meetings/constants';
 import StyledMeetingSegment from './MeetingDetailsSegment.style';
 
 const MeetingDetailsSegment = ({
+  id,
   title,
   url,
   groupName,
@@ -12,17 +14,9 @@ const MeetingDetailsSegment = ({
   timestamp,
   isJoiningPermitted,
   nextOccurrence,
-  id,
   author,
   authorId,
 }) => {
-  const recurrenceToTimeMap = {
-    '1 day': 'Daily',
-    '7 days': 'Weekly',
-    '14 days': 'Every 2 weeks',
-    '30 days': 'Monthly',
-  };
-
   return (
     <StyledMeetingSegment>
       <div className="meeting-container">
@@ -32,15 +26,15 @@ const MeetingDetailsSegment = ({
           </Typography>
           <div className="info-wrapper">
             <Chip label={groupName} color="default" size="small" />
-            {/* <ActionsSegment
+            <ActionsSegment
               authorId={authorId}
-              groupId={groupId}
-              assignmentId={assignmentId}
-              assignmentText={description}
-              assignmentTitle={title}
-              assignmentFileUrl={fileUrl}
-              deadline={deadline}
-            /> */}
+              meetingId={id}
+              meetingTitle={title}
+              meetingUrl={url}
+              timestamp={timestamp}
+              recurrenceInterval={recurrenceInterval}
+              isRecurrent={isRecurrent}
+            />
           </div>
         </div>
         <Typography variant="subtitle1" className="meeting-title">
@@ -54,9 +48,7 @@ const MeetingDetailsSegment = ({
         <div className="actions-info-wrapper">
           <Typography variant="overline" color="textSecondary">
             {isRecurrent
-              ? `Recurrent, ${
-                  recurrenceToTimeMap[recurrenceInterval.slice(0, -9)]
-                }`
+              ? `Recurrent, ${recurrenceToTimeMap[recurrenceInterval]}`
               : null}
           </Typography>
         </div>

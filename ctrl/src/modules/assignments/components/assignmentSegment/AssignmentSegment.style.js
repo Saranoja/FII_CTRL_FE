@@ -13,15 +13,25 @@ const StyledAssignmentSegment = styled.div`
 
     .assignment-header-wrapper {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
 
-      .info-wrapper {
+      ${theme.breakpoints.up('sm')} {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+      }
+
+      .info-wrapper {
+        display: block;
+
+        
+        ${theme.breakpoints.up('sm')} {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-around;
+        }
       }
     }
 

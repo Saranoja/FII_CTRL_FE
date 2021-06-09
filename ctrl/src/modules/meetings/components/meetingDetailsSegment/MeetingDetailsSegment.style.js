@@ -15,12 +15,12 @@ const StyledMeetingSegment = styled.div`
       display: flex;
       flex-direction: column;
 
-        ${theme.breakpoints.up('sm')} {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-        }
+      ${theme.breakpoints.up('sm')} {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
 
       .info-wrapper {
         display: block;

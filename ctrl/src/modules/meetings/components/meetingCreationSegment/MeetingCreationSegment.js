@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { withTeacher } from 'hocs';
 import { postMeeting } from 'modules/meetings/actions';
 
+import { recurrenceIntervals } from 'modules/meetings/constants';
+
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, DateTimePicker } from '@material-ui/pickers';
 
@@ -34,29 +36,6 @@ const MeetingCreationSegment = ({ actions, groups }) => {
     group: groups[0] || null,
     timestamp: new Date(),
   };
-
-  const dropdownOptions = [
-    {
-      key: 1,
-      value: '1 day',
-      text: 'Daily',
-    },
-    {
-      key: 7,
-      value: '1 week',
-      text: 'Weekly',
-    },
-    {
-      key: 14,
-      value: '2 weeks',
-      text: 'Every 2 weeks',
-    },
-    {
-      key: 30,
-      value: '1 month',
-      text: 'Monthly',
-    },
-  ];
 
   const [meetingState, setMeetingState] = useState(initialMeetingState);
 
@@ -180,7 +159,7 @@ const MeetingCreationSegment = ({ actions, groups }) => {
                     {element.text}
                   </MenuItem>
                 ),
-                dropdownOptions
+                recurrenceIntervals
               )}
             </Select>
           </FormControl>

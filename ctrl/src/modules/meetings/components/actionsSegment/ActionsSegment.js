@@ -3,25 +3,23 @@ import * as R from 'ramda';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withAuthor } from 'hocs';
-import { patchAssignment, deleteAssignment } from 'modules/assignments/actions';
+import { patchMeeting, deleteMeeting } from 'modules/meetings/actions';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditAssignmentDialog from './EditMeetingDialog';
-import DeleteAssignmentDialog from './DeleteMeetingDialog';
+import EditMeetingDialog from './EditMeetingDialog';
+import DeleteMeetingDialog from './DeleteMeetingDialog';
 import StyledActionsSegment from './ActionsSegment.style';
 
-// TODO: ...
-
 const ActionsSegment = ({
-  groupId,
   authorId,
-  assignmentId,
-  assignmentText,
-  assignmentTitle,
-  assignmentFileUrl,
-  deadline,
+  meetingId,
+  meetingTitle,
+  meetingUrl,
+  timestamp,
+  isRecurrent,
+  recurrenceInterval,
   actions,
 }) => {
   const [isEditDialogOpen, setEditDialogOpen] = useState(false);
@@ -35,14 +33,14 @@ const ActionsSegment = ({
     setDeleteDialogOpen(true);
   };
 
-  const handleAssignmentSaveEdit = (newAssignmentData) => {
+  const handleMeetingSaveEdit = (newMeetingData) => {
     setEditDialogOpen(false);
-    actions.patchAssignment(groupId, assignmentId, newAssignmentData);
+    actions.patchMeeting(meetingId, newMeetingData);
   };
 
-  const handleAssignmentDeletion = () => {
+  const handleMeetingDeletion = () => {
     setDeleteDialogOpen(false);
-    actions.deleteAssignment(groupId, assignmentId);
+    actions.deleteMeeting(meetingId);
   };
 
   return (
@@ -50,7 +48,7 @@ const ActionsSegment = ({
       <Tooltip title="Edit">
         <IconButton
           size="small"
-          className="edit-assignment-button"
+          className="edit-meeting-button"
           onClick={handleEditClick}
         >
           <EditIcon />
@@ -59,25 +57,26 @@ const ActionsSegment = ({
       <Tooltip title="Delete">
         <IconButton
           size="small"
-          className="remove-assignment-button"
+          className="remove-meeting-button"
           onClick={handleDeleteClick}
         >
           <DeleteIcon />
         </IconButton>
       </Tooltip>
-      <EditAssignmentDialog
-        assignmentText={assignmentText}
-        assignmentTitle={assignmentTitle}
-        assignmentDeadline={deadline}
-        assignmentFileUrl={assignmentFileUrl}
+      <EditMeetingDialog
+        meetingTitle={meetingTitle}
+        meetingTimestamp={timestamp}
+        meetingUrl={meetingUrl}
+        isMeetingRecurrent={isRecurrent}
+        meetingRecurrence={recurrenceInterval}
         isOpen={isEditDialogOpen}
         handleClose={() => setEditDialogOpen(false)}
-        handleSave={handleAssignmentSaveEdit}
+        handleSave={handleMeetingSaveEdit}
       />
-      <DeleteAssignmentDialog
+      <DeleteMeetingDialog
         isOpen={isDeleteDialogOpen}
         handleClose={() => setDeleteDialogOpen(false)}
-        handleDelete={handleAssignmentDeletion}
+        handleDelete={handleMeetingDeletion}
       />
     </StyledActionsSegment>
   );
@@ -88,8 +87,8 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
-      patchAssignment,
-      deleteAssignment,
+      patchMeeting,
+      deleteMeeting,
     },
     dispatch
   ),
