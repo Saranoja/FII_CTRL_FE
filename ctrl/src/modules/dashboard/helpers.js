@@ -15,7 +15,7 @@ export const studentCardsInfo = [
     id: 2,
     image: images.team,
     title: 'Meetings',
-    description: 'Check your meetings calendar',
+    description: 'Check your upcoming meetings',
     route: routePaths.MEETINGS,
   },
   {
@@ -75,7 +75,7 @@ export const teacherCardsInfo = [
     id: 4,
     image: images.meetings,
     title: 'Meetings',
-    description: 'Post or edit a meeting',
+    description: 'Post or edit a meeting of yours',
     route: routePaths.MEETINGS,
   },
   {

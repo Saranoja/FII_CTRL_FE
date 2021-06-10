@@ -125,6 +125,7 @@ const GroupsCreationSegment = ({
             style={{ marginBottom: '16px' }}
           />
           <Autocomplete
+            limitTags={8}
             value={selectedGroups}
             onChange={(event, newGroup, reason, element) => {
               setSelectedGroups(newGroup);
@@ -166,6 +167,7 @@ const GroupsCreationSegment = ({
             style={{ marginBottom: '16px' }}
           />
           <Autocomplete
+            limitTags={8}
             value={members}
             onChange={(event, newMembers) => {
               setMembers(newMembers);
@@ -192,6 +194,7 @@ const GroupsCreationSegment = ({
             style={{ marginBottom: '16px' }}
           />
           <Autocomplete
+            limitTags={8}
             value={teacherMembers}
             onChange={(event, newMembers) => {
               setTeacherMembers(newMembers);

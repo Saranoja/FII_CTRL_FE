@@ -32,6 +32,7 @@ import {
 } from 'modules/groupsManager/actions';
 
 import GroupsCreationSegment from './components/groupsCreationSegment';
+import MembersListSegment from './components/MembersListSegment';
 import StyledGroupsManager from './GroupsManager.style';
 import { LinearProgress, Typography } from '@material-ui/core';
 import DeleteGroupDialog from './components/DeleteGroupDialog';
@@ -52,6 +53,7 @@ const GroupsManager = ({
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [isAvatarUploadDialogOpen, setAvatarUploadDialogOpen] = useState(false);
   const [isMembersEditDialogOpen, setMembersEditDialogOpen] = useState(false);
+  const [isGroupMembersDialogOpen, setGroupMembersDialogOpen] = useState(false);
   const [selectedGroupId, setSelectedGroupId] = useState(null);
 
   const handleClick = (event, element) => {
@@ -78,6 +80,11 @@ const GroupsManager = ({
     setMembersEditDialogOpen(true);
   };
 
+  const handleGroupClick = (groupId) => {
+    actions.getMembers(groupId);
+    setGroupMembersDialogOpen(true);
+  };
+
   return (
     <Layout>
       <StyledGroupsManager elevation={3}>
@@ -92,7 +99,14 @@ const GroupsManager = ({
               <List>
                 {R.map(
                   (element) => (
-                    <ListItem key={element.id}>
+                    <ListItem
+                      key={element.id}
+                      button
+                      onClick={() => {
+                        setSelectedGroupId(element.id);
+                        handleGroupClick(element.id);
+                      }}
+                    >
                       <ListItemAvatar>
                         {element.avatar ? (
                           <Avatar src={element.avatar} />
@@ -219,6 +233,12 @@ const GroupsManager = ({
           currentMembers={currentGroupMembers}
           studentsList={studentsList}
           teachersList={teachersList}
+          isLoading={isLoading}
+        />
+        <MembersListSegment
+          membersList={currentGroupMembers}
+          isOpen={isGroupMembersDialogOpen}
+          handleClose={() => setGroupMembersDialogOpen(false)}
           isLoading={isLoading}
         />
       </StyledGroupsManager>

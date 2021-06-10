@@ -34,7 +34,7 @@ const CustomFilePicker = ({
           onError={(errorMessage) => setErrorMessage(errorMessage)}
           maxSize="100"
         >
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" disableElevation>
             Browse
           </Button>
         </FilePicker>

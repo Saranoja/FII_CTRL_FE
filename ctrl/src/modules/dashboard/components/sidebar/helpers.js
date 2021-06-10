@@ -7,7 +7,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import MailIcon from '@material-ui/icons/Mail';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+// import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 import userManager from 'modules/userManager';
 import routePaths from 'routes/routePaths';

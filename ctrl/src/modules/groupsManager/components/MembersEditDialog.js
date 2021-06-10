@@ -90,6 +90,7 @@ const MembersEditDialog = ({
               Select users you want to remove...
             </DialogContentText>
             <Autocomplete
+              limitTags={8}
               value={usedMembers}
               onChange={(event, newMembers) => {
                 setUsedMembers(newMembers);
@@ -120,6 +121,7 @@ const MembersEditDialog = ({
               ...or type in users you want to add!
             </DialogContentText>
             <Autocomplete
+              limitTags={8}
               value={members}
               onChange={(event, newMembers) => {
                 setMembers(newMembers);
