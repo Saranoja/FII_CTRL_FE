@@ -20,5 +20,6 @@ export default {
     assignments: `${BASE}/assignments`,
     files: `${BASE}/files`,
     meetings: `${BASE}/meetings`,
+    calendar: `${BASE}/calendar`,
   },
 };

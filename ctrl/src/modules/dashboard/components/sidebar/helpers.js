@@ -41,7 +41,7 @@ export const sidebarMenuItems = [
     label: 'Check your calendar',
     icon: CalendarTodayIcon,
     action: (history) => {
-      console.log('calendar click');
+      history.push(routePaths.CALENDAR);
     },
     teachingRequired: false,
     studentRequired: false,
@@ -78,14 +78,14 @@ export const sidebarMenuItems = [
     teachingRequired: false,
     studentRequired: true,
   },
-  {
-    index: 6,
-    label: 'Contact faculty staff',
-    icon: AccountBoxIcon,
-    action: (history) => {
-      console.log('contact click');
-    },
-    teachingRequired: false,
-    studentRequired: true,
-  },
+  // {
+  //   index: 6,
+  //   label: 'Contact faculty staff',
+  //   icon: AccountBoxIcon,
+  //   action: (history) => {
+  //     console.log('contact click');
+  //   },
+  //   teachingRequired: false,
+  //   studentRequired: true,
+  // },
 ];

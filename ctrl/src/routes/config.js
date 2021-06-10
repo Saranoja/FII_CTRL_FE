@@ -11,6 +11,7 @@ import Meetings from 'modules/meetings';
 // import Groups from 'modules/groups';
 // import Notes from 'modules/notes';
 import Profile from 'modules/profile';
+import Calendar from 'modules/calendar';
 
 //TODO: actually separate this into routes for students and routes for teachers
 
@@ -82,6 +83,12 @@ export const privateRoutes = [
     path: routePaths.MEETINGS,
     component: Meetings,
     title: 'Meetings',
+  },
+  {
+    id: 'calendar',
+    path: routePaths.CALENDAR,
+    component: Calendar,
+    title: 'Calendar',
   },
   // {
   //     id: 'groups',

@@ -20,6 +20,7 @@ const API = {
   assignments: `${BASE}/assignments`,
   files: `${BASE}/files`,
   meetings: `${BASE}/meetings`,
+  calendar: `${BASE}/calendar`,
 };
 
 export default API;
