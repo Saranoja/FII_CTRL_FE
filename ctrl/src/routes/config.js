@@ -12,6 +12,7 @@ import Meetings from 'modules/meetings';
 // import Notes from 'modules/notes';
 import Profile from 'modules/profile';
 import Calendar from 'modules/calendar';
+import ResourcesManager from 'modules/resourcesManager';
 
 //TODO: actually separate this into routes for students and routes for teachers
 
@@ -107,6 +108,12 @@ export const privateRoutes = [
     path: routePaths.PROFILE,
     component: Profile,
     title: 'Profile',
+  },
+  {
+    id: 'resources-manager',
+    path: routePaths.RESOURCES_MANAGER,
+    component: ResourcesManager,
+    title: 'ResourcesManager',
   },
 ];
 export const publicRoutes = [

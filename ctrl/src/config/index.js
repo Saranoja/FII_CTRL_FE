@@ -21,5 +21,6 @@ export default {
     files: `${BASE}/files`,
     meetings: `${BASE}/meetings`,
     calendar: `${BASE}/calendar`,
+    bibliography: `${BASE}/bibliography`,
   },
 };

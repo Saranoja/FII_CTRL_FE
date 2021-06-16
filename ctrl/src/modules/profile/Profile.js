@@ -23,6 +23,7 @@ import {
 import {
   NOTIFICATION_TYPES,
   EVENT_TYPES,
+  DOMAINS,
 } from 'modules/notifications/constants';
 import EditIcon from '@material-ui/icons/Edit';
 import { Layout } from 'components';
@@ -68,8 +69,9 @@ const Profile = ({
           type: NOTIFICATION_TYPES.success,
           author_id: id,
           event: EVENT_TYPES.patch,
-          message: 'Profile updated successfully.',
           timestamp: Date.now(),
+          group: '',
+          domain: DOMAINS.PROFILE,
         })
       )
       .then(() => actions.loadProfileDetails(id))
@@ -78,8 +80,9 @@ const Profile = ({
           type: NOTIFICATION_TYPES.error,
           author_id: id,
           event: EVENT_TYPES.patch,
-          message: 'Error updating profile.',
           timestamp: Date.now(),
+          group: '',
+          domain: DOMAINS.PROFILE,
         })
       );
   };

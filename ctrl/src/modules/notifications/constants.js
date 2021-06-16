@@ -15,6 +15,8 @@ export const DOMAINS = {
   ANNOUNCEMENTS: 'announcements',
   GROUPS: 'groups',
   MEETINGS: 'meetings',
+  PROFILE: 'profile',
+  BIBLIOGRAPHY: 'bibliography',
 };
 
 export const generics = {
@@ -38,6 +40,10 @@ export const generics = {
       error: 'Error when posting a new meeting for',
       success: 'Successfully created new meeting for',
       info: 'added you to a meeting for',
+    },
+    [DOMAINS.BIBLIOGRAPHY]: {
+      error: 'Error when posting a new resource.',
+      success: 'Successfully posted a new resource.',
     },
   },
   deleteMessageGeneric: {
@@ -82,6 +88,10 @@ export const generics = {
       error: 'Error when updating the meeting info for',
       success: 'Successfully updated meeting data for',
       info: 'updated the deetails of a meeting for',
+    },
+    [DOMAINS.PROFILE]: {
+      error: 'Error when updating profile.',
+      success: 'Successfully updated profile.',
     },
   },
 };

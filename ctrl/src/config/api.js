@@ -21,6 +21,7 @@ const API = {
   files: `${BASE}/files`,
   meetings: `${BASE}/meetings`,
   calendar: `${BASE}/calendar`,
+  bibliography: `${BASE}/bibliography`,
 };
 
 export default API;

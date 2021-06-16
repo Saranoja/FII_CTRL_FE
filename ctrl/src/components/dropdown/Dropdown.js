@@ -19,13 +19,14 @@ const CustomDropdown = ({
   };
 
   return (
-    <FormControl>
+    <FormControl fullWidth>
       <InputLabel id="demo-simple-select-label">{placeholder}</InputLabel>
       <Select
         onChange={handleOnChange}
         className={className}
         value={currentValue}
         disabled={disabled}
+        fullWidth
       >
         {R.map(
           (element) => (

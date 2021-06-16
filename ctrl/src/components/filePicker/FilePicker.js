@@ -10,6 +10,7 @@ const CustomFilePicker = ({
   availableExtensions,
   uploadMessage,
   handleFileRemove,
+  className = 'file-picker',
 }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [fileName, setFileName] = useState(uploadMessage);
@@ -26,7 +27,7 @@ const CustomFilePicker = ({
   };
 
   return (
-    <StyledCustomFilePicker>
+    <StyledCustomFilePicker className={className}>
       <div className="filepicker-wrapper">
         <FilePicker
           extensions={availableExtensions}
@@ -49,7 +50,6 @@ const CustomFilePicker = ({
           <DeleteIcon />
         </IconButton>
       </div>
-
       <label className="upload-error">{errorMessage}</label>
     </StyledCustomFilePicker>
   );

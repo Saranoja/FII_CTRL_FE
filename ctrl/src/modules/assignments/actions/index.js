@@ -24,12 +24,13 @@ export const updateAssignment = createPrefixedAction(
 
 export const uploadFile = createPrefixedAction(actionTypes.UPLOAD_FILE);
 
-export const uploadFileToBucket = (file) => (dispatch) => {
+export const uploadFileToBucket = (file, dirname = '') => (dispatch) => {
   const header = createFormDataHeaderWithToken();
   var formData = new FormData();
   formData.append('file', file);
+  const dir = dirname.length ? `?dir=${dirname}` : '';
   return dispatch(
-    uploadFile(POST(`${userManager.config.files}`, formData, header))
+    uploadFile(POST(`${userManager.config.files}${dir}`, formData, header))
   );
 };
 

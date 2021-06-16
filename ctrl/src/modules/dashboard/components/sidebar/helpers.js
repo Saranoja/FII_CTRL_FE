@@ -1,5 +1,5 @@
 import { openLinkInNewTab } from 'utils';
-import { webmailUrl, scheduleBase } from 'utils/externalLinks';
+import { webmailUrl, scheduleBase, esimsUrl } from 'utils/externalLinks';
 
 import HomeIcon from '@material-ui/icons/Home';
 import GroupIcon from '@material-ui/icons/Group';
@@ -8,6 +8,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 // import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import GradeIcon from '@material-ui/icons/Grade';
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
 import userManager from 'modules/userManager';
 import routePaths from 'routes/routePaths';
@@ -50,7 +52,7 @@ export const sidebarMenuItems = [
     index: 3,
     label: 'Check Webmail',
     icon: MailIcon,
-    action: (history) => {
+    action: () => {
       openLinkInNewTab(webmailUrl);
     },
     teachingRequired: false,
@@ -60,7 +62,7 @@ export const sidebarMenuItems = [
     index: 4,
     label: 'Check your schedule',
     icon: ScheduleIcon,
-    action: (history) => {
+    action: () => {
       openLinkInNewTab(
         `${scheduleBase}${currentUserYear}${currentUserGroup}.html`
       );
@@ -88,4 +90,24 @@ export const sidebarMenuItems = [
   //   teachingRequired: false,
   //   studentRequired: true,
   // },
+  {
+    index: 7,
+    label: 'Check your grades',
+    icon: GradeIcon,
+    action: () => {
+      openLinkInNewTab(esimsUrl);
+    },
+    teachingRequired: false,
+    studentRequired: true,
+  },
+  {
+    index: 7,
+    label: 'Upload resources',
+    icon: LibraryBooksIcon,
+    action: (history) => {
+      history.push(routePaths.RESOURCES_MANAGER);
+    },
+    teachingRequired: true,
+    studentRequired: false,
+  },
 ];

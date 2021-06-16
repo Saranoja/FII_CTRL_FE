@@ -18,12 +18,11 @@ class ProfileConsumer extends React.Component {
     if (isBlank(socket)) return;
 
     socket.on('profile_update', (data) => {
-      console.log('profile update: ', data);
       actions.loadProfileDetails();
+      actions.loadNotification(data);
     });
 
     socket.on('profile_error', (data) => {
-      console.log('profile update erro: ', data);
       actions.loadNotification(data);
     });
   }
