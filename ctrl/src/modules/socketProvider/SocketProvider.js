@@ -10,7 +10,7 @@ import { withSignedIn } from 'hocs';
 
 const MAX_RETRY_CONNECTIONS = 3;
 const CONNECTION_RETRY_INTERVAL = 3000;
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'https://fii-ctrl.appspot.com';
 const TOKEN_REFRESH_SUCCESS = 'tokenRefreshSuccess';
 const TOKEN_REFRESH_ERROR = 'tokenRefreshError';
 

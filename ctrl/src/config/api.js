@@ -1,7 +1,6 @@
 // const ENV = window._env_ || process.env;
 
-const BASE = 'http://localhost:5000';
-// const base = 'https://fii-ctrl.appspot.com';
+const BASE = 'https://fii-ctrl.appspot.com';
 
 const API = {
   login: `${BASE}/login`,
