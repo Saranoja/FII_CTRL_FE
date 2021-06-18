@@ -102,7 +102,7 @@ const MeetingCreationSegment = ({ actions, groups }) => {
         fullWidth
       >
         <DialogTitle id="fmeeting-creation-title">
-          Create a new meeting for a group.
+          Create a new meeting for a group
         </DialogTitle>
         <DialogContent>
           <TextField

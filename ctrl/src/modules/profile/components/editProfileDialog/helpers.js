@@ -7,7 +7,7 @@ export const editableFields = [
   },
   {
     id: 'phone_number',
-    label: 'PhoneNumber',
+    label: 'Phone Number',
     multiline: false,
     rows: 1,
   },
