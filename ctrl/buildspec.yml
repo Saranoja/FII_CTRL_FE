@@ -3,7 +3,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - yarn install
+      - cd ctrl
+      - yarn install --frozen-lockfile
   build:
     commands:
       - yarn build
@@ -12,4 +13,4 @@ artifacts:
   files:
     - '**/*'
   discard-paths: no
-  base-directory: build
+  base-directory: ctrl/build
