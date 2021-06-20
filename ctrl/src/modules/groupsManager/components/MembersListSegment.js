@@ -35,7 +35,7 @@ const MembersListSegment = ({
               <StyledMembersList dense disablePadding>
                 {R.map(
                   (member) => (
-                    <ListItem disableGutters divider>
+                    <ListItem disableGutters divider key={member.id}>
                       <ListItemText
                         primary={`${member.first_name} ${member.last_name}`}
                       />

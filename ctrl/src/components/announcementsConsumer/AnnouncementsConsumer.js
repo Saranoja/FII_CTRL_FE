@@ -20,11 +20,11 @@ class AnnouncementsConsumer extends React.Component {
 
     actions.loadGroups().then((result) => {
       R.forEach((group) => {
-        socket.emit('join', { room: group.id, uid: currentUserId });
+        socket.emit('join', { room: String(group.id), uid: currentUserId });
       }, R.path(['payload', 'data', 'current_user_groups'], result));
     });
 
-    socket.on('message', (data) => {
+    socket.on('announcements', (data) => {
       const currentGroupId = this.getLastVisitedGroup().id || groups[0].id;
       actions.loadNotification(data);
       if (data.group_id === String(currentGroupId))

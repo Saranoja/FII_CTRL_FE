@@ -79,7 +79,12 @@ const MeetingCreationSegment = ({ actions, groups }) => {
   };
 
   const checkSubmit = () => {
-    if (meetingState.title === '' || meetingState.url === '') return true;
+    if (
+      meetingState.title === '' ||
+      meetingState.url === '' ||
+      !meetingState.group
+    )
+      return true;
     return false;
   };
 

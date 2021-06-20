@@ -8,6 +8,7 @@ export const EVENT_TYPES = {
   post: 'post',
   patch: 'patch',
   delete: 'delete',
+  put: 'put',
 };
 
 export const DOMAINS = {
@@ -17,6 +18,7 @@ export const DOMAINS = {
   MEETINGS: 'meetings',
   PROFILE: 'profile',
   BIBLIOGRAPHY: 'bibliography',
+  MEMBERS: 'members',
 };
 
 export const generics = {
@@ -67,6 +69,11 @@ export const generics = {
       success: 'Successfully deleted meeting of',
       info: 'deleted a meeting of',
     },
+    [DOMAINS.MEMBERS]: {
+      error: 'Error when adding members in',
+      success: 'Successfully deleted members in',
+      info: 'removed you from the group',
+    },
   },
   patchMessageGeneric: {
     [DOMAINS.ANNOUNCEMENTS]: {
@@ -94,12 +101,20 @@ export const generics = {
       success: 'Successfully updated profile.',
     },
   },
+  putMessageGeneric: {
+    [DOMAINS.MEMBERS]: {
+      error: 'Error when adding members in',
+      success: 'Successfully added members for',
+      info: 'added you to the group',
+    },
+  },
 };
 
 export const eventToMessageMap = {
   [EVENT_TYPES.post]: generics.postMessageGeneric,
   [EVENT_TYPES.delete]: generics.deleteMessageGeneric,
   [EVENT_TYPES.patch]: generics.patchMessageGeneric,
+  [EVENT_TYPES.put]: generics.putMessageGeneric,
 };
 
 export const noNotificationsGeneric = 'No new notifications';
