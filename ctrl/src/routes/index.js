@@ -15,8 +15,11 @@ const AppRoutes = (props) => (
     {props.privateRoutes.map((route) => (
       <PrivateRoute
         unauthorizedRedirectPath={props.unauthorizedRedirectPath}
+        notAllowedPath={props.notAllowedPath}
         exact
         key={route.id}
+        teacherAuthorized={route.teacherAuthorized}
+        studentAuthorized={route.studentAuthorized}
         {...route}
       />
     ))}
@@ -26,6 +29,7 @@ const AppRoutes = (props) => (
 
 AppRoutes.defaultProps = {
   unauthorizedRedirectPath: routePaths.LOGIN,
+  notAllowedPath: routePaths.NOT_FOUND,
   publicRoutes,
   privateRoutes,
 };

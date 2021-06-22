@@ -8,9 +8,14 @@ import { STORE_KEYS } from 'utils';
 
 const PrivateRoute = ({
   unauthorizedRedirectPath,
+  notAllowedPath,
   component: Component,
   componentProps,
   hasId,
+  teacherAuthorized,
+  studentAuthorized,
+  isTeacher,
+  isAdmin,
   ...otherProps
 }) => (
   <Route
@@ -25,6 +30,15 @@ const PrivateRoute = ({
         return <Redirect to={{ pathname: unauthorizedRedirectPath }} />;
       }
 
+      if (
+        !isAdmin &&
+        ((!teacherAuthorized && isTeacher) ||
+          (!studentAuthorized && !isTeacher))
+      ) {
+        console.log('Redirecting to ', notAllowedPath);
+        return <Redirect to={{ pathname: notAllowedPath }} />;
+      }
+
       return <Component {...props} {...componentProps} />;
     }}
   />
@@ -32,6 +46,8 @@ const PrivateRoute = ({
 
 const mapStateToProps = (state) => ({
   hasId: state.userManager.hasId,
+  isTeacher: state.userManager.teaching,
+  isAdmin: state.userManager.admin,
 });
 
 const mapDispatchToProps = (dispatch) => ({

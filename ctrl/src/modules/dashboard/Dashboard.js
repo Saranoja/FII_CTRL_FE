@@ -7,13 +7,17 @@ import { loadAccountDetails } from 'modules/userManager/actions';
 import Layout from 'components/layout';
 import ErrorPage from 'components/errorPage';
 import ActionCard from './components/actionCard';
-import { studentCardsInfo, teacherCardsInfo } from './helpers';
+import { studentCardsInfo, teacherCardsInfo, adminCardsInfo } from './helpers';
 import StyledDashboard from './Dashboard.style';
 
 class Dashboard extends React.Component {
   render() {
-    const cardsType = this.props.teaching ? teacherCardsInfo : studentCardsInfo;
-    const { hasError } = this.props;
+    const { hasError, teaching, admin } = this.props;
+    const cardsType = admin
+      ? adminCardsInfo
+      : teaching
+      ? teacherCardsInfo
+      : studentCardsInfo;
 
     if (hasError) return <ErrorPage />;
 
@@ -51,6 +55,7 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => ({
   firstName: state.userManager.first_name,
   teaching: state.userManager.teaching,
+  admin: state.userManager.admin,
   hasError: state.userManager.hasError,
   hasId: state.userManager.hasId,
 });

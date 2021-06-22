@@ -25,7 +25,7 @@ class SocketProvider extends Component {
   }
 
   async componentDidMount() {
-    registerListener(TOKEN_REFRESH_SUCCESS, this.connectSocket); //TODO: fire event on refresh
+    registerListener(TOKEN_REFRESH_SUCCESS, this.connectSocket);
     registerListener(TOKEN_REFRESH_ERROR, this.disconnectSocket);
     const token = userManager.getIdToken();
     if (token) {

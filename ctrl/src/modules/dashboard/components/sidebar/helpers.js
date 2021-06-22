@@ -7,7 +7,6 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import MailIcon from '@material-ui/icons/Mail';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-// import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import GradeIcon from '@material-ui/icons/Grade';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 
@@ -27,6 +26,7 @@ export const sidebarMenuItems = [
     },
     teachingRequired: false,
     studentRequired: false,
+    adminAllowed: true,
   },
   {
     index: 1,
@@ -37,6 +37,7 @@ export const sidebarMenuItems = [
     },
     teachingRequired: true,
     studentRequired: false,
+    adminAllowed: true,
   },
   {
     index: 2,
@@ -47,6 +48,7 @@ export const sidebarMenuItems = [
     },
     teachingRequired: false,
     studentRequired: false,
+    adminAllowed: false,
   },
   {
     index: 3,
@@ -57,6 +59,7 @@ export const sidebarMenuItems = [
     },
     teachingRequired: false,
     studentRequired: false,
+    adminAllowed: false,
   },
   {
     index: 4,
@@ -69,6 +72,7 @@ export const sidebarMenuItems = [
     },
     teachingRequired: false,
     studentRequired: true,
+    adminAllowed: false,
   },
   {
     index: 5,
@@ -79,19 +83,10 @@ export const sidebarMenuItems = [
     },
     teachingRequired: false,
     studentRequired: true,
+    adminAllowed: true,
   },
-  // {
-  //   index: 6,
-  //   label: 'Contact faculty staff',
-  //   icon: AccountBoxIcon,
-  //   action: (history) => {
-  //     console.log('contact click');
-  //   },
-  //   teachingRequired: false,
-  //   studentRequired: true,
-  // },
   {
-    index: 7,
+    index: 6,
     label: 'Check your grades',
     icon: GradeIcon,
     action: () => {
@@ -99,6 +94,7 @@ export const sidebarMenuItems = [
     },
     teachingRequired: false,
     studentRequired: true,
+    adminAllowed: false,
   },
   {
     index: 7,
@@ -109,5 +105,6 @@ export const sidebarMenuItems = [
     },
     teachingRequired: true,
     studentRequired: false,
+    adminAllowed: true,
   },
 ];

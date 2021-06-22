@@ -30,8 +30,6 @@ import {
 } from './actions';
 import StyledResources from './Resources.style';
 
-// TODO: split in separate components
-
 class Resources extends React.Component {
   constructor() {
     super();

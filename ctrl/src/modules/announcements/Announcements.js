@@ -55,8 +55,6 @@ class Announcements extends React.Component {
     await actions.loadGroupAnnouncements(newGroup.id);
   };
 
-  //TODO: create separate components for the 2 papers
-
   render() {
     const {
       groups,

@@ -8,8 +8,6 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import StyledArticleCard from './ArticleCard.style';
 
-// TODO: process latex text
-
 const ArticleCard = ({ title, author, summary, link }) => (
   <StyledArticleCard>
     <CardContent>

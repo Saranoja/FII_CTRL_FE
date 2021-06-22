@@ -15,6 +15,7 @@ import StyledSidebar from './Sidebar.style';
 const Sidebar = ({
   username,
   teaching,
+  admin,
   isSidebarOpen,
   handleSidebarToggle,
   history,
@@ -28,8 +29,9 @@ const Sidebar = ({
       <h1 className="username-greet">Hello {username}!</h1>
       <List component="nav" aria-label="main sidebar items">
         {R.map((item) => {
-          if (item.teachingRequired && !teaching) return null;
-          if (item.studentRequired && teaching) return null;
+          if (!item.adminAllowed && admin) return null;
+          if (!admin && item.teachingRequired && !teaching) return null;
+          if (!admin && item.studentRequired && teaching) return null;
           return (
             <ListItem
               button
@@ -72,6 +74,7 @@ const Sidebar = ({
 const mapStateToProps = (state) => ({
   username: state.userManager.first_name,
   teaching: state.userManager.teaching,
+  admin: state.userManager.admin,
 });
 
 const mapDispatchToProps = (dispatch) => ({
