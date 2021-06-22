@@ -94,7 +94,7 @@ export const generics = {
     [DOMAINS.MEETINGS]: {
       error: 'Error when updating the meeting info for',
       success: 'Successfully updated meeting data for',
-      info: 'updated the deetails of a meeting for',
+      info: 'updated the details of a meeting for',
     },
     [DOMAINS.PROFILE]: {
       error: 'Error when updating profile.',
