@@ -34,6 +34,8 @@ class UserManager {
   clearData = () => {
     localStorageManager.removeItem(STORE_KEYS.ID);
     localStorageManager.removeItem(STORE_KEYS.PERSISTED_PATH);
+    localStorageManager.removeItem(STORE_KEYS.NOTIFICATIONS_LIST);
+    localStorageManager.removeItem(STORE_KEYS.LAST_VISITED_GROUP);
   };
 
   isTeaching = () => {
