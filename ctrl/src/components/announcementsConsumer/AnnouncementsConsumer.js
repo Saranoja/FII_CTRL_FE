@@ -15,17 +15,22 @@ class AnnouncementsConsumer extends React.Component {
   };
 
   componentDidMount() {
-    const { socket, actions, groups, currentUserId } = this.props;
+    const { socket, actions, groups } = this.props;
     if (isBlank(socket)) return;
 
-    actions.loadGroups().then((result) => {
-      R.forEach((group) => {
-        socket.emit('join', { room: String(group.id), uid: currentUserId });
-      }, R.path(['payload', 'data', 'current_user_groups'], result));
-    });
+    setTimeout(() => {
+      actions.loadGroups().then((result) => {
+        R.forEach((group) => {
+          socket.emit('join', {
+            room: String(group.id),
+            uid: localStorageManager.get(STORE_KEYS.ID).id,
+          });
+        }, R.path(['payload', 'data', 'current_user_groups'], result));
+      });
+    }, 2000);
 
     socket.on('announcements', (data) => {
-      const currentGroupId = this.getLastVisitedGroup().id || groups[0].id;
+      const currentGroupId = this.getLastVisitedGroup()?.id || groups[0]?.id;
       actions.loadNotification(data);
       if (data.group_id === String(currentGroupId))
         actions.loadGroupAnnouncements(currentGroupId);
@@ -43,7 +48,6 @@ class AnnouncementsConsumer extends React.Component {
 
 const mapStateToProps = (state) => ({
   groups: state.announcements.groups,
-  currentUserId: state.userManager.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
