@@ -10,14 +10,36 @@ const StyledAssignments = styled(Paper)`
       margin-bottom: ${theme.spacing(3)}px;
     }
 
-    .assignment-segments-wrapper {
-      max-height: 70vh;
-      overflow: auto;
-      margin: ${theme.spacing(4)}px 0;
+    ${theme.breakpoints.up('lg')} {
+      padding: ${theme.spacing(3)}px;
+    }
 
-      .tab-panel-root {
-        padding: 0;
+    .assignments-container {
+      height: 70vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      ${theme.breakpoints.up('sm')} {
+        height: 80vh;
       }
+
+      ${theme.breakpoints.up('lg')} {
+        height: 75vh;
+      }
+
+      .assignment-segments-wrapper {
+        max-height: 70vh;
+        overflow: auto;
+        flex-grow: 1;
+        margin: ${theme.spacing(2)}px 0;
+
+        .tab-panel-root {
+          padding: 0;
+        }
+      }
+
     }
   `}
 `;

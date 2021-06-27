@@ -28,15 +28,22 @@ class Assignments extends React.Component {
   }
 
   render() {
-    const { isLoading, currentAssignments, groups } = this.props;
+    const {
+      isLoading,
+      currentAssignments,
+      groups,
+      isTeacher,
+      subjects,
+    } = this.props;
     const { currentTab } = this.state;
-    const availableSubjects = [];
+    let availableSubjects = [];
 
-    if (currentAssignments) {
-      R.forEachObjIndexed(
-        (v, k) => availableSubjects.push(k),
-        currentAssignments
-      );
+    if (!isTeacher && currentAssignments) {
+      availableSubjects = R.keys(currentAssignments);
+    }
+
+    if (isTeacher && subjects) {
+      availableSubjects = R.keys(subjects);
     }
 
     return (
@@ -49,69 +56,67 @@ class Assignments extends React.Component {
             {isLoading ? (
               <LinearProgress />
             ) : (
-              <>
-                <div className="assignments-wrapper">
-                  <TabContext value={currentTab || ''}>
-                    <Tabs
-                      value={currentTab}
-                      onChange={(event, newValue) =>
-                        this.setState({ currentTab: newValue })
-                      }
-                      indicatorColor="primary"
-                      textColor="primary"
-                      aria-label="label tabs"
-                      variant="scrollable"
-                      scrollButtons="auto"
-                    >
-                      {R.map(
-                        (subject) => (
-                          <Tab label={subject} value={subject} key={subject} />
-                        ),
-                        availableSubjects
-                      )}
-                    </Tabs>
-                    <div className="assignment-segments-wrapper">
-                      {currentAssignments && currentTab ? (
-                        <TabPanel
-                          value={currentTab}
-                          classes={{
-                            root: 'tab-panel-root',
-                          }}
-                        >
-                          {R.map(
-                            (assignment) => (
-                              <AssignmentSegment
-                                key={assignment.id}
-                                assignmentId={assignment.id}
-                                title={assignment.title}
-                                description={assignment.description}
-                                author={assignment.author}
-                                authorId={assignment.author_id}
-                                createdAt={assignment.created_at}
-                                deadline={assignment.deadline}
-                                fileUrl={assignment.file_url}
-                                groupName={
-                                  R.find(
-                                    R.propEq(
-                                      'id',
-                                      assignment.discussion_group_id
-                                    )
-                                  )(groups)?.name
-                                }
-                                groupId={assignment.discussion_group_id}
-                              />
-                            ),
-                            currentAssignments[currentTab]
-                          )}
-                        </TabPanel>
-                      ) : (
-                        <p> Nothing to display :) </p>
-                      )}
-                    </div>
-                  </TabContext>
-                </div>
+              <div className="assignments-container">
+                <TabContext value={currentTab || ''}>
+                  <Tabs
+                    value={currentTab}
+                    onChange={(event, newValue) =>
+                      this.setState({ currentTab: newValue })
+                    }
+                    indicatorColor="primary"
+                    textColor="primary"
+                    aria-label="label tabs"
+                    variant="scrollable"
+                    scrollButtons="auto"
+                  >
+                    {R.map(
+                      (subject) => (
+                        <Tab label={subject} value={subject} key={subject} />
+                      ),
+                      availableSubjects
+                    )}
+                  </Tabs>
+                  <div className="assignment-segments-wrapper">
+                    {currentAssignments && currentAssignments[currentTab] ? (
+                      <TabPanel
+                        value={currentTab}
+                        classes={{
+                          root: 'tab-panel-root',
+                        }}
+                      >
+                        {R.map(
+                          (assignment) => (
+                            <AssignmentSegment
+                              key={assignment.id}
+                              assignmentId={assignment.id}
+                              title={assignment.title}
+                              description={assignment.description}
+                              author={assignment.author}
+                              authorId={assignment.author_id}
+                              createdAt={assignment.created_at}
+                              deadline={assignment.deadline}
+                              fileUrl={assignment.file_url}
+                              groupName={
+                                R.find(
+                                  R.propEq('id', assignment.discussion_group_id)
+                                )(groups)?.name
+                              }
+                              groupId={assignment.discussion_group_id}
+                            />
+                          ),
+                          currentAssignments[currentTab]
+                        )}
+                      </TabPanel>
+                    ) : (
+                      <Typography variant="subtitle1" color="textSecondary">
+                        {' '}
+                        No assignment published for this subject yet{' '}
+                      </Typography>
+                    )}
+                  </div>
+                </TabContext>
                 <AssignmentsCreationSegment />
-              </>
+              </div>
             )}
           </>
         </StyledAssignments>
@@ -124,6 +129,8 @@ const mapStateToProps = (state) => ({
   currentAssignments: state.assignments.currentAssignments,
   groups: state.announcements.groups,
   isLoading: state.assignments.isLoading,
+  isTeacher: state.userManager.teaching,
+  subjects: state.userManager.subjects,
 });
 
 const mapDispatchToProps = (dispatch) => ({

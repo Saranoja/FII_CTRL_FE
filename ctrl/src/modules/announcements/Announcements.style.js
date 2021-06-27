@@ -24,16 +24,13 @@ const StyledAnnouncements = styled.div`
         ${theme.breakpoints.up('lg')} {
           height: 90vh;
           padding: ${theme.spacing(3)}px;
+          max-width: 75%;
+          margin-right: ${theme.spacing(2)}px;
         }
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
-        ${theme.breakpoints.up('lg')} {
-          max-width: 75%;
-          margin-right: ${theme.spacing(2)}px;
-        }
 
         .announcements-wrapper {
           flex-grow: 1;
