@@ -112,6 +112,7 @@ class Resources extends React.Component {
       recommendations,
       articles,
       isLoading,
+      areArticlesLoading,
       current_file,
     } = this.props;
 
@@ -244,7 +245,7 @@ class Resources extends React.Component {
               </TabPanel>
             </div>
           </TabContext>
-          {isLoading ? (
+          {isLoading || areArticlesLoading ? (
             <CircularProgress className="grid-divider-loader" />
           ) : null}
         </StyledResources>
@@ -258,6 +259,7 @@ const mapStateToProps = (state) => ({
   recommendations: state.resources.recommendations,
   articles: state.resources.articles,
   isLoading: state.resources.isLoading,
+  areArticlesLoading: state.resources.areArticlesLoading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

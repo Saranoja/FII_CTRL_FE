@@ -74,7 +74,7 @@ const filePostArticleHandler = [
     if (!ready) {
       return {
         ...state,
-        isLoading: true,
+        areArticlesLoading: true,
       };
     }
 
@@ -82,7 +82,7 @@ const filePostArticleHandler = [
       return {
         ...state,
         hasError: true,
-        isLoading: false,
+        areArticlesLoading: false,
       };
     }
 
@@ -90,7 +90,7 @@ const filePostArticleHandler = [
 
     return {
       ...state,
-      isLoading: false,
+      areArticlesLoading: false,
       articles: response,
     };
   },
@@ -134,7 +134,7 @@ const keywordsPostArticleHandler = [
     if (!ready) {
       return {
         ...state,
-        isLoading: true,
+        areArticlesLoading: true,
       };
     }
 
@@ -142,7 +142,7 @@ const keywordsPostArticleHandler = [
       return {
         ...state,
         hasError: true,
-        isLoading: false,
+        areArticlesLoading: false,
       };
     }
 
@@ -150,7 +150,7 @@ const keywordsPostArticleHandler = [
 
     return {
       ...state,
-      isLoading: false,
+      areArticlesLoading: false,
       articles: response,
     };
   },
