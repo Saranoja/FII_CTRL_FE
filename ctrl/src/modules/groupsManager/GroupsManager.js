@@ -152,60 +152,58 @@ const GroupsManager = ({
                             </IconButton>
                           </Tooltip>
                         )}
-
-                        <Menu
-                          id="simple-menu"
-                          anchorEl={anchorEl}
-                          keepMounted
-                          open={Boolean(anchorEl)}
-                          onClose={handleClose}
-                          elevation={2}
-                        >
-                          <MenuItem
-                            onClick={() => {
-                              handleClose();
-                              setAvatarUploadDialogOpen(true);
-                            }}
-                          >
-                            <ListItemIcon>
-                              <PhotoCameraIcon size="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Update group picture" />
-                          </MenuItem>
-                          <MenuItem
-                            onClick={() => {
-                              handleClose();
-                              setMembersEditDialogOpen(true);
-                              handleMembersEdit();
-                            }}
-                          >
-                            <ListItemIcon>
-                              <GroupAddIcon size="small" />
-                            </ListItemIcon>
-                            <ListItemText primary="Manage group members" />
-                          </MenuItem>
-
-                          {!isWidthUp('sm', width) && (
-                            <MenuItem
-                              onClick={() => {
-                                handleClose();
-                                setSelectedGroupId(element.id);
-                                setDeleteDialogOpen(true);
-                              }}
-                            >
-                              <ListItemIcon>
-                                <DeleteIcon size="small" />
-                              </ListItemIcon>
-                              <ListItemText primary="Delete this group" />
-                            </MenuItem>
-                          )}
-                        </Menu>
                       </ListItemSecondaryAction>
                     </ListItem>
                   ),
                   groups
                 )}
               </List>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                elevation={2}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    setAvatarUploadDialogOpen(true);
+                  }}
+                >
+                  <ListItemIcon>
+                    <PhotoCameraIcon size="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Update group picture" />
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    setMembersEditDialogOpen(true);
+                    handleMembersEdit();
+                  }}
+                >
+                  <ListItemIcon>
+                    <GroupAddIcon size="small" />
+                  </ListItemIcon>
+                  <ListItemText primary="Manage group members" />
+                </MenuItem>
+
+                {!isWidthUp('sm', width) && (
+                  <MenuItem
+                    onClick={() => {
+                      handleClose();
+                      setDeleteDialogOpen(true);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <DeleteIcon size="small" />
+                    </ListItemIcon>
+                    <ListItemText primary="Delete this group" />
+                  </MenuItem>
+                )}
+              </Menu>
             </div>
             <GroupsCreationSegment />
           </>
