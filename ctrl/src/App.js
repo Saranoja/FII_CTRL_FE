@@ -32,8 +32,8 @@ const App = () => {
     <MuiThemePRovider theme={theme(themeType)}>
       <ScThemeProvider theme={theme(themeType)}>
         <SocketProvider>
-          <GroupsConsumer />
           <AnnouncementsConsumer />
+          <GroupsConsumer />
           <AssignmentsConsumer />
           <MeetingsConsumer />
           <MembersConsumer />

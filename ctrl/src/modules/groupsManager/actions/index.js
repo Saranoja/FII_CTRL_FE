@@ -72,7 +72,7 @@ export const postGroup = (groupData) => (dispatch) => {
 
 export const deleteGroup = (groupId) => (dispatch) => {
   const header = createHeaderWithToken();
-  dispatch(
+  return dispatch(
     removeGroup(
       DELETE(`${userManager.config.groups}?id=${groupId}`, {}, header)
     )
@@ -81,7 +81,7 @@ export const deleteGroup = (groupId) => (dispatch) => {
 
 export const patchGroup = (groupId, newGroupData = {}) => (dispatch) => {
   const header = createHeaderWithToken();
-  dispatch(
+  return dispatch(
     updateGroup(
       PATCH(`${userManager.config.groups}?id=${groupId}`, newGroupData, header)
     )

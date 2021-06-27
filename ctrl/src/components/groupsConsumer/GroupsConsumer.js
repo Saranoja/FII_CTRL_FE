@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { loadNotification } from 'modules/notifications/actions';
 import { loadGroups } from 'modules/announcements/actions';
-import { isBlank, reloadPage } from 'utils';
+import { isBlank } from 'utils';
 import withSocketProvider from 'modules/socketProvider/withSocketProvider';
 
 class GroupsConsumer extends React.Component {
@@ -16,11 +16,13 @@ class GroupsConsumer extends React.Component {
       await actions.loadNotification(data);
       await actions.loadGroups();
       if (data.event === 'post') {
-        socket.emit('join', { room: data.group_id, uid: currentUserId });
-        reloadPage();
+        socket.emit('join', {
+          room: String(data.group_id),
+          uid: currentUserId,
+        });
       }
       if (data.event === 'delete')
-        socket.emit('leave', { room: data.group_id });
+        socket.emit('leave', { room: String(data.group_id) });
     });
 
     socket.on('error_groups', (data) => {

@@ -41,7 +41,7 @@ class Announcements extends React.Component {
     const lastVisitedGroup = this.getLastVisitedGroup() || groups[0];
     this.setState({ currentGroup: lastVisitedGroup });
     this.setLastVisitedGroup(lastVisitedGroup);
-    actions.loadGroupAnnouncements(lastVisitedGroup.id);
+    if (lastVisitedGroup) actions.loadGroupAnnouncements(lastVisitedGroup?.id);
   };
 
   componentDidMount() {
